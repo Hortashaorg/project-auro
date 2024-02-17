@@ -1,0 +1,24 @@
+{
+    "name": "strategy-game",
+    "customizations": {
+      "vscode": {
+        "settings": {},
+        "extensions": [
+          "esbenp.prettier-vscode",
+          "yoavbls.pretty-ts-errors",
+          "GitHub.copilot",
+          "GitHub.copilot-chat",
+          "ms-azuretools.vscode-docker",
+          "eamodio.gitlens",
+          "GitHub.vscode-github-actions",
+          "ms-azuretools.vscode-bicep",
+          "astro-build.astro-vscode"
+        ]
+      }
+    },
+    "dockerComposeFile": "./docker-compose.yml",
+    "service": "local",
+    "workspaceFolder": "/app",
+    "postCreateCommand": "pnpm install && pnpm local database db:migrate-up"
+  }
+  
