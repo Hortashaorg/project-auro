@@ -3,11 +3,16 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
+    "development": "env-cmd --file ./.env.development pnpm ",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "db:populate": "tsx src/backend/db/scripts/populate.ts",
+    "db:generate": "tsx src/backend/db/scripts/db-generate.ts",
+    "db:migrate": "tsx src/backend/db/scripts/migrate-to-latest.ts",
+    "db:migrate-down": "tsx src/backend/db/scripts/migrate-down.ts"
   },
   "dependencies": {
     "@astrojs/check": "^0.5.4",
@@ -15,8 +20,18 @@
     "@astrojs/svelte": "^5.0.3",
     "@astrojs/tailwind": "^5.1.0",
     "astro": "^4.4.0",
+    "kysely": "^0.27.2",
+    "kysely-codegen": "^0.11.0",
+    "pg": "^8.11.3",
+    "pg-cursor": "^2.10.3",
     "svelte": "^4.2.11",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.11.0",
+    "@types/pg-cursor": "^2.7.2",
+    "env-cmd": "^10.1.0",
+    "tsx": "^4.7.1"
   }
 }
