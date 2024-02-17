@@ -12,13 +12,14 @@
           "eamodio.gitlens",
           "GitHub.vscode-github-actions",
           "ms-azuretools.vscode-bicep",
-          "astro-build.astro-vscode"
+          "astro-build.astro-vscode",
+          "bradlc.vscode-tailwindcss"
         ]
       }
     },
     "dockerComposeFile": "./docker-compose.yml",
     "service": "local",
     "workspaceFolder": "/app",
-    "postCreateCommand": "pnpm install && pnpm local database db:migrate-up"
+    "postCreateCommand": "pnpm install"
   }
   
