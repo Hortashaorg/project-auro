@@ -1,13 +1,9 @@
 ---
-import { db } from "@src/backend/db";
-
 interface Props {
 	title: string;
 }
 
 const { title } = Astro.props;
-
-const stuff = await db.selectFrom("asset").selectAll().executeTakeFirstOrThrow();
 
 ---
 
@@ -18,11 +14,11 @@ const stuff = await db.selectFrom("asset").selectAll().executeTakeFirstOrThrow()
 		<meta name="description" content="Astro description" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<script src="https://unpkg.com/htmx.org@1.9.10"></script>
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
 	<body>
-		<h1 class="text-white">{ stuff.name }</h1>
 		<slot />
 	</body>
 </html>
