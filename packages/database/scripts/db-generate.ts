@@ -1,10 +1,12 @@
 import { DialectManager, Generator } from "kysely-codegen";
 
-import { db } from "..";
+import { getDB } from "../index";
 
 const outFile = "./src/backend/db/database-schema.d.ts";
 
 const initGenerator = async () => {
+  const db = await getDB();
+
   try {
     const generator = new Generator();
     await generator.generate({

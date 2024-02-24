@@ -1,11 +1,6 @@
 import type { ColumnType } from "kysely";
 
-export type Assettype =
-  | "assignment"
-  | "character"
-  | "item"
-  | "resource"
-  | "skill";
+export type Assettype = "assignment" | "character" | "item" | "resource" | "skill";
 
 export type Droptype = "character" | "item" | "resource" | "skill";
 
@@ -13,13 +8,7 @@ export type Generated<T> = T extends ColumnType<infer S, infer I, infer U>
   ? ColumnType<S, I | undefined, U>
   : ColumnType<T, T | undefined, T>;
 
-export type Rarity =
-  | "ancient"
-  | "common"
-  | "epic"
-  | "legendary"
-  | "rare"
-  | "uncommon";
+export type Rarity = "ancient" | "common" | "epic" | "legendary" | "rare" | "uncommon";
 
 export type Startingtype = "character" | "item" | "resource";
 
@@ -33,29 +22,29 @@ export interface Account {
 
 export interface Asset {
   id: Generated<string>;
-  name: string;
   type: Assettype;
+  name: string;
   url: string;
 }
 
 export interface Assignment {
-  assetId: string;
   id: Generated<string>;
   name: string;
   worldId: string;
+  assetId: string;
 }
 
 export interface Auth {
-  accessToken: string | null;
   address: string;
   code: number;
   refreshToken: string | null;
+  accessToken: string | null;
 }
 
 export interface Character {
-  assetId: string;
   id: Generated<string>;
   name: string;
+  assetId: string;
   rarity: Rarity;
   worldId: string;
 }
@@ -72,38 +61,38 @@ export interface CharacterSkill {
 }
 
 export interface DropTable {
-  assignmentId: string;
-  characterId: string | null;
-  dropChance: number;
   id: Generated<string>;
-  itemId: string | null;
-  maxAmount: number;
+  type: Droptype;
+  dropChance: number;
   minAmount: number;
+  maxAmount: number;
+  assignmentId: string;
   resourceId: string | null;
   skillId: string | null;
-  type: Droptype;
+  itemId: string | null;
+  characterId: string | null;
 }
 
 export interface Item {
-  assetId: string;
   id: Generated<string>;
   name: string;
   rarity: Rarity;
   worldId: string;
+  assetId: string;
 }
 
 export interface LootHistory {
-  amount: number;
-  dropTableId: string;
   id: Generated<string>;
-  playerCharacterId: string;
   timestamp: Generated<Timestamp>;
+  dropTableId: string;
   turnHistoryId: string;
+  playerCharacterId: string;
+  amount: number;
 }
 
 export interface PlayerCharacter {
-  characterId: string;
   id: Generated<string>;
+  characterId: string;
   userId: string;
 }
 
@@ -114,35 +103,35 @@ export interface PlayerItem {
 }
 
 export interface PlayerResource {
-  amount: Generated<number>;
   id: Generated<string>;
   resourceId: string;
   userId: string;
+  amount: Generated<number>;
 }
 
 export interface Resource {
-  assetId: string;
   id: Generated<string>;
   name: string;
   rarity: Rarity;
   worldId: string;
+  assetId: string;
 }
 
 export interface Skill {
-  assetId: string;
   id: Generated<string>;
   name: string;
   worldId: string;
+  assetId: string;
 }
 
 export interface StarterKit {
-  amount: number | null;
-  characterId: string | null;
   id: Generated<string>;
-  itemId: string | null;
-  resourceId: string | null;
-  type: Startingtype;
   worldId: string;
+  type: Startingtype;
+  amount: number | null;
+  resourceId: string | null;
+  itemId: string | null;
+  characterId: string | null;
 }
 
 export interface TurnHistory {
@@ -152,11 +141,11 @@ export interface TurnHistory {
 }
 
 export interface User {
-  address: string;
   id: Generated<string>;
+  address: string;
+  worldId: string;
   turns: Generated<number>;
   type: Generated<Usertype>;
-  worldId: string;
 }
 
 export interface World {

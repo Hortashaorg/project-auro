@@ -1,6 +1,7 @@
-import { db } from "../index";
+import { getDB } from "../index";
 
 const populateDBData = async () => {
+  const db = await getDB();
   try {
     await db.transaction().execute(async (trx) => {
       await trx.deleteFrom("asset").execute();

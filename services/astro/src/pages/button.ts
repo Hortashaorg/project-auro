@@ -1,6 +1,7 @@
-import { db } from "src/backend/db";
+import { initDatabase } from "@src/database";
 
 export async function GET() {
+  const db = await initDatabase();
   const data = await db
     .selectFrom("asset")
     .selectAll()

@@ -3,17 +3,19 @@ import type { MigrationResultSet } from "kysely";
 import { FileMigrationProvider, Migrator } from "kysely";
 import * as path from "path";
 
-import { db } from "../index";
+import { getDB } from "../index";
 
-const createMigrator = async () =>
-  new Migrator({
+const createMigrator = async () => {
+  const db = await getDB();
+  return new Migrator({
     db,
     provider: new FileMigrationProvider({
       fs,
       path,
-      migrationFolder: path.join(process.cwd(), "src/backend/db/migrations"),
+      migrationFolder: path.join(process.cwd(), "migrations"),
     }),
   });
+};
 
 const processResult = ({ error, results }: MigrationResultSet) => {
   if (results) {
