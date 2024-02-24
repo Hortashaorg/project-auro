@@ -1,4 +1,4 @@
-import { db } from "@src/backend/db"
+import { db } from "src/backend/db"
 
 export async function GET() {
     const data = await db.selectFrom("asset").selectAll().executeTakeFirstOrThrow();

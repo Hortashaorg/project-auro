@@ -1,4 +1,4 @@
-import { throwError } from "@src/utilities";
+import { throwError } from "src/utilities";
 
 export const enviroment = {
   DB_PASSWORD: import.meta.env.DB_PASSWORD ?? throwError("env variable: DB_PASSWORD not found"),
