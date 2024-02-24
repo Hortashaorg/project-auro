@@ -1,8 +1,10 @@
 import { CamelCasePlugin, Kysely, PostgresDialect } from "kysely";
 import pkg from "pg";
 import Cursor from "pg-cursor";
-import { enviroment } from "./environment";
+
 import type { DB } from "./database-schema";
+import { enviroment } from "./environment";
+
 const { Pool } = pkg;
 
 export const db = new Kysely<DB>({
@@ -14,8 +16,8 @@ export const db = new Kysely<DB>({
       database: enviroment.DB_NAME,
       password: enviroment.DB_PASSWORD,
       user: enviroment.DB_USER,
-      ssl: false
-    })
+      ssl: false,
+    }),
   }),
   plugins: [new CamelCasePlugin()],
 });

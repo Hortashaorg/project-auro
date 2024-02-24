@@ -1,4 +1,5 @@
 import { DialectManager, Generator } from "kysely-codegen";
+
 import { db } from "..";
 
 const outFile = "./src/backend/db/database-schema.d.ts";
