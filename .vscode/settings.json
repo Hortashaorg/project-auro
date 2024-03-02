@@ -5,12 +5,7 @@
     "source.fixAll.eslint": "always",
     "source.organizeImports": "always"
   },
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "astro",
-    "typescript",
-    "typescriptreact"
-  ],
+  "eslint.validate": ["astro", "typescript"],
+  "eslint.workingDirectories": ["./", "./services/astro"],
   "prettier.documentSelectors": ["**/*.astro", "**/*.json", "**/*.ts"]
 }
