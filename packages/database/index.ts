@@ -20,7 +20,6 @@ export const getDB = async (
   }
 
   cachedDb = new Kysely<DB>({
-    // Use MysqlDialect for MySQL and SqliteDialect for SQLite.
     dialect: new PostgresDialect({
       cursor: Cursor,
       pool: new Pool({

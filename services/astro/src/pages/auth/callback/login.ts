@@ -21,12 +21,20 @@ export const GET: APIRoute = async ({ url }) => {
       }),
     },
   );
-  console.log(result.status);
-  console.log(await result.json());
+  const auth = (await result.json()) as {
+    access_token: string;
+    refresh_token: string;
+    id_token: string;
+    scope: "openid email offline_access";
+    expires_in: number;
+    token_type: "Bearer";
+  };
+
   return new Response("Logging in...", {
     status: 302,
     headers: {
-      Location: "/login",
+      Location: "/",
+      "Set-Cookie": `access_token=${auth.access_token}; Max-Age=${auth.expires_in}; HttpOnly; SameSite=Strict; Secure; Path=/;`,
     },
   });
 };
