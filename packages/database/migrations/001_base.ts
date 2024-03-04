@@ -13,9 +13,6 @@ export async function up(db: Kysely<unknown>): Promise<void> {
     .addColumn("updatedAt", "timestamp", (col) =>
       col.notNull().defaultTo("now()"),
     )
-    .addColumn("createdAt", "timestamp", (col) =>
-      col.notNull().defaultTo("now()"),
-    )
     .execute();
 
   await db.schema
@@ -23,7 +20,6 @@ export async function up(db: Kysely<unknown>): Promise<void> {
     .addColumn("accountId", "uuid", (col) =>
       col.primaryKey().references("account.id").onDelete("cascade"),
     )
-    .addColumn("code", "integer", (col) => col.notNull())
     .addColumn("refreshTokenHash", "varchar(500)")
     .addColumn("refreshTokenExpires", "timestamp")
     .addColumn("accessTokenHash", "varchar(500)")

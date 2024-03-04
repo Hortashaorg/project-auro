@@ -2,7 +2,7 @@ import { DialectManager, Generator } from "kysely-codegen";
 
 import { getDB } from "../index";
 
-const outFile = "./src/backend/db/database-schema.d.ts";
+const outFile = "./database-schema.d.ts";
 
 const initGenerator = async () => {
   const db = await getDB();
