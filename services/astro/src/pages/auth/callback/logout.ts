@@ -1,10 +1,34 @@
+import { hashToken } from "@package/common";
+import { initDatabase } from "@src/database";
 import type { APIRoute } from "astro";
 
-export const GET: APIRoute = async () => {
-  // Get current refresh token and access token
-  // Hash the tokens
-  // Find auth record with matching tokens
-  // Nullify the record.
+export const GET: APIRoute = async ({ cookies }) => {
+  const accessToken = cookies.get("access_token");
+  const refreshToken = cookies.get("access_token");
+
+  const db = await initDatabase();
+
+  accessToken?.value;
+  await db
+    .updateTable("auth")
+    .set({
+      accessTokenHash: null,
+      accessTokenExpires: null,
+      refreshTokenHash: null,
+      refreshTokenExpires: null,
+    })
+    .where((eb) =>
+      eb.or([
+        eb("accessTokenHash", "=", hashToken(accessToken?.value ?? "invalid")),
+        eb(
+          "refreshTokenHash",
+          "=",
+          hashToken(refreshToken?.value ?? "invalid"),
+        ),
+      ]),
+    )
+    .execute();
+
   const response = new Response("Logging out...", { status: 302 });
   response.headers.append("Location", "/");
   response.headers.append(
