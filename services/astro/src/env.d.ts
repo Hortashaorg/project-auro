@@ -5,6 +5,10 @@ declare namespace App {
     account?: {
       id: string;
       email: string;
+      accessTokenHash: string | null;
+      accessTokenExpires: Date | null;
+      refreshTokenHash: string | null;
+      refreshTokenExpires: Date | null;
     };
     server?: {
       id: string;
