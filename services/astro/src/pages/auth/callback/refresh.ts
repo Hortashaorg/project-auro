@@ -1,11 +1,9 @@
-import { throwError } from "@package/common";
-import { getLoginTokens } from "@src/logic/auth";
+import { getLoginTokens, nullifyTokensByRefreshToken } from "@src/logic/auth";
 import type { APIRoute } from "astro";
 
-export const GET: APIRoute = async ({ url }) => {
-  const code = url.searchParams.get("code");
-  if (!code) throw Error("Something went terribly wrong.");
-
+export const GET: APIRoute = async ({ cookies }) => {
+  const refreshToken = cookies.get("refresh_token")?.value;
+  if (!refreshToken) throw Error("Something went terribly wrong.");
   const result = await fetch(
     `https://dev-5g37fye485wl6b3n.eu.auth0.com/oauth/token`,
     {
@@ -14,18 +12,18 @@ export const GET: APIRoute = async ({ url }) => {
         "content-type": "application/x-www-form-urlencoded",
       },
       body: new URLSearchParams({
-        grant_type: "authorization_code",
+        grant_type: "refresh_token",
         client_id: "co4niwbMW14RUu0WltdhW13TVpDUnzPY",
         client_secret:
           "s8WNp0tE31dD6Z6PHae_c0xBTULISHXvntbO-VadXFSz2gh4b7WW7moNzD-YWhZ7",
-        code,
+        refresh_token: refreshToken,
         redirect_uri: "https://localhost:4321/callback",
       }),
     },
   );
 
   if (result.status !== 200) {
-    throwError("Authentication failed when trying to login.");
+    return nullifyTokensByRefreshToken(refreshToken);
   }
 
   const auth = (await result.json()) as {

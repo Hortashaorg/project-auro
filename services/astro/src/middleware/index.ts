@@ -1,8 +1,10 @@
 import { hashToken, throwError } from "@package/common";
-import { initDatabase } from "@src/database";
+import { initDatabase } from "@src/logic/database";
 import { defineMiddleware, sequence } from "astro/middleware";
+
 import { hasAccessToUrl } from "./permissions";
 
+/* eslint-disable no-param-reassign */
 export const getUser = defineMiddleware(async ({ cookies, locals }, next) => {
   const accessToken = cookies.get("access_token");
 
@@ -34,6 +36,7 @@ export const getUser = defineMiddleware(async ({ cookies, locals }, next) => {
   }
   return next();
 });
+/* eslint-enable no-param-reassign */
 
 export const validation = defineMiddleware(async (context, next) => {
   const hasAccess = hasAccessToUrl(context);
@@ -70,9 +73,22 @@ export const validation = defineMiddleware(async (context, next) => {
   return next();
 });
 
-export const tokenRenew = defineMiddleware(async (_, next) => {
-  // If access token is about to expire. Do a token renewal
-  return next();
-});
+export const tokenRenew = defineMiddleware(
+  async ({ locals, cookies, url }, next) => {
+    const refreshToken = cookies.get("refresh_token")?.value;
+
+    if (
+      !locals.loggedIn &&
+      !url.pathname.startsWith("/auth/callback") &&
+      refreshToken
+    ) {
+      const response = new Response("Refreshing Token...", { status: 302 });
+      response.headers.append("Location", "/auth/callback/refresh");
+      return response;
+    }
+
+    return next();
+  },
+);
 
 export const onRequest = sequence(getUser, validation, tokenRenew);

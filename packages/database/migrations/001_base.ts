@@ -20,9 +20,9 @@ export async function up(db: Kysely<unknown>): Promise<void> {
     .addColumn("accountId", "uuid", (col) =>
       col.primaryKey().references("account.id").onDelete("cascade"),
     )
-    .addColumn("refreshTokenHash", "varchar(500)")
+    .addColumn("refreshTokenHash", "varchar(500)", (col) => col.unique())
     .addColumn("refreshTokenExpires", "timestamp")
-    .addColumn("accessTokenHash", "varchar(500)")
+    .addColumn("accessTokenHash", "varchar(500)", (col) => col.unique())
     .addColumn("accessTokenExpires", "timestamp")
     .execute();
 
