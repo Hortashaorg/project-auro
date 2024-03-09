@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "local": "env-cmd --file ./.env.local pnpm ",
-    "astro": "pnpm --filter @game/astro",
+    "astro": "pnpm --filter @service/astro",
     "database": "pnpm --filter @package/database",
     "packages": "pnpm --filter @package/*",
     "services": "pnpm --filter @service/*",

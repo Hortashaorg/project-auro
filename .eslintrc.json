@@ -23,19 +23,17 @@
   },
 
   "rules": {
-    /* Auto-sort imports and exports */
     "tailwindcss/enforces-shorthand": "off",
     "import/order": "off",
     "no-console": "off",
     "no-restricted-syntax": "off",
 
-    /* Custom preferences */
     "@typescript-eslint/consistent-indexed-object-style": [
       "warn",
-      "index-signature" // Prevent ambiguity with Records & Tuples
+      "index-signature"
     ],
     "@typescript-eslint/consistent-type-definitions": "warn",
-    "@typescript-eslint/method-signature-style": "error", // Force type safety
+    "@typescript-eslint/method-signature-style": "error",
     "@typescript-eslint/no-empty-interface": [
       "warn",
       { "allowSingleExtends": true }
@@ -55,8 +53,8 @@
     "func-names": ["warn", "as-needed"],
     "import/no-extraneous-dependencies": "off",
     "import/prefer-default-export": "off",
-    "tailwindcss/classnames-order": "off", // Enforced by Prettier
-    "tailwindcss/no-custom-classname": "off" // Avoid distractions while typing
+    "tailwindcss/classnames-order": "off",
+    "tailwindcss/no-custom-classname": "off"
   },
   "overrides": [
     {

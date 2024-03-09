@@ -166,12 +166,6 @@ importers:
       jose:
         specifier: ^5.2.2
         version: 5.2.2
-      pg:
-        specifier: ^8.11.3
-        version: 8.11.3
-      pg-cursor:
-        specifier: ^2.10.3
-        version: 2.10.3(pg@8.11.3)
       react:
         specifier: ^18.2.0
         version: 18.2.0
