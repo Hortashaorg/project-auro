@@ -1,6 +1,6 @@
 import { getSecret } from "@package/common";
 import { environment } from "@src/environment";
-import { getLoginTokens, nullifyTokensByRefreshToken } from "@src/logic/auth";
+import { getLoginTokens, nullifyTokensByRefreshToken } from "@src/logic/auth/auth";
 import type { APIRoute } from "astro";
 
 export const GET: APIRoute = async ({ cookies }) => {

@@ -1,5 +1,5 @@
 import node from "@astrojs/node";
-import svelte from "@astrojs/svelte";
+import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
 import basicSsl from "@vitejs/plugin-basic-ssl";
 import { defineConfig } from "astro/config";
@@ -10,7 +10,12 @@ export default defineConfig({
   adapter: node({
     mode: "standalone",
   }),
-  integrations: [svelte(), tailwind()],
+  integrations: [
+    tailwind({
+      applyBaseStyles: false,
+    }),
+    react(),
+  ],
   vite: {
     plugins: [basicSsl()],
     server: {

@@ -12,7 +12,6 @@
     "plugin:tailwindcss/recommended",
     "prettier"
   ],
-  "plugins": ["simple-import-sort"],
   "parserOptions": {
     "project": true,
     "extraFileExtensions": [".astro"]
@@ -25,9 +24,7 @@
 
   "rules": {
     /* Auto-sort imports and exports */
-    "simple-import-sort/imports": "warn",
-    "simple-import-sort/exports": "warn",
-    "sort-imports": "off",
+    "tailwindcss/enforces-shorthand": "off",
     "import/order": "off",
     "no-console": "off",
     "no-restricted-syntax": "off",
