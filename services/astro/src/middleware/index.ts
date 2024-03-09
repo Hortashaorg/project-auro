@@ -1,5 +1,5 @@
 import { hashToken, throwError } from "@package/common";
-import { initDatabase } from "@src/logic/database";
+import { initDatabase } from "@src/logic/db/database";
 import { defineMiddleware, sequence } from "astro/middleware";
 
 import { hasAccessToUrl } from "./permissions";

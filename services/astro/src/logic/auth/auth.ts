@@ -1,5 +1,5 @@
 import { hashToken } from "@package/common";
-import { initDatabase } from "@src/logic/database";
+import { initDatabase } from "@src/logic/db/database";
 import { decodeJwt } from "jose";
 
 interface AuthTokenInfo {

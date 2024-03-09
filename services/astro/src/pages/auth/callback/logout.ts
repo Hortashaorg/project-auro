@@ -1,4 +1,4 @@
-import { nullifyTokensByRefreshToken } from "@src/logic/auth";
+import { nullifyTokensByRefreshToken } from "@src/logic/auth/auth";
 import type { APIRoute } from "astro";
 
 export const GET: APIRoute = async ({ cookies }) => {

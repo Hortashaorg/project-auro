@@ -1,8 +1,6 @@
 import type { APIContext } from "astro";
 
-const isLoggedIn = ({ locals }: APIContext) => {
-  return locals.loggedIn;
-};
+const isLoggedIn = ({ locals }: APIContext) => locals.loggedIn;
 
 const paths = [
   {

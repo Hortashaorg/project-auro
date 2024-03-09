@@ -1,6 +1,6 @@
 import { getSecret, throwError } from "@package/common";
 import { environment } from "@src/environment";
-import { getLoginTokens } from "@src/logic/auth";
+import { getLoginTokens } from "@src/logic/auth/auth";
 import type { APIRoute } from "astro";
 
 export const GET: APIRoute = async ({ url }) => {
