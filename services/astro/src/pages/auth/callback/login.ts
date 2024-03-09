@@ -1,4 +1,5 @@
-import { throwError } from "@package/common";
+import { getSecret, throwError } from "@package/common";
+import { environment } from "@src/environment";
 import { getLoginTokens } from "@src/logic/auth";
 import type { APIRoute } from "astro";
 
@@ -16,8 +17,10 @@ export const GET: APIRoute = async ({ url }) => {
       body: new URLSearchParams({
         grant_type: "authorization_code",
         client_id: "co4niwbMW14RUu0WltdhW13TVpDUnzPY",
-        client_secret:
-          "s8WNp0tE31dD6Z6PHae_c0xBTULISHXvntbO-VadXFSz2gh4b7WW7moNzD-YWhZ7",
+        client_secret: await getSecret(
+          "AUTH0-CLIENT-SECRET",
+          environment.KEYVAULT_NAME,
+        ),
         code,
         redirect_uri: "https://localhost:4321/callback",
       }),

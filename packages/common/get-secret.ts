@@ -12,12 +12,10 @@ export const createOrGetCredentials = () => {
   return credentials;
 };
 
-export const getSecret = async (secretName: string) => {
+export const getSecret = async (secretName: string, keyvaultName: string) => {
   credentials = createOrGetCredentials();
-  const KEYVAULT_NAME =
-    process.env.KEYVAULT_NAME ??
-    throwError("env variable: KEYVAULT_NAME not found");
-  const url = `https://${KEYVAULT_NAME}.vault.azure.net`;
+
+  const url = `https://${keyvaultName}.vault.azure.net`;
   const client = new SecretClient(url, credentials);
 
   const { value } = await client.getSecret(secretName);

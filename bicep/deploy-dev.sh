@@ -1,0 +1,1 @@
+az deployment sub create --template-file bicep/env.dev.bicep --subscription "6aca9c05-403e-4398-ad29-70f396bd3a03" --location "norwayeast"
