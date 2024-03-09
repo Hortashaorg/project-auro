@@ -1,8 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
-  content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],,
-  prefix: "",
+  content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
     container: {
       center: true,
@@ -68,5 +67,6 @@ module.exports = {
       },
     },
   },
+  // eslint-disable-next-line global-require
   plugins: [require("tailwindcss-animate")],
 };
