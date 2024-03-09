@@ -24,7 +24,7 @@ export const environment = {
   },
   get KEYVAULT_NAME() {
     return (
-      import.meta.env.DB_USER ??
+      import.meta.env.KEYVAULT_NAME ??
       throwError("env variable: KEYVAULT_NAME not found")
     );
   },
