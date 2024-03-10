@@ -40,4 +40,4 @@ jobs:
           target: ${{github.event.inputs.service}}
           file: ./.devcontainer/Dockerfile
           push: true
-          tags: ${{ vars.DOCKER_REGISTRY }}/project-auro:${{github.event.inputs.service}}-${{github.event.inputs.environment}}
+          tags: ${{ vars.DOCKER_USERNAME }}/project-auro:${{github.event.inputs.service}}-${{github.event.inputs.environment}}
