@@ -38,4 +38,11 @@ COPY .. /app/
 RUN pnpm install \
     && pnpm packages build \
     && pnpm astro build
+
+# Set environment variable for the host
+ENV HOST=0.0.0.0
+
+# Expose the port the app runs on
+EXPOSE 4321
+
 CMD ["pnpm", "astro", "start"]
