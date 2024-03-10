@@ -30,3 +30,12 @@ RUN pip install azure-cli --break-system-packages
 
 # Cleanup
 RUN rm -rf /var/cache/apk/*
+
+
+# collectorbrreg
+FROM base AS astro
+COPY .. /app/
+RUN pnpm install \
+    && pnpm packages build \
+    && pnpm astro build
+CMD ["pnpm", "astro", "start"]

@@ -25,7 +25,6 @@ resource keyvault 'Microsoft.KeyVault/vaults@2023-02-01' = {
     networkAcls: {
       defaultAction: 'Deny'
       bypass: 'AzureServices'
-      ipRules: []
     }
     accessPolicies: [
       {
