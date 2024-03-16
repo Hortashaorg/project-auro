@@ -2,15 +2,7 @@ name: Setup Fly
 
 on:
   workflow_dispatch:
-    inputs:
-      environment:
-        description: The environment to deploy to. Defaults to test.
-        required: true
-        type: choice
-        options:
-          - dev
-          - prod
-        default: dev
+
 jobs:
   create-secret:
     runs-on: ubuntu-latest
@@ -18,7 +10,5 @@ jobs:
       - name: Azure Login
         uses: superfly/flyctl-actions/setup-flyctl@master
 
-      - name: Set Docker Auth
-        run: flyctl auth docker --access-token ${{ secrets.DOCKER_PASSWORD }}
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+      - name: Deploy
+        run: fly deploy --access-token ${{ secrets.FLY_API_TOKEN }}
