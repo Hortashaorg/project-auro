@@ -6,7 +6,6 @@ import type { APIRoute } from "astro";
 export const GET: APIRoute = async ({ url }) => {
   const code = url.searchParams.get("code");
 
-  console.log(url);
   if (!code) throw Error("Something went terribly wrong.");
 
   const result = await fetch(
