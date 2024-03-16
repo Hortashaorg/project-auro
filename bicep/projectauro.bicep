@@ -27,12 +27,3 @@ module keyvault 'module.keyvault.bicep' = {
 		location: location
 	}
 }
-
-module kubernetes 'module.kubernetes.bicep' = {
-	name: 'kubernetes-projectauro-${env}'
-	scope: resourceGroup
-	params: {
-		env: env
-		location: location
-	}
-}

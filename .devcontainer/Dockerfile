@@ -28,6 +28,10 @@ RUN apk add --no-cache gcc musl-dev python3-dev libffi-dev openssl-dev cargo mak
 RUN pip install --upgrade pip --break-system-packages
 RUN pip install azure-cli --break-system-packages
 
+RUN curl -L https://fly.io/install.sh | sh
+RUN export FLYCTL_INSTALL="/root/.fly"
+RUN export PATH="$FLYCTL_INSTALL/bin:$PATH"
+
 # Cleanup
 RUN rm -rf /var/cache/apk/*
 
