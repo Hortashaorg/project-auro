@@ -1,23 +1,5 @@
-# flyctl launch added from .gitignore
-# build output
-**/dist
-
-# generated types
-**/.astro
-
-# dependencies
-**/node_modules
-**/.pnpm-store
-
-# logs
-**/npm-debug.log*
-**/yarn-debug.log*
-**/yarn-error.log*
-**/pnpm-debug.log*
-
-# macOS-specific files
-**/.DS_Store
-
-# flyctl launch added from node_modules/.pnpm/tailwindcss@3.4.1/node_modules/tailwindcss/stubs/.gitignore
-!node_modules/.pnpm/tailwindcss@3.4.1/node_modules/tailwindcss/stubs/**/*
 fly.toml
+Dockerfile
+.dockerignore
+node_modules
+.git

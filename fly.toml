@@ -1,16 +1,17 @@
-# fly.toml app configuration file generated for project-auro-dev on 2024-03-16T14:28:41Z
+# fly.toml app configuration file generated for project-auro-dev-wispy-water-6592 on 2024-03-16T16:07:03Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'project-auro-dev'
+app = 'project-auro-dev-wispy-water-6592'
 primary_region = 'arn'
 
 [build]
-  image = 'hortasha/project-auro:astro-dev'
+  dockerfile = '.devcontainer/Dockerfile'
+  build-target = 'astro'
 
 [http_service]
-  internal_port = 8080
+  internal_port = 4321
   force_https = true
   auto_stop_machines = true
   auto_start_machines = true

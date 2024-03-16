@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "local": "env-cmd --file ./.env.local pnpm ",
+    "prod": "env-cmd --file ./.env.production pnpm ",
     "astro": "pnpm --filter @service/astro",
     "database": "pnpm --filter @package/database",
     "packages": "pnpm --filter @package/*",
