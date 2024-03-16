@@ -7,8 +7,8 @@ jobs:
   create-secret:
     runs-on: ubuntu-latest
     steps:
-      - name: Azure Login
+      - name: Install fly CLI
         uses: superfly/flyctl-actions/setup-flyctl@master
 
       - name: Deploy
-        run: fly deploy --access-token ${{ secrets.FLY_API_TOKEN }}
+        run: flyctl deploy --access-token ${{ secrets.FLY_API_TOKEN }}
