@@ -1,9 +1,12 @@
 import { getSecret } from "@package/common";
 import { environment } from "@src/environment";
-import { getLoginTokens, nullifyTokensByRefreshToken } from "@src/logic/auth/auth";
+import {
+  getLoginTokens,
+  nullifyTokensByRefreshToken,
+} from "@src/logic/auth/auth";
 import type { APIRoute } from "astro";
 
-export const GET: APIRoute = async ({ cookies }) => {
+export const GET: APIRoute = async ({ cookies, url }) => {
   const refreshToken = cookies.get("refresh_token")?.value;
   if (!refreshToken) throw Error("Something went terribly wrong.");
   const result = await fetch(
@@ -21,7 +24,7 @@ export const GET: APIRoute = async ({ cookies }) => {
           environment.KEYVAULT_NAME,
         ),
         refresh_token: refreshToken,
-        redirect_uri: "https://localhost:4321/callback",
+        redirect_uri: `${url.origin}/callback`,
       }),
     },
   );

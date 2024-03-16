@@ -5,6 +5,8 @@ import type { APIRoute } from "astro";
 
 export const GET: APIRoute = async ({ url }) => {
   const code = url.searchParams.get("code");
+
+  console.log(url);
   if (!code) throw Error("Something went terribly wrong.");
 
   const result = await fetch(
@@ -22,7 +24,7 @@ export const GET: APIRoute = async ({ url }) => {
           environment.KEYVAULT_NAME,
         ),
         code,
-        redirect_uri: "https://localhost:4321/callback",
+        redirect_uri: `${url.origin}/callback`,
       }),
     },
   );

@@ -3,24 +3,22 @@ import { Wrapper } from "@comp/Wrapper";
 import Layout from "../layouts/Layout.astro";
 
 const accessToken = Astro.cookies.get("access_token")?.value;
+const loginUrl = `https://dev-5g37fye485wl6b3n.eu.auth0.com/authorize?response_type=code&scope=openid%20email%20offline_access&client_id=co4niwbMW14RUu0WltdhW13TVpDUnzPY&redirect_uri=${Astro.url.origin}/auth/callback/login`;
+const logoutUrl = `https://dev-5g37fye485wl6b3n.eu.auth0.com/v2/logout?client_id=co4niwbMW14RUu0WltdhW13TVpDUnzPY&returnTo=${Astro.url.origin}/auth/callback/logout`;
 ---
 
 {
   accessToken === undefined ? (
     <Layout title="Welcome to Astro.">
       <main>
-        <a href="https://dev-5g37fye485wl6b3n.eu.auth0.com/authorize?response_type=code&scope=openid%20email%20offline_access&client_id=co4niwbMW14RUu0WltdhW13TVpDUnzPY&redirect_uri=https://localhost:4321/auth/callback/login">
-          Login
-        </a>
+        <a href={loginUrl}>Login</a>
         <Wrapper client:only />
       </main>
     </Layout>
   ) : (
     <Layout title="Welcome to Astro.">
       <main>
-        <a href="https://dev-5g37fye485wl6b3n.eu.auth0.com/v2/logout?client_id=co4niwbMW14RUu0WltdhW13TVpDUnzPY&returnTo=https://localhost:4321/auth/callback/logout">
-          Logout
-        </a>
+        <a href={logoutUrl}>Logout</a>
       </main>
     </Layout>
   )
