@@ -12,7 +12,7 @@ interface AuthTokenInfo {
 
 export const getLoginTokens = async (
   tokenInfo: AuthTokenInfo,
-  redirectURL = "/auth/callback/loading",
+  redirectURL = "/auth/loading",
 ) => {
   const idTokenClaims = decodeJwt<{
     email: string;
