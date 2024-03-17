@@ -26,7 +26,6 @@ export const createOrGetCredentials = () => {
 };
 
 export const getSecret = async (secretName: string, keyvaultName: string) => {
-  console.log("getting secret now");
   credentials = createOrGetCredentials();
 
   const url = `https://${keyvaultName}.vault.azure.net`;

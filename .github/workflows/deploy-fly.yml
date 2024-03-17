@@ -1,0 +1,17 @@
+name: Deploy to fly
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Out Code
+        uses: actions/checkout@v4
+
+      - name: Install fly CLI
+        uses: superfly/flyctl-actions/setup-flyctl@master
+
+      - name: Deploy
+        run: flyctl deploy --access-token ${{ secrets.FLY_API_TOKEN }}

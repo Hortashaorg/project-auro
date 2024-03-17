@@ -8,10 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check Out Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install fly CLI
         uses: superfly/flyctl-actions/setup-flyctl@master
 
-      - name: Deploy
-        run: flyctl deploy --access-token ${{ secrets.FLY_API_TOKEN }}
+      - name: Set Secrets
+        run: flyctl secrets set AZURE_APP_ID=${{ secrets.SERVICE_PRINCIPAL_FLY_APP_ID }} AZURE_TENANT_ID=${{ vars.SERVICE_PRINCIPAL_FLY_TENANT }} AZURE_SECRET=${{ secrets.SERVICE_PRINCIPAL_FLY_SECRET }} --access-token ${{ secrets.FLY_API_TOKEN }}
