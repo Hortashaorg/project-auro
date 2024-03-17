@@ -15,9 +15,6 @@ export const createOrGetCredentials = () => {
     if (environment.NODE_ENV === "development") {
       credentials = new DefaultAzureCredential();
     } else {
-      console.log("Tenant", environment.AZURE_TENANT_ID);
-      console.log("App Id", environment.AZURE_APP_ID);
-      console.log("Secret", environment.AZURE_SECRET);
       credentials = new ClientSecretCredential(
         environment.AZURE_TENANT_ID,
         environment.AZURE_APP_ID,
