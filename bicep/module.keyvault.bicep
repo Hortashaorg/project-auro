@@ -47,6 +47,24 @@ resource keyvault 'Microsoft.KeyVault/vaults@2023-02-01' = {
       }
       {
         tenantId: tenantId
+        objectId: '41b88837-93b8-48f5-8131-b1819bdac9e6' // Service Principal Fly
+        permissions: {
+          certificates: [
+            'Get'
+            'List'
+          ]
+          keys: [
+            'Get'
+            'List'
+          ]
+          secrets: [
+            'Get'
+            'List'
+          ]
+        }
+      }
+      {
+        tenantId: tenantId
         objectId: '81e551da-14be-43c3-90db-3e30186cc81c' // Martin
         permissions: {
           certificates: [
