@@ -19,6 +19,9 @@ export const createOrGetCredentials = () => {
         environment.AZURE_TENANT_ID,
         environment.AZURE_APP_ID,
         environment.AZURE_SECRET,
+        {
+          additionallyAllowedTenants: [environment.AZURE_TENANT_ID],
+        },
       );
     }
   }
