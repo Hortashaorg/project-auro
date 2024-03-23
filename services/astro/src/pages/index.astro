@@ -1,5 +1,4 @@
 ---
-import { Wrapper } from "@comp/Wrapper";
 import Layout from "../layouts/Layout.astro";
 
 const accessToken = Astro.cookies.get("access_token")?.value;
@@ -12,7 +11,6 @@ const logoutUrl = `https://dev-5g37fye485wl6b3n.eu.auth0.com/v2/logout?client_id
     <Layout title="Welcome to Astro.">
       <main>
         <a href={loginUrl}>Login</a>
-        <Wrapper client:only />
       </main>
     </Layout>
   ) : (
