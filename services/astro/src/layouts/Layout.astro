@@ -5,6 +5,8 @@ import { Navbar } from "@src/sections/Navbar";
 interface Props {
   title: string;
 }
+
+const accessToken = Astro.cookies.get("access_token")?.value;
 const { title } = Astro.props;
 ---
 
@@ -20,7 +22,7 @@ const { title } = Astro.props;
   </head>
   <body>
     <div class="container">
-      <Navbar client:only />
+      <Navbar client:only="true" loggedIn={accessToken !== undefined} />
       <slot />
     </div>
   </body>

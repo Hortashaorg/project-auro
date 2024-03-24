@@ -1,3 +1,4 @@
+import { Button } from "@comp/shadui/ui/button";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -5,10 +6,12 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
 } from "@comp/shadui/ui/navigation-menu";
 import { cn } from "@src/logic/shadui";
 import React from "react";
+
+const loginUrl = `https://dev-5g37fye485wl6b3n.eu.auth0.com/authorize?response_type=code&scope=openid%20email%20offline_access&client_id=co4niwbMW14RUu0WltdhW13TVpDUnzPY&redirect_uri=${window.location.origin}/auth/callback/login`;
+const logoutUrl = `https://dev-5g37fye485wl6b3n.eu.auth0.com/v2/logout?client_id=co4niwbMW14RUu0WltdhW13TVpDUnzPY&returnTo=${window.location.origin}/auth/callback/logout`;
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -48,7 +51,7 @@ const components: { title: string; href: string; description: string }[] = [
   },
 ];
 
-export const Navbar: React.FC = () => (
+export const Navbar: React.FC<{ loggedIn: boolean }> = ({ loggedIn }) => (
   <div className="flex items-center">
     <div className="mr-4 hidden md:flex">
       <NavigationMenu>
@@ -102,18 +105,19 @@ export const Navbar: React.FC = () => (
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
-          <NavigationMenuItem>
-            <a href="/docs">
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Documentation
-              </NavigationMenuLink>
-            </a>
-          </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
     </div>
     <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-      YOLO
+      {loggedIn ? (
+        <Button asChild>
+          <a href={logoutUrl}>Logout</a>
+        </Button>
+      ) : (
+        <Button asChild>
+          <a href={loginUrl}>Login</a>
+        </Button>
+      )}
     </div>
   </div>
 );
