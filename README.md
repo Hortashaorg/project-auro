@@ -1,1 +1,1 @@
-This is a empty readme
+# How to install
