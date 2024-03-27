@@ -1,4 +1,3 @@
-import { Button } from "@comp/shadui/ui/button";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -6,6 +5,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
 } from "@comp/shadui/ui/navigation-menu";
 import { cn } from "@src/logic/shadui";
 import React from "react";
@@ -109,15 +109,25 @@ export const Navbar: React.FC<{ loggedIn: boolean }> = ({ loggedIn }) => (
       </NavigationMenu>
     </div>
     <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-      {loggedIn ? (
-        <Button asChild>
-          <a href={logoutUrl}>Logout</a>
-        </Button>
-      ) : (
-        <Button asChild>
-          <a href={loginUrl}>Login</a>
-        </Button>
-      )}
+      <NavigationMenu>
+        <NavigationMenuList>
+          <NavigationMenuItem>
+            {loggedIn ? (
+              <NavigationMenuLink asChild>
+                <a href={logoutUrl} className={navigationMenuTriggerStyle()}>
+                  Logout
+                </a>
+              </NavigationMenuLink>
+            ) : (
+              <NavigationMenuLink asChild>
+                <a href={loginUrl} className={navigationMenuTriggerStyle()}>
+                  Login
+                </a>
+              </NavigationMenuLink>
+            )}
+          </NavigationMenuItem>
+        </NavigationMenuList>
+      </NavigationMenu>
     </div>
   </div>
 );
