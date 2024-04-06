@@ -11,12 +11,6 @@ export const environment = {
       import.meta.env.DB_NAME ?? throwError("env variable: DB_NAME not found")
     );
   },
-  get DB_PASSWORD() {
-    return (
-      import.meta.env.DB_PASSWORD ??
-      throwError("env variable: DB_PASSWORD not found")
-    );
-  },
   get DB_USER() {
     return (
       import.meta.env.DB_USER ?? throwError("env variable: DB_USER not found")
@@ -26,6 +20,11 @@ export const environment = {
     return (
       import.meta.env.KEYVAULT_NAME ??
       throwError("env variable: KEYVAULT_NAME not found")
+    );
+  },
+  get NODE_ENV() {
+    return (
+      import.meta.env.NODE_ENV ?? throwError("env variable: NODE_ENV not found")
     );
   },
 };

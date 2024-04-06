@@ -16,4 +16,15 @@ export const environment = {
   get DB_HOST() {
     return process.env.DB_HOST ?? throwError("env variable: DB_HOST not found");
   },
+  get KEYVAULT_NAME() {
+    return (
+      process.env.KEYVAULT_NAME ??
+      throwError("env variable: KEYVAULT_NAME not found")
+    );
+  },
+  get NODE_ENV() {
+    return (
+      process.env.NODE_ENV ?? throwError("env variable: NODE_ENV not found")
+    );
+  },
 };

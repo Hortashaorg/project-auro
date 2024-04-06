@@ -1,3 +1,4 @@
+import { getSecret } from "@package/common";
 import { getDB } from "@package/database";
 import { environment } from "@src/environment";
 
@@ -11,7 +12,9 @@ export const initDatabase = async () => {
   db = await getDB(
     environment.DB_HOST,
     environment.DB_NAME,
-    environment.DB_PASSWORD,
+    environment.NODE_ENV === "development"
+      ? "root"
+      : await getSecret("DB-PASSWORD", environment.KEYVAULT_NAME),
     environment.DB_USER,
   );
 

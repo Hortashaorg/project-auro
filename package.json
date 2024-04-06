@@ -4,7 +4,7 @@
   "description": "",
   "private": true,
   "scripts": {
-    "local": "env-cmd --file ./.env.local pnpm ",
+    "dev": "env-cmd --file ./.env.development pnpm ",
     "prod": "env-cmd --file ./.env.production pnpm ",
     "astro": "pnpm --filter @service/astro",
     "database": "pnpm --filter @package/database",

@@ -2,6 +2,7 @@ import { CamelCasePlugin, Kysely, PostgresDialect } from "kysely";
 import pkg from "pg";
 import Cursor from "pg-cursor";
 
+import { getSecret } from "@package/common";
 import type { DB } from "./database-schema";
 import { environment } from "./environment";
 
@@ -25,7 +26,10 @@ export const getDB = async (
       pool: new Pool({
         host: DB_HOST ?? environment.DB_HOST,
         database: DB_NAME ?? environment.DB_NAME,
-        password: DB_PASSWORD ?? environment.DB_PASSWORD,
+        password:
+          DB_PASSWORD ?? environment.NODE_ENV === "development"
+            ? "root"
+            : await getSecret("DB-PASSWORD", environment.KEYVAULT_NAME),
         user: DB_USER ?? environment.DB_USER,
         ssl: false,
       }),
