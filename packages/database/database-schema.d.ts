@@ -14,6 +14,7 @@ export interface Account {
   id: Generated<string>;
   email: string;
   registrationTime: Timestamp;
+  avatarAssetId: string;
   updatedAt: Generated<Timestamp>;
 }
 

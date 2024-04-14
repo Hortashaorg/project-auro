@@ -1,5 +1,6 @@
 ---
 import "@src/globals.css";
+import { initDatabase } from "@src/logic/db/database";
 import { Navbar } from "@src/sections/Navbar";
 
 interface Props {
@@ -8,10 +9,21 @@ interface Props {
 
 const accessToken = Astro.cookies.get("access_token")?.value;
 const { title } = Astro.props;
+
+const db = await initDatabase();
+
+const userWithAvatar = Astro.locals.account?.id
+  ? await db
+      .selectFrom("account")
+      .innerJoin("asset", "account.avatarAssetId", "asset.id")
+      .where("account.id", "=", Astro.locals.account.id)
+      .select("asset.url")
+      .executeTakeFirstOrThrow()
+  : undefined;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" id="page">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content="Astro description" />
@@ -21,7 +33,11 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
-    <Navbar client:only="true" loggedIn={accessToken !== undefined} />
+    <Navbar
+      client:only="true"
+      loggedIn={accessToken !== undefined}
+      avatarUrl={userWithAvatar?.url}
+    />
     <div class="container mt-5">
       <slot />
     </div>

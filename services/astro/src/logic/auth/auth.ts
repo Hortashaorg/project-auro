@@ -19,11 +19,19 @@ export const getLoginTokens = async (
   }>(tokenInfo.id_token);
 
   const db = await initDatabase();
+
+  const defaultAvatar = await db
+    .selectFrom("asset")
+    .select("asset.id")
+    .where("type", "=", "avatar")
+    .executeTakeFirstOrThrow();
+
   let account = await db
     .insertInto("account")
     .values({
       email: idTokenClaims.email,
       registrationTime: new Date(),
+      avatarAssetId: defaultAvatar.id,
     })
     .onConflict((occ) => occ.column("email").doNothing())
     .returningAll()

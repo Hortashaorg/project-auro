@@ -5,12 +5,25 @@ export async function up(db: Kysely<unknown>): Promise<void> {
   await db.schema.createType("assetcategory").asEnum(["avatar"]).execute();
 
   await db.schema
+    .createTable("asset")
+    .addColumn("id", "uuid", (col) =>
+      col.primaryKey().defaultTo(sql`gen_random_uuid()`),
+    )
+    .addColumn("type", sql`assetcategory`, (col) => col.notNull())
+    .addColumn("name", "varchar(50)", (col) => col.notNull().unique())
+    .addColumn("url", "varchar(500)", (col) => col.notNull().unique())
+    .execute();
+
+  await db.schema
     .createTable("account")
     .addColumn("id", "uuid", (col) =>
       col.primaryKey().defaultTo(sql`gen_random_uuid()`),
     )
     .addColumn("email", "varchar(100)", (col) => col.notNull().unique())
     .addColumn("registrationTime", "timestamp", (col) => col.notNull())
+    .addColumn("avatarAssetId", "uuid", (col) =>
+      col.notNull().references("asset.id"),
+    )
     .addColumn("updatedAt", "timestamp", (col) =>
       col.notNull().defaultTo("now()"),
     )
@@ -63,26 +76,16 @@ export async function up(db: Kysely<unknown>): Promise<void> {
       col.notNull().defaultTo("now()"),
     )
     .execute();
-
-  await db.schema
-    .createTable("asset")
-    .addColumn("id", "uuid", (col) =>
-      col.primaryKey().defaultTo(sql`gen_random_uuid()`),
-    )
-    .addColumn("type", sql`assetcategory`, (col) => col.notNull())
-    .addColumn("name", "varchar(50)", (col) => col.notNull().unique())
-    .addColumn("url", "varchar(500)", (col) => col.notNull().unique())
-    .execute();
 }
 
 export async function down(db: Kysely<unknown>): Promise<void> {
-  await db.schema.dropTable("asset").execute();
-
   await db.schema.dropTable("user").execute();
   await db.schema.dropTable("server").execute();
 
   await db.schema.dropTable("auth").execute();
   await db.schema.dropTable("account").execute();
+
+  await db.schema.dropTable("asset").execute();
 
   await db.schema.dropType("usertype").execute();
   await db.schema.dropType("assetcategory").execute();

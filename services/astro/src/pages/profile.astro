@@ -9,6 +9,15 @@ const avatars = await db
   .selectAll()
   .where("type", "=", "avatar")
   .execute();
+
+const userWithAvatar = Astro.locals.account?.id
+  ? await db
+      .selectFrom("account")
+      .innerJoin("asset", "account.avatarAssetId", "asset.id")
+      .where("account.id", "=", Astro.locals.account.id)
+      .selectAll("asset")
+      .executeTakeFirstOrThrow()
+  : undefined;
 ---
 
 <Layout title="Profile">
@@ -20,9 +29,14 @@ const avatars = await db
       avatars.map((avatar) => (
         <Card
           className={
-            "w-[8rem] cursor-pointer " +
-            (avatar.name === "Human" ? "border-4 border-primary" : "")
+            "w-[8rem] " +
+            (avatar.id === userWithAvatar?.id
+              ? "border-4 border-primary"
+              : "cursor-pointer")
           }
+          hx-post="/profile"
+          hx-swap="outerHTML"
+          hx-target="#page"
         >
           <CardHeader>
             <CardTitle className="text-nowrap overflow-hidden overflow-ellipsis">

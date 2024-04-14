@@ -21,7 +21,10 @@ import React from "react";
 const loginUrl = `https://dev-5g37fye485wl6b3n.eu.auth0.com/authorize?response_type=code&scope=openid%20email%20offline_access&client_id=co4niwbMW14RUu0WltdhW13TVpDUnzPY&redirect_uri=${window.location.origin}/auth/callback/login`;
 const logoutUrl = `https://dev-5g37fye485wl6b3n.eu.auth0.com/v2/logout?client_id=co4niwbMW14RUu0WltdhW13TVpDUnzPY&returnTo=${window.location.origin}/auth/callback/logout`;
 
-export const Navbar: React.FC<{ loggedIn: boolean }> = ({ loggedIn }) => (
+export const Navbar: React.FC<{
+  loggedIn: boolean;
+  avatarUrl: string | undefined;
+}> = ({ loggedIn, avatarUrl }) => (
   <div className="flex items-center border-b p-3">
     <div className="mr-4 hidden md:flex">
       <NavigationMenu>
@@ -57,8 +60,12 @@ export const Navbar: React.FC<{ loggedIn: boolean }> = ({ loggedIn }) => (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Avatar>
-                      <AvatarImage src="https://github.com/shadcn.png" />
-                      <AvatarFallback>CN</AvatarFallback>
+                      <AvatarImage
+                        src={avatarUrl}
+                        className="bg-muted p-1 border-2 border-black rounded-full"
+                        id="avatar"
+                      />
+                      <AvatarFallback id="avatar">CN</AvatarFallback>
                     </Avatar>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="w-56">
