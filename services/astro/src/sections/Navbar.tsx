@@ -63,9 +63,8 @@ export const Navbar: React.FC<{
                       <AvatarImage
                         src={avatarUrl}
                         className="bg-muted p-1 border-2 border-black rounded-full"
-                        id="avatar"
                       />
-                      <AvatarFallback id="avatar">CN</AvatarFallback>
+                      <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="w-56">
