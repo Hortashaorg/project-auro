@@ -4,7 +4,7 @@ const isLoggedIn = ({ locals }: APIContext) => locals.loggedIn;
 
 const paths = [
   {
-    url: "/secure",
+    url: "/profile",
     permission: isLoggedIn,
   },
 ];

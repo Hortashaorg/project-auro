@@ -1,5 +1,7 @@
 import type { ColumnType } from "kysely";
 
+export type Assetcategory = "avatar";
+
 export type Generated<T> = T extends ColumnType<infer S, infer I, infer U>
   ? ColumnType<S, I | undefined, U>
   : ColumnType<T, T | undefined, T>;
@@ -13,6 +15,13 @@ export interface Account {
   email: string;
   registrationTime: Timestamp;
   updatedAt: Generated<Timestamp>;
+}
+
+export interface Asset {
+  id: Generated<string>;
+  type: Assetcategory;
+  name: string;
+  url: string;
 }
 
 export interface Auth {
@@ -42,6 +51,7 @@ export interface User {
 
 export interface DB {
   account: Account;
+  asset: Asset;
   auth: Auth;
   server: Server;
   user: User;
