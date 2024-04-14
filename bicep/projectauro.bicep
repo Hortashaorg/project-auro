@@ -27,3 +27,12 @@ module keyvault 'module.keyvault.bicep' = {
 		location: location
 	}
 }
+
+module storageaccount 'module.storage.bicep' = {
+	name: 'stprojectauro-${env}'
+	scope: resourceGroup
+	params: {
+		env: env
+		location: location
+	}
+}
