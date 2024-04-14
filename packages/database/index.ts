@@ -20,16 +20,19 @@ export const getDB = async (
     return cachedDb;
   }
 
+  const password = DB_PASSWORD
+    ? DB_PASSWORD
+    : environment.NODE_ENV === "development"
+      ? "root"
+      : await getSecret("DB-PASSWORD", environment.KEYVAULT_NAME);
+
   cachedDb = new Kysely<DB>({
     dialect: new PostgresDialect({
       cursor: Cursor,
       pool: new Pool({
         host: DB_HOST ?? environment.DB_HOST,
         database: DB_NAME ?? environment.DB_NAME,
-        password:
-          DB_PASSWORD ?? environment.NODE_ENV === "development"
-            ? "root"
-            : await getSecret("DB-PASSWORD", environment.KEYVAULT_NAME),
+        password: password,
         user: DB_USER ?? environment.DB_USER,
         ssl: false,
       }),
