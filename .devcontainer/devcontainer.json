@@ -20,5 +20,5 @@
   "dockerComposeFile": "./docker-compose.yml",
   "service": "local",
   "workspaceFolder": "/app",
-  "postCreateCommand": "pnpm install && pnpm setup && source /root/.bashrc && pnpm add -g tsx && pnpm packages build && read -p 'Enter your git email: ' email && git config --global user.email \"$email\" && read -p 'Enter your git username: ' username && git config --global user.name \"$username\""
+  "postCreateCommand": "pnpm install && pnpm setup && source /root/.bashrc && pnpm add -g @gala-chain/cli && pnpm add -g tsx && pnpm packages build && read -p 'Enter your git email: ' email && git config --global user.email \"$email\" && read -p 'Enter your git username: ' username && git config --global user.name \"$username\""
 }

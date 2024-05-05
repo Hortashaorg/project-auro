@@ -13,7 +13,7 @@ SHELL ["/bin/bash", "-c"]
 RUN apk update && apk upgrade
 
 # Install pnpm
-RUN npm install -g pnpm
+RUN corepack enable && corepack prepare pnpm@latest --activate
 
 # ---- local conatiner for running microservices manually ----
 FROM base AS local
@@ -34,7 +34,6 @@ RUN export PATH="$FLYCTL_INSTALL/bin:$PATH"
 
 # Cleanup
 RUN rm -rf /var/cache/apk/*
-
 
 # collectorbrreg
 FROM base AS astro

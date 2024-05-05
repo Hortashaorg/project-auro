@@ -14,7 +14,7 @@
   },
   "author": "",
   "dependencies": {
-    "@package/common": "1.0.0",
+    "@package/common": "workspace:*",
     "kysely": "^0.26.3",
     "kysely-codegen": "^0.10.1",
     "pg": "^8.11.3",
