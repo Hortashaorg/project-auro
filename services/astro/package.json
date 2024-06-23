@@ -17,9 +17,7 @@
     "@package/database": "workspace:*",
     "astro": "^4.11.0",
     "class-variance-authority": "^0.7.0",
-    "clsx": "^2.1.1",
     "jose": "^5.4.1",
-    "tailwind-merge": "^2.3.0",
     "typescript": "^5.5.2",
     "tailwindcss": "4.0.0-alpha.16"
   },
