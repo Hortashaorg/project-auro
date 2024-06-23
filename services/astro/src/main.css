@@ -1,0 +1,45 @@
+@import "tailwindcss/preflight" layer(base);
+@import "tailwindcss/utilities" layer(utilities);
+
+[x-cloak] {
+  display: none !important;
+}
+
+@theme {
+  --color-primary-900: #312e81;
+  --color-primary-500: #6366f1;
+  --color-primary-200: #c7d2fe;
+  --color-primary-050: #eef2ff;
+  --color-white: #fff;
+
+  --spacing-0: 0;
+  --spacing-1: 8px;
+  --spacing-3: 16px;
+  --spacing-5: 32px;
+
+  --width-1: 0.25rem;
+  --width-2: 0.5rem;
+  --width-4: 1rem;
+  --width-8: 2rem;
+  --width-48: 12rem;
+  --width-96: 24rem;
+
+  --radius-sm: 0.125rem;
+
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+
+  --width-screen: 100vw;
+}
+
+@layer utilities {
+  .container {
+    max-width: 100%;
+    padding-left: var(--spacing-3);
+    padding-right: var(--spacing-3);
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

@@ -1,6 +1,5 @@
 import node from "@astrojs/node";
-import react from "@astrojs/react";
-import tailwind from "@astrojs/tailwind";
+import tailwind from "@tailwindcss/vite";
 import basicSsl from "@vitejs/plugin-basic-ssl";
 import { defineConfig } from "astro/config";
 
@@ -10,16 +9,11 @@ export default defineConfig({
   adapter: node({
     mode: "standalone",
   }),
-  integrations: [
-    tailwind({
-      applyBaseStyles: false,
-    }),
-    react(),
-  ],
   vite: {
-    plugins: [basicSsl()],
+    plugins: [basicSsl(), tailwind()],
     server: {
       https: true,
+      port: "localhost",
     },
   },
 });

@@ -2,8 +2,15 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "always",
+    "source.fixAll.eslint": "never",
     "source.organizeImports": "always"
+  },
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ],
+  "files.associations": {
+    "*.css": "tailwindcss"
   },
   "eslint.validate": ["astro", "typescript"],
   "eslint.workingDirectories": ["./", "./services/astro"],

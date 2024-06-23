@@ -11,12 +11,12 @@
   "keywords": [],
   "author": "",
   "dependencies": {
-    "@azure/identity": "^3.3.0",
-    "@azure/keyvault-secrets": "^4.7.0"
+    "@azure/identity": "^4.3.0",
+    "@azure/keyvault-secrets": "^4.8.0"
   },
   "devDependencies": {
-    "tsx": "^3.13.0",
-    "typescript": "^5.2.2",
-    "esbuild": "0.19.9"
+    "esbuild": "0.21.5",
+    "tsx": "^4.15.7",
+    "typescript": "^5.5.2"
   }
 }
