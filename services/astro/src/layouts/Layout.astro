@@ -1,4 +1,5 @@
 ---
+import "@src/main.css";
 import { initDatabase } from "@src/logic/db/database";
 import Navbar from "@src/sections/navbar/Navbar.astro";
 
@@ -28,8 +29,7 @@ const userWithAvatar = Astro.locals.account?.id
     <meta name="description" content="Astro description" />
     <meta name="viewport" content="width=device-width" />
     <script src="https://unpkg.com/htmx.org@1.9.10"></script>
-    <script src="https://unpkg.com/alpinejs" defer></script>
-    <link href="src/main.css" rel="stylesheet" />
+    <script src="https://unpkg.com/alpinejs"></script>
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
