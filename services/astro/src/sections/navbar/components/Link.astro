@@ -3,23 +3,18 @@ import type { RequiredProps } from "@src/types";
 import type { HTMLAttributes } from "astro/types";
 import { cva } from "class-variance-authority";
 
-const linkVariants = cva(["hover:bg-primary-200"], {
+const linkVariants = cva(["hover:bg-primary-200", "py-3"], {
   variants: {
     variant: {
-      navLink: [
-        "bg-blue-500",
-        "text-white",
-        "border-transparent",
-        "hover:bg-blue-600",
-      ],
-      dropdownLink: ["block", "py-3", "text-center"],
+      navLink: ["px-5"],
+      dropdownLink: ["block", "text-center"],
     },
   },
 });
 
-type ButtonVariants = RequiredProps<typeof linkVariants, "variant">;
+type LinkVariants = RequiredProps<typeof linkVariants, "variant">;
 
-interface Props extends HTMLAttributes<"a">, ButtonVariants {}
+interface Props extends HTMLAttributes<"a">, LinkVariants {}
 
 const { variant } = Astro.props;
 ---

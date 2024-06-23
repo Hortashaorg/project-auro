@@ -1,17 +1,41 @@
 ---
+import type { RequiredProps } from "@src/types";
 import type { HTMLAttributes } from "astro/types";
+import { cva } from "class-variance-authority";
 
-interface Props extends HTMLAttributes<"div"> {
+const selectVariants = cva(
+  [
+    "absolute",
+    "grid",
+    "grid-cols-2",
+    "w-96",
+    "rounded-sm",
+    "z-20",
+    "bg-primary-050",
+  ],
+  {
+    variants: {
+      flow: {
+        right: [],
+        left: ["right-0"],
+      },
+    },
+  },
+);
+
+interface Props
+  extends HTMLAttributes<"div">,
+    RequiredProps<typeof selectVariants, "flow"> {
   name: string;
 }
 
-const { name, class: classList } = Astro.props;
+const { name, class: classList, flow } = Astro.props;
 ---
 
 <div class={`relative ${classList}`} {...Astro.props}>
   <button
     class="flex items-center justify-between gap-3 hover:bg-primary-200 cursor-pointer py-3 px-5"
-    @click="open = !open"
+    @click={`name = name == "${name}" ? "" : "${name}"`}
     >{name}<svg
       class="w-2"
       aria-hidden="true"
@@ -28,8 +52,8 @@ const { name, class: classList } = Astro.props;
     </svg>
   </button>
   <div
-    class="absolute grid grid-cols-2 w-96 rounded-sm z-20 bg-primary-050"
-    x-show="open"
+    class={`${selectVariants({ flow })}`}
+    x-show={`name == "${name}"`}
     x-cloak
   >
     <slot />
