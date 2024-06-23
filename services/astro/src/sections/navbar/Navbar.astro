@@ -26,7 +26,13 @@ const logoutUrl = `https://dev-5g37fye485wl6b3n.eu.auth0.com/v2/logout?client_id
   <Menu>
     {
       loggedIn ? (
-        <Select name="Profile" variant="single" flow="left" imgSrc={avatarUrl}>
+        <Select
+          name="Profile"
+          variant="single"
+          flow="left"
+          imgSrc={avatarUrl}
+          id="avatar"
+        >
           <Link href="/profile" variant="dropdownLink">
             profile
           </Link>

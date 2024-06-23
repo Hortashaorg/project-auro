@@ -3,6 +3,5 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Profile">
-  <h1>Profile</h1>
   <div hx-get="/api/avatars" hx-trigger="load"></div>
 </Layout>

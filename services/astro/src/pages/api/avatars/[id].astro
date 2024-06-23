@@ -1,7 +1,8 @@
 ---
 import { throwError } from "@package/common";
 import { initDatabase } from "@src/logic/db/database";
-import { Navbar } from "@src/sections/Navbar";
+import Link from "@src/sections/navbar/components/Link.astro";
+import Select from "@src/sections/navbar/components/Select.astro";
 import Avatars from "./index.astro";
 
 const db = await initDatabase();
@@ -23,11 +24,19 @@ const avatarUrl = await db
   .selectAll()
   .executeTakeFirstOrThrow();
 
-export const partial = true;
+const logoutUrl = `https://dev-5g37fye485wl6b3n.eu.auth0.com/v2/logout?client_id=co4niwbMW14RUu0WltdhW13TVpDUnzPY&returnTo=${Astro.url.origin}/auth/callback/logout`;
 ---
 
 <Avatars />
 
-<div id="navbar" hx-swap-oob="true">
-  <Navbar client:only="true" loggedIn={true} avatarUrl={avatarUrl.url} />
-</div>
+<Select
+  name="Profile"
+  variant="single"
+  flow="left"
+  imgSrc={avatarUrl.url}
+  id="avatar"
+  hx-swap-oob="true"
+>
+  <Link href="/profile" variant="dropdownLink"> profile </Link>
+  <Link href={logoutUrl} variant="dropdownLink"> Logout </Link>
+</Select>

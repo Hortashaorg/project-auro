@@ -1,5 +1,4 @@
 ---
-import { Card, CardContent, CardHeader, CardTitle } from "@comp/shadui/ui/card";
 import { initDatabase } from "@src/logic/db/database";
 const db = await initDatabase();
 
@@ -17,8 +16,6 @@ const userWithAvatar = Astro.locals.account?.id
       .selectAll("asset")
       .executeTakeFirstOrThrow()
   : undefined;
-
-export const partial = true;
 ---
 
 <div
@@ -27,8 +24,8 @@ export const partial = true;
 >
   {
     avatars.map((avatar) => (
-      <Card
-        className={
+      <div
+        class={
           "w-[8rem] " +
           (avatar.id === userWithAvatar?.id
             ? "border-4 border-primary"
@@ -38,15 +35,9 @@ export const partial = true;
         hx-swap="outerHTML"
         hx-target="#avatars"
       >
-        <CardHeader>
-          <CardTitle className="text-nowrap overflow-hidden overflow-ellipsis">
-            {avatar.name}
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="grid justify-items-center">
-          <img src={avatar.url} alt={avatar.name} />
-        </CardContent>
-      </Card>
+        {avatar.name}
+        <img src={avatar.url} alt={avatar.name} />
+      </div>
     ))
   }
 </div>
