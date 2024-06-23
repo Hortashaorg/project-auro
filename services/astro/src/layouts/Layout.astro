@@ -35,7 +35,10 @@ const userWithAvatar = Astro.locals.account?.id
   </head>
   <body>
     <div id="navbar">
-      <Navbar />
+      <Navbar
+        loggedIn={accessToken !== undefined}
+        avatarUrl={userWithAvatar?.url}
+      />
     </div>
     <div class="mt-2 container">
       <slot />
