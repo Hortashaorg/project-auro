@@ -14,4 +14,4 @@ jobs:
         uses: superfly/flyctl-actions/setup-flyctl@master
 
       - name: Deploy
-        run: flyctl deploy -t ${{ secrets.FLY_API_TOKEN }} -a project-auro-dev
+        run: flyctl deploy -a project-auro-dev --access-token ${{ secrets.FLY_API_TOKEN }}
