@@ -12,7 +12,7 @@ const textVariants = cva([], {
       small: ["text-sm"],
     },
     alignment: {
-      left: [],
+      left: ["text-left"],
       center: ["text-center"],
     },
   },
@@ -21,16 +21,23 @@ const textVariants = cva([], {
   },
 });
 
-type TextVariants = NonNullableProps<typeof textVariants, "variant">;
+type TextVariants = NonNullableProps<
+  typeof textVariants,
+  "variant" | "alignment"
+>;
 
-interface Props extends HTMLAttributes<"div">, TextVariants {}
+interface Props extends HTMLAttributes<"div">, TextVariants {
+  variant: "header" | "subheader" | "paragraph" | "small";
+}
 
-const { variant, alignment } = Astro.props;
+const { variant, alignment = "left", ...restProps } = Astro.props;
+
+const Tag = variant === "header" ? "h1" : variant === "subheader" ? "h2" : "p";
 ---
 
-<div
-  class={`${textVariants({ variant, alignment })} ${Astro.props.class}`}
-  {...Astro.props}
+<Tag
+  class={`${textVariants({ variant, alignment })} ${restProps.class}`}
+  {...restProps}
 >
   <slot />
-</div>
+</Tag>
