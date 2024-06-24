@@ -1,0 +1,36 @@
+---
+import type { NonNullableProps } from "@src/types";
+import type { HTMLAttributes } from "astro/types";
+import { cva } from "class-variance-authority";
+
+const textVariants = cva([], {
+  variants: {
+    variant: {
+      header: ["text-3xl", "font-bold"],
+      subheader: ["text-2xl", "font-semibold"],
+      paragraph: ["text-base"],
+      small: ["text-sm"],
+    },
+    alignment: {
+      left: [],
+      center: ["text-center"],
+    },
+  },
+  defaultVariants: {
+    alignment: "left",
+  },
+});
+
+type TextVariants = NonNullableProps<typeof textVariants, "variant">;
+
+interface Props extends HTMLAttributes<"div">, TextVariants {}
+
+const { variant, alignment } = Astro.props;
+---
+
+<div
+  class={`${textVariants({ variant, alignment })} ${Astro.props.class}`}
+  {...Astro.props}
+>
+  <slot />
+</div>

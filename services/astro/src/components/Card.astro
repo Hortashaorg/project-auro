@@ -1,5 +1,6 @@
 ---
 import type { HTMLAttributes } from "astro/types";
+import Text from "./Text.astro";
 
 interface Props extends HTMLAttributes<"div"> {
   title: string;
@@ -12,9 +13,9 @@ const { title } = Astro.props;
   class={`block w-[12rem] h-[15rem] p-5 bg-white border border-primary-200 rounded-sm ${Astro.props.class}`}
   {...Astro.props}
 >
-  <h5 class="mb-3 font-bold text-primary-900 text-center">
+  <Text variant="header" alignment="center">
     {title}
-  </h5>
+  </Text>
   <div class="flex justify-center">
     <slot />
   </div>
