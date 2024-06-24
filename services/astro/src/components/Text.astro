@@ -21,10 +21,7 @@ const textVariants = cva([], {
   },
 });
 
-type TextVariants = NonNullableProps<
-  typeof textVariants,
-  "variant" | "alignment"
->;
+type TextVariants = NonNullableProps<typeof textVariants, "variant">;
 
 interface Props extends HTMLAttributes<"div">, TextVariants {
   variant: "header" | "subheader" | "paragraph" | "small";
