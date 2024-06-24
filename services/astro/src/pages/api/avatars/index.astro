@@ -1,4 +1,6 @@
 ---
+import Card from "@src/components/Card.astro";
+import Grid from "@src/components/Grid.astro";
 import { initDatabase } from "@src/logic/db/database";
 const db = await initDatabase();
 
@@ -18,26 +20,22 @@ const userWithAvatar = Astro.locals.account?.id
   : undefined;
 ---
 
-<div
-  class="grid grid-cols-[repeat(auto-fill,minmax(8rem,1fr))] gap-5 max-w-full justify-stretch justify-items-center"
-  id="avatars"
->
+<Grid id="avatars">
   {
     avatars.map((avatar) => (
-      <div
+      <Card
+        title={avatar.name}
         class={
-          "w-[8rem] " +
-          (avatar.id === userWithAvatar?.id
+          avatar.id === userWithAvatar?.id
             ? "border-4 border-primary"
-            : "cursor-pointer")
+            : "cursor-pointer"
         }
         hx-post={`/api/avatars/${avatar.id}`}
         hx-swap="outerHTML"
         hx-target="#avatars"
       >
-        {avatar.name}
-        <img src={avatar.url} alt={avatar.name} />
-      </div>
+        <img src={avatar.url} alt={avatar.name} class="w-[9rem]" />
+      </Card>
     ))
   }
-</div>
+</Grid>
