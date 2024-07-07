@@ -38,10 +38,17 @@ interface Props
 	imgSrc?: string | undefined;
 }
 
-const { name, imgSrc, flow, variant } = Astro.props;
+const {
+	name,
+	imgSrc,
+	flow,
+	variant,
+	class: className,
+	...restProps
+} = Astro.props;
 ---
 
-<div {...Astro.props} class={cn('relative', Astro.props.class)}>
+<div {...restProps} class={cn('relative', className)}>
   <div @click={`name = name == "${name}" ? "" : "${name}"`}>
     {
       imgSrc ? (

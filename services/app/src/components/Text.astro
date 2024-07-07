@@ -37,14 +37,19 @@ type TextVariants = NonNullableProps<typeof textVariants, "variant">;
 
 interface Props extends HTMLAttributes<"div">, TextVariants {}
 
-const { variant, alignment = "left", ...restProps } = Astro.props;
+const {
+	variant,
+	alignment = "left",
+	class: className,
+	...restProps
+} = Astro.props;
 
 const Tag = variant === "header" ? "h1" : "p";
 ---
 
 <Tag
   {...restProps}
-  class={cn(textVariants({ variant, alignment }), restProps.class)}
+  class={cn(textVariants({ variant, alignment }), className)}
 >
   <slot />
 </Tag>

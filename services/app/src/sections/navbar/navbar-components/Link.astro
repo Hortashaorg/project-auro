@@ -18,9 +18,9 @@ type LinkVariants = NonNullableProps<typeof linkVariants, "variant">;
 
 interface Props extends HTMLAttributes<"a">, LinkVariants {}
 
-const { variant } = Astro.props;
+const { variant, class: className, ...restProps } = Astro.props;
 ---
 
-<a {...Astro.props} class={cn(linkVariants({ variant }), Astro.props.class)}>
+<a {...restProps} class={cn(linkVariants({ variant }), className)}>
 	<Text variant="paragraph" class="group-hover:text-text-400"><slot /></Text>
 </a>

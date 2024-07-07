@@ -3,11 +3,13 @@ import { cn } from "@utils/tailwind";
 import type { HTMLAttributes } from "astro/types";
 
 interface Props extends HTMLAttributes<"header"> {}
+
+const { class: className, ...restProps } = Astro.props;
 ---
 
 <header
-  {...Astro.props}
-  class={cn('flex w-full items-center justify-between mb-5 bg-primary-050 border-accent-900 border-b', Astro.props.class)}
+  {...restProps}
+  class={cn('flex w-full items-center justify-between mb-5 bg-primary-050 border-accent-900 border-b', className)}
   x-data="{ name:'' }"
 >
   <slot />
