@@ -31,37 +31,38 @@ export const getUser = defineMiddleware(async ({ cookies, locals }, next) => {
 
 export const validation = defineMiddleware(async (context, next) => {
 	const hasAccess = hasAccessToUrl(context);
-	if (!hasAccess && !context.locals.loggedIn) {
+
+	if (hasAccess) {
+		return next();
+	}
+
+	if (!context.locals.loggedIn) {
 		const response = new Response("Unauthorized", { status: 302 });
 		response.headers.append("Location", "/");
 
 		return response;
 	}
+	const response = new Response("Unauthorized", { status: 302 });
+	response.headers.append("Location", "/");
+	const db = await getDB();
 
-	if (!hasAccess && context.locals.loggedIn) {
-		const response = new Response("Unauthorized", { status: 302 });
-		response.headers.append("Location", "/");
-		const db = await getDB();
+	await db
+		.updateTable("auth")
+		.set({
+			accessTokenExpires: null,
+			accessTokenHash: null,
+			refreshTokenExpires: null,
+			refreshTokenHash: null,
+		})
+		.where(
+			"accountId",
+			"=",
+			context.locals.account?.id ??
+				throwError("Account do not exist even though user is logged in."),
+		)
+		.execute();
 
-		await db
-			.updateTable("auth")
-			.set({
-				accessTokenExpires: null,
-				accessTokenHash: null,
-				refreshTokenExpires: null,
-				refreshTokenHash: null,
-			})
-			.where(
-				"accountId",
-				"=",
-				context.locals.account?.id ??
-					throwError("Account do not exist even though user is logged in."),
-			)
-			.execute();
-
-		return response;
-	}
-	return next();
+	return response;
 });
 
 export const tokenRenew = defineMiddleware(
