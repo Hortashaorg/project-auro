@@ -12,7 +12,8 @@
 				"astro-build.astro-vscode",
 				"bradlc.vscode-tailwindcss",
 				"supermaven.supermaven",
-				"biomejs.biome"
+				"biomejs.biome",
+				"CraigRBroughton.htmx-attributes"
 			]
 		}
 	},

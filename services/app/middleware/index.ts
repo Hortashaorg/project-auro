@@ -1,29 +1,21 @@
 import { hashToken, throwError } from "@package/common";
-import { initDatabase } from "@src/logic/db/database";
 import { defineMiddleware, sequence } from "astro/middleware";
 
+import { getDB } from "@package/database";
 import { hasAccessToUrl } from "./permissions";
 
-/* eslint-disable no-param-reassign */
 export const getUser = defineMiddleware(async ({ cookies, locals }, next) => {
 	const accessToken = cookies.get("access_token");
 
 	if (!accessToken) {
 		locals.loggedIn = false;
 	} else {
-		const db = await initDatabase();
+		const db = await getDB();
 		const auth = await db
 			.selectFrom("auth")
 			.innerJoin("account", "auth.accountId", "account.id")
 			.where("accessTokenHash", "=", hashToken(accessToken.value))
-			.select([
-				"accessTokenExpires",
-				"refreshTokenExpires",
-				"id",
-				"accessTokenHash",
-				"refreshTokenHash",
-				"email",
-			])
+			.selectAll()
 			.executeTakeFirst();
 		if (auth) {
 			locals.loggedIn = true;
@@ -36,7 +28,6 @@ export const getUser = defineMiddleware(async ({ cookies, locals }, next) => {
 	}
 	return next();
 });
-/* eslint-enable no-param-reassign */
 
 export const validation = defineMiddleware(async (context, next) => {
 	const hasAccess = hasAccessToUrl(context);
@@ -50,7 +41,7 @@ export const validation = defineMiddleware(async (context, next) => {
 	if (!hasAccess && context.locals.loggedIn) {
 		const response = new Response("Unauthorized", { status: 302 });
 		response.headers.append("Location", "/");
-		const db = await initDatabase();
+		const db = await getDB();
 
 		await db
 			.updateTable("auth")

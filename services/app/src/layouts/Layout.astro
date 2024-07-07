@@ -1,7 +1,7 @@
 ---
 import "./main.css";
-import Navbar from "@sections/navbar/Navbar.astro";
 import { getDB } from "@package/database";
+import Navbar from "@sections/navbar/Navbar.astro";
 
 interface Props {
 	title: string;
@@ -29,7 +29,6 @@ const userWithAvatar = Astro.locals.account?.id
     <meta name="description" content="Astro description" />
     <meta name="viewport" content="width=device-width" />
     <script src="https://unpkg.com/htmx.org@2.0.0"></script>
-    <script src="https://unpkg.com/alpinejs"></script>
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
