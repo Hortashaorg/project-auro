@@ -75,16 +75,16 @@ export default {
 			},
 		},
 		fontSize: {
-			sm: "0.750rem",
+			sm: "0.800rem",
 			base: "1rem",
-			xl: "1.333rem",
-			"2xl": "1.777rem",
-			"3xl": "2.369rem",
-			"4xl": "3.158rem",
-			"5xl": "4.210rem",
+			xl: "1.250rem",
+			"2xl": "1.563rem",
+			"3xl": "1.954rem",
+			"4xl": "2.442rem",
+			"5xl": "3.053rem",
 		},
 		fontFamily: {
-			heading: "Jersey 20",
+			heading: "Rethink Sans",
 			body: "Konkhmer Sleokchher",
 		},
 		fontWeight: {

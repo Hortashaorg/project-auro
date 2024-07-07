@@ -1,4 +1,5 @@
 ---
+import { cn } from "@utils/tailwind";
 import type { NonNullableProps } from "@utils/types";
 import type { HTMLAttributes } from "astro/types";
 import { cva } from "class-variance-authority";
@@ -6,10 +7,21 @@ import { cva } from "class-variance-authority";
 const textVariants = cva([], {
 	variants: {
 		variant: {
-			header: ["text-3xl", "font-bold"],
-			subheader: ["text-2xl", "font-semibold"],
-			paragraph: ["text-base"],
-			small: ["text-sm"],
+			header: [
+				"text-5xl",
+				"font-bold",
+				"text-text-default",
+				"font-heading",
+				"leading-tight",
+				"tracking-tighter",
+			],
+			paragraph: [
+				"text-base",
+				"font-normal",
+				"text-text-default",
+				"font-body",
+				"leading-loose",
+			],
 		},
 		alignment: {
 			left: ["text-left"],
@@ -23,18 +35,16 @@ const textVariants = cva([], {
 
 type TextVariants = NonNullableProps<typeof textVariants, "variant">;
 
-interface Props extends HTMLAttributes<"div">, TextVariants {
-	variant: "header" | "subheader" | "paragraph" | "small";
-}
+interface Props extends HTMLAttributes<"div">, TextVariants {}
 
 const { variant, alignment = "left", ...restProps } = Astro.props;
 
-const Tag = variant === "header" ? "h1" : variant === "subheader" ? "h2" : "p";
+const Tag = variant === "header" ? "h1" : "p";
 ---
 
 <Tag
-  class={`${textVariants({ variant, alignment })} ${restProps.class}`}
   {...restProps}
+  class={cn(textVariants({ variant, alignment }), restProps.class)}
 >
   <slot />
 </Tag>
