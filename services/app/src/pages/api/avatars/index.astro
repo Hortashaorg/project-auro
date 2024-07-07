@@ -25,8 +25,8 @@ const userWithAvatar = Astro.locals.account?.id
         title={avatar.name}
         class={
           avatar.id === userWithAvatar?.id
-            ? "border-4 border-primary"
-            : "cursor-pointer"
+            ? "border-4 border-primary-default"
+            : "cursor-pointer border-4 border-background-950"
         }
         hx-post={`/api/avatars/${avatar.id}`}
         hx-swap="outerHTML"
