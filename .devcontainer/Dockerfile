@@ -40,7 +40,7 @@ FROM base AS astro
 COPY .. /app/
 RUN pnpm install \
     && pnpm packages build \
-    && pnpm astro build
+    && pnpm app build
 
 # Set environment variable for the host
 ENV HOST=0.0.0.0

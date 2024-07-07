@@ -1,18 +1,19 @@
 {
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.defaultFormatter": "biomejs.biome",
   "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "never",
-    "source.organizeImports": "always"
+  "search.exclude": {
+    "**/node_modules": true
   },
+  "editor.codeActionsOnSave": {
+    "source.organizeImports.biome": "explicit"
+  },
+  "biome.lspBin": "./biome",
+  "remote.autoForwardPortsSource": "process",
   "tailwindCSS.experimental.classRegex": [
     ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
     ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
   ],
   "files.associations": {
     "*.css": "tailwindcss"
-  },
-  "eslint.validate": ["astro", "typescript"],
-  "eslint.workingDirectories": ["./", "./services/astro"],
-  "prettier.documentSelectors": ["**/*.astro", "**/*.json", "**/*.ts"]
+  }
 }

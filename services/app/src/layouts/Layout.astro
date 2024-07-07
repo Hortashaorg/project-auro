@@ -1,0 +1,47 @@
+---
+import "./main.css";
+import Navbar from "@sections/navbar/Navbar.astro";
+import { getDB } from "@package/database";
+
+interface Props {
+  title: string;
+}
+
+const accessToken = Astro.cookies.get("access_token")?.value;
+const { title } = Astro.props;
+
+const db = await getDB();
+
+const userWithAvatar = Astro.locals.account?.id
+  ? await db
+      .selectFrom("account")
+      .innerJoin("asset", "account.avatarAssetId", "asset.id")
+      .where("account.id", "=", Astro.locals.account.id)
+      .select("asset.url")
+      .executeTakeFirstOrThrow()
+  : undefined;
+---
+
+<!doctype html>
+<html lang="en" id="page">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <script src="https://unpkg.com/htmx.org@2.0.0"></script>
+    <script src="https://unpkg.com/alpinejs"></script>
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div id="navbar">
+      <Navbar
+        loggedIn={accessToken !== undefined}
+        avatarUrl={userWithAvatar?.url}
+      />
+    </div>
+    <div class="mt-2 container">
+      <slot />
+    </div>
+  </body>
+</html>

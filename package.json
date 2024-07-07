@@ -4,35 +4,20 @@
   "description": "",
   "private": true,
   "scripts": {
-    "dev": "env-cmd --file ./.env.development pnpm ",
+    "local": "env-cmd --file ./.env.local pnpm ",
     "prod": "env-cmd --file ./.env.production pnpm ",
-    "astro": "pnpm --filter @service/astro",
+    "app": "pnpm --filter @service/app",
     "database": "pnpm --filter @package/database",
     "packages": "pnpm --filter @package/*",
     "services": "pnpm --filter @service/*",
-    "lint": "prettier --write  \"**/*.{ts,tsx,md,mdx,astro}\" && eslint --fix \"**/*.{ts,tsx,astro}\""
+    "biome:check": "./biome check --diagnostic-level=error .",
+    "biome:lint": "./biome lint --diagnostic-level=error .",
+    "biome:lint:write": "./biome lint --apply --diagnostic-level=error .",
+    "biome:format": "./biome format --diagnostic-level=error .",
+    "biome:format:write": "./biome format . --write"
   },
   "author": "Martin Eide",
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^7.13.1",
-    "@typescript-eslint/parser": "^7.13.1",
-    "env-cmd": "^10.1.0",
-    "eslint": "^9.5.0",
-    "eslint-config-airbnb-base": "15.0.0",
-    "eslint-config-airbnb-typescript": "18.0.0",
-    "eslint-config-prettier": "9.1.0",
-    "eslint-import-resolver-typescript": "3.6.1",
-    "eslint-plugin-astro": "1.2.2",
-    "eslint-plugin-eslint-comments": "3.2.0",
-    "eslint-plugin-import": "2.29.1",
-    "eslint-plugin-jsx-a11y": "6.9.0",
-    "eslint-plugin-regexp": "2.6.0",
-    "eslint-plugin-simple-import-sort": "12.1.0",
-    "prettier": "3.3.2",
-    "prettier-plugin-astro": "0.14.0",
-    "prettier-plugin-tailwindcss": "0.6.5"
-  },
-  "resolutions": {
-    "lilconfig": "3.1.1"
+    "env-cmd": "^10.1.0"
   }
 }

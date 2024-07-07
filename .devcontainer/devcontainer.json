@@ -6,14 +6,13 @@
       "extensions": [
         "esbenp.prettier-vscode",
         "yoavbls.pretty-ts-errors",
-        "GitHub.copilot",
-        "GitHub.copilot-chat",
         "ms-azuretools.vscode-docker",
         "eamodio.gitlens",
         "GitHub.vscode-github-actions",
         "ms-azuretools.vscode-bicep",
         "astro-build.astro-vscode",
-        "bradlc.vscode-tailwindcss"
+        "bradlc.vscode-tailwindcss",
+        "supermaven.supermaven"
       ]
     }
   },

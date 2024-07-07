@@ -6,32 +6,11 @@
 }
 
 @theme {
-  --color-primary-900: #312e81;
-  --color-primary-500: #6366f1;
-  --color-primary-200: #c7d2fe;
-  --color-primary-050: #eef2ff;
-  --color-white: #fff;
-
-  --spacing-0: 0;
-  --spacing-1: 8px;
-  --spacing-3: 16px;
-  --spacing-5: 32px;
-
-  --width-1: 0.25rem;
-  --width-2: 0.5rem;
-  --width-4: 1rem;
-  --width-8: 2rem;
-  --width-48: 12rem;
-  --width-96: 24rem;
-
-  --radius-sm: 0.125rem;
-
-  --breakpoint-sm: 640px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 1024px;
-  --breakpoint-xl: 1280px;
-
-  --width-screen: 100vw;
+  --color-text: #f5f7ec;
+  --color-background: #101408;
+  --color-primary: #c2d294;
+  --color-secondary: #3e7833;
+  --color-accent: #62bc63;
 }
 
 @layer utilities {

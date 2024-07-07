@@ -12,7 +12,7 @@ let credentials: TokenCredential;
 
 export const createOrGetCredentials = () => {
   if (!credentials) {
-    if (environment.NODE_ENV === "development") {
+    if (environment.NODE_ENV === "local") {
       credentials = new DefaultAzureCredential();
     } else {
       credentials = new ClientSecretCredential(

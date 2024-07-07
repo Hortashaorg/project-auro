@@ -10,19 +10,13 @@ const { Pool } = pkg;
 
 let cachedDb: Kysely<DB> | null = null;
 
-export const getDB = async (
-  DB_HOST?: string,
-  DB_NAME?: string,
-  DB_PASSWORD?: string,
-  DB_USER?: string,
-) => {
+export const getDB = async () => {
   if (cachedDb) {
     return cachedDb;
   }
 
-  const password = DB_PASSWORD
-    ? DB_PASSWORD
-    : environment.NODE_ENV === "development"
+  const password =
+    environment.NODE_ENV === "local"
       ? "root"
       : await getSecret("DB-PASSWORD", environment.KEYVAULT_NAME);
 
@@ -30,10 +24,10 @@ export const getDB = async (
     dialect: new PostgresDialect({
       cursor: Cursor,
       pool: new Pool({
-        host: DB_HOST ?? environment.DB_HOST,
-        database: DB_NAME ?? environment.DB_NAME,
+        host: environment.DB_HOST,
+        database: environment.DB_NAME,
         password: password,
-        user: DB_USER ?? environment.DB_USER,
+        user: environment.DB_USER,
         ssl: false,
       }),
     }),
@@ -42,3 +36,5 @@ export const getDB = async (
 
   return cachedDb;
 };
+
+export type { Insertable, Selectable } from "kysely";
