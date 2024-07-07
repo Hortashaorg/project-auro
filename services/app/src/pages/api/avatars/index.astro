@@ -1,6 +1,8 @@
 ---
 import Card from "@comp/Card.astro";
 import Grid from "@comp/Grid.astro";
+import Section from "@comp/Section.astro";
+import Text from "@comp/Text.astro";
 import { getDB } from "@package/database";
 const db = await getDB();
 const avatars = await db
@@ -17,23 +19,25 @@ const userWithAvatar = Astro.locals.account?.id
 			.executeTakeFirstOrThrow()
 	: undefined;
 ---
-
-<Grid id="avatars">
-  {
-    avatars.map((avatar) => (
-      <Card
-        title={avatar.name}
-        class={
-          avatar.id === userWithAvatar?.id
-            ? "border-4 border-primary-default"
-            : "cursor-pointer border-4 border-background-950"
-        }
-        hx-post={`/api/avatars/${avatar.id}`}
-        hx-swap="outerHTML"
-        hx-target="#avatars"
-      >
-        <img src={avatar.url} alt={avatar.name} class="w-[9rem]" />
-      </Card>
-    ))
-  }
-</Grid>
+<Section space="large" id="avatars">
+  <Text variant="header">Choose your <span class="text-primary-default">Avatar</span></Text>
+  <Grid>
+    {
+      avatars.map((avatar) => (
+        <Card
+          title={avatar.name}
+          class={
+            avatar.id === userWithAvatar?.id
+              ? "border-4 border-primary-default"
+              : "cursor-pointer border-4 border-background-950"
+          }
+          hx-post={`/api/avatars/${avatar.id}`}
+          hx-swap="outerHTML"
+          hx-target="#avatars"
+        >
+          <img src={avatar.url} alt={avatar.name} class="w-[9rem]" />
+        </Card>
+      ))
+    }
+  </Grid>
+</Section>

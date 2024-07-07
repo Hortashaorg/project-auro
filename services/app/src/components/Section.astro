@@ -1,0 +1,24 @@
+---
+import { cn } from "@utils/tailwind";
+import type { NonNullableProps } from "@utils/types";
+import type { HTMLAttributes } from "astro/types";
+import { cva } from "class-variance-authority";
+
+const sectionVariants = cva(["flex", "flex-col"], {
+	variants: {
+		space: {
+			large: ["gap-10"],
+			small: ["gap-5"],
+			none: ["gap-0"],
+		},
+	},
+});
+
+type SectionVariants = NonNullableProps<typeof sectionVariants, "space">;
+interface Props extends HTMLAttributes<"section">, SectionVariants {}
+
+const { space, class: className, ...restProps } = Astro.props;
+---
+<section {...restProps} class={cn(sectionVariants({ space }), className)}>
+  <slot />
+</section>
