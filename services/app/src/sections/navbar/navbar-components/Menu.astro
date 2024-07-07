@@ -1,9 +1,10 @@
 ---
+import { cn } from "@utils/tailwind";
 import type { HTMLAttributes } from "astro/types";
 
 interface Props extends HTMLAttributes<"nav"> {}
 ---
 
-<nav class={`flex font-medium px-3 ${Astro.props.class}`} {...Astro.props}>
+<nav {...Astro.props} class={cn('flex font-medium px-3', Astro.props.class)}>
   <slot />
 </nav>

@@ -1,10 +1,22 @@
 ---
+import Text from "@comp/Text.astro";
+import { cn } from "@utils/tailwind";
 import type { NonNullableProps } from "@utils/types";
 import type { HTMLAttributes } from "astro/types";
 import { cva } from "class-variance-authority";
 
 const selectVariants = cva(
-	["absolute", "grid", "rounded-sm", "z-20", "bg-primary-050"],
+	[
+		"absolute",
+		"grid",
+		"rounded-sm",
+		"z-20",
+		"bg-primary-050",
+		"border-accent-900",
+		"border",
+		"rounded-lg",
+		"bg-background-default",
+	],
 	{
 		variants: {
 			variant: {
@@ -26,10 +38,10 @@ interface Props
 	imgSrc?: string | undefined;
 }
 
-const { name, imgSrc, class: classList, flow, variant } = Astro.props;
+const { name, imgSrc, flow, variant } = Astro.props;
 ---
 
-<div class={`relative ${classList}`} {...Astro.props}>
+<div {...Astro.props} class={cn('relative', Astro.props.class)}>
   <div @click={`name = name == "${name}" ? "" : "${name}"`}>
     {
       imgSrc ? (
@@ -38,29 +50,32 @@ const { name, imgSrc, class: classList, flow, variant } = Astro.props;
           class="cursor-pointer rounded-full bg-white p-1 w-[3.5rem] border"
         />
       ) : (
-        <button class="flex items-center justify-between gap-3 hover:bg-primary-200 cursor-pointer py-3 px-5">
-          {name}
-          <svg
-            class="w-2"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 10 6"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="m1 1 4 4 4-4"
-            />
-          </svg>
+        <button class="group cursor-pointer py-3 px-5">
+          <Text variant="paragraph" class="flex items-center justify-between gap-3 group-hover:text-text-400">
+            {name}
+            
+            <svg
+              class="w-2"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 10 6"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 1 4 4 4-4"
+              />
+            </svg>
+          </Text>
         </button>
       )
     }
   </div>
   <div
-    class={`${selectVariants({ flow, variant })}`}
+    class={selectVariants({ flow, variant })}
     x-show={`name == "${name}"`}
     x-cloak
   >
