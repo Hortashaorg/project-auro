@@ -1,31 +1,31 @@
 {
-  "name": "@package/database",
-  "version": "1.0.0",
-  "description": "",
-  "main": "dist/index.js",
-  "type": "module",
-  "scripts": {
-    "build": "esbuild index.ts --bundle --platform=node --format=esm --outdir=dist --packages=external",
-    "typecheck": "tsc --noEmit",
-    "populate": "tsx scripts/populate.ts",
-    "migrate-down": "tsx scripts/migrate-down.ts",
-    "migrate-up": "tsx scripts/migrate-to-latest.ts",
-    "generate": "tsx scripts/db-generate.ts"
-  },
-  "author": "",
-  "dependencies": {
-    "@package/common": "workspace:*",
-    "kysely": "^0.27.4",
-    "kysely-codegen": "^0.15.0",
-    "pg": "^8.12.0",
-    "pg-cursor": "^2.11.0"
-  },
-  "devDependencies": {
-    "@types/node": "^20.14.10",
-    "@types/pg": "^8.11.6",
-    "@types/pg-cursor": "^2.7.2",
-    "esbuild": "0.23.0",
-    "tsx": "^4.16.2",
-    "typescript": "^5.5.3"
-  }
+	"name": "@package/database",
+	"version": "1.0.0",
+	"description": "",
+	"main": "dist/index.js",
+	"type": "module",
+	"scripts": {
+		"build": "esbuild index.ts --bundle --platform=node --format=esm --outdir=dist --packages=external",
+		"typecheck": "tsc --noEmit",
+		"populate": "tsx scripts/populate.ts",
+		"migrate-down": "tsx scripts/migrate-down.ts",
+		"migrate-up": "tsx scripts/migrate-to-latest.ts",
+		"generate": "tsx scripts/db-generate.ts"
+	},
+	"author": "",
+	"dependencies": {
+		"@package/common": "workspace:*",
+		"kysely": "^0.27.4",
+		"kysely-codegen": "^0.15.0",
+		"pg": "^8.12.0",
+		"pg-cursor": "^2.11.0"
+	},
+	"devDependencies": {
+		"@types/node": "^20.14.10",
+		"@types/pg": "^8.11.6",
+		"@types/pg-cursor": "^2.7.2",
+		"esbuild": "0.23.0",
+		"tsx": "^4.16.2",
+		"typescript": "^5.5.3"
+	}
 }

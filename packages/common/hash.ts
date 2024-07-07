@@ -1,10 +1,10 @@
-import { createHash } from "crypto";
+import { createHash } from "node:crypto";
 
 export const hashToken = (token: string) => {
-  const hash = createHash("sha256");
+	const hash = createHash("sha256");
 
-  hash.update(token);
-  const hashedToken = hash.digest("hex");
+	hash.update(token);
+	const hashedToken = hash.digest("hex");
 
-  return hashedToken;
+	return hashedToken;
 };

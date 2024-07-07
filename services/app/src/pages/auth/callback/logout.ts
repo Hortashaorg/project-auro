@@ -2,17 +2,17 @@ import { nullifyTokensByRefreshToken } from "@utils/auth";
 import type { APIRoute } from "astro";
 
 export const GET: APIRoute = async ({ cookies }) => {
-  const refreshToken = cookies.get("refresh_token")?.value;
+	const refreshToken = cookies.get("refresh_token")?.value;
 
-  if (refreshToken) {
-    return nullifyTokensByRefreshToken(refreshToken);
-  }
+	if (refreshToken) {
+		return nullifyTokensByRefreshToken(refreshToken);
+	}
 
-  // Can't logout since no refresh token is found
-  return new Response("No refresh token found, redirecting", {
-    status: 302,
-    headers: {
-      Location: "/",
-    },
-  });
+	// Can't logout since no refresh token is found
+	return new Response("No refresh token found, redirecting", {
+		status: 302,
+		headers: {
+			Location: "/",
+		},
+	});
 };

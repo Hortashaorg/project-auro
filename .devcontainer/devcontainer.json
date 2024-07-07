@@ -1,23 +1,23 @@
 {
-  "name": "project-auro",
-  "customizations": {
-    "vscode": {
-      "settings": {},
-      "extensions": [
-        "esbenp.prettier-vscode",
-        "yoavbls.pretty-ts-errors",
-        "ms-azuretools.vscode-docker",
-        "eamodio.gitlens",
-        "GitHub.vscode-github-actions",
-        "ms-azuretools.vscode-bicep",
-        "astro-build.astro-vscode",
-        "bradlc.vscode-tailwindcss",
-        "supermaven.supermaven"
-      ]
-    }
-  },
-  "dockerComposeFile": "./docker-compose.yml",
-  "service": "local",
-  "workspaceFolder": "/app",
-  "postCreateCommand": "pnpm install && pnpm setup && source /root/.bashrc && pnpm add -g @gala-chain/cli && pnpm add -g tsx && pnpm packages build && read -p 'Enter your git email: ' email && git config --global user.email \"$email\" && read -p 'Enter your git username: ' username && git config --global user.name \"$username\""
+	"name": "project-auro",
+	"customizations": {
+		"vscode": {
+			"settings": {},
+			"extensions": [
+				"yoavbls.pretty-ts-errors",
+				"ms-azuretools.vscode-docker",
+				"eamodio.gitlens",
+				"GitHub.vscode-github-actions",
+				"ms-azuretools.vscode-bicep",
+				"astro-build.astro-vscode",
+				"bradlc.vscode-tailwindcss",
+				"supermaven.supermaven",
+				"biomejs.biome"
+			]
+		}
+	},
+	"dockerComposeFile": "./docker-compose.yml",
+	"service": "local",
+	"workspaceFolder": "/app",
+	"postCreateCommand": "pnpm install && pnpm setup && source /root/.bashrc && pnpm add -g @gala-chain/cli && pnpm add -g tsx && pnpm packages build && read -p 'Enter your git email: ' email && git config --global user.email \"$email\" && read -p 'Enter your git username: ' username && git config --global user.name \"$username\""
 }

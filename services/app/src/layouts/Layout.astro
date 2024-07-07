@@ -4,7 +4,7 @@ import Navbar from "@sections/navbar/Navbar.astro";
 import { getDB } from "@package/database";
 
 interface Props {
-  title: string;
+	title: string;
 }
 
 const accessToken = Astro.cookies.get("access_token")?.value;
@@ -13,13 +13,13 @@ const { title } = Astro.props;
 const db = await getDB();
 
 const userWithAvatar = Astro.locals.account?.id
-  ? await db
-      .selectFrom("account")
-      .innerJoin("asset", "account.avatarAssetId", "asset.id")
-      .where("account.id", "=", Astro.locals.account.id)
-      .select("asset.url")
-      .executeTakeFirstOrThrow()
-  : undefined;
+	? await db
+			.selectFrom("account")
+			.innerJoin("asset", "account.avatarAssetId", "asset.id")
+			.where("account.id", "=", Astro.locals.account.id)
+			.select("asset.url")
+			.executeTakeFirstOrThrow()
+	: undefined;
 ---
 
 <!doctype html>

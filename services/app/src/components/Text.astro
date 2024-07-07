@@ -4,27 +4,27 @@ import type { HTMLAttributes } from "astro/types";
 import { cva } from "class-variance-authority";
 
 const textVariants = cva([], {
-  variants: {
-    variant: {
-      header: ["text-3xl", "font-bold"],
-      subheader: ["text-2xl", "font-semibold"],
-      paragraph: ["text-base"],
-      small: ["text-sm"],
-    },
-    alignment: {
-      left: ["text-left"],
-      center: ["text-center"],
-    },
-  },
-  defaultVariants: {
-    alignment: "left",
-  },
+	variants: {
+		variant: {
+			header: ["text-3xl", "font-bold"],
+			subheader: ["text-2xl", "font-semibold"],
+			paragraph: ["text-base"],
+			small: ["text-sm"],
+		},
+		alignment: {
+			left: ["text-left"],
+			center: ["text-center"],
+		},
+	},
+	defaultVariants: {
+		alignment: "left",
+	},
 });
 
 type TextVariants = NonNullableProps<typeof textVariants, "variant">;
 
 interface Props extends HTMLAttributes<"div">, TextVariants {
-  variant: "header" | "subheader" | "paragraph" | "small";
+	variant: "header" | "subheader" | "paragraph" | "small";
 }
 
 const { variant, alignment = "left", ...restProps } = Astro.props;

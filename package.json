@@ -1,23 +1,23 @@
 {
-  "name": "game",
-  "version": "1.0.0",
-  "description": "",
-  "private": true,
-  "scripts": {
-    "local": "env-cmd --file ./.env.local pnpm ",
-    "prod": "env-cmd --file ./.env.production pnpm ",
-    "app": "pnpm --filter @service/app",
-    "database": "pnpm --filter @package/database",
-    "packages": "pnpm --filter @package/*",
-    "services": "pnpm --filter @service/*",
-    "biome:check": "./biome check --diagnostic-level=error .",
-    "biome:lint": "./biome lint --diagnostic-level=error .",
-    "biome:lint:write": "./biome lint --apply --diagnostic-level=error .",
-    "biome:format": "./biome format --diagnostic-level=error .",
-    "biome:format:write": "./biome format . --write"
-  },
-  "author": "Martin Eide",
-  "devDependencies": {
-    "env-cmd": "^10.1.0"
-  }
+	"name": "game",
+	"version": "1.0.0",
+	"description": "",
+	"private": true,
+	"scripts": {
+		"local": "env-cmd --file ./.env.local pnpm ",
+		"prod": "env-cmd --file ./.env.production pnpm ",
+		"app": "pnpm --filter @service/app",
+		"database": "pnpm --filter @package/database",
+		"packages": "pnpm --filter @package/*",
+		"services": "pnpm --filter @service/*",
+		"biome:check": "./biome check --diagnostic-level=error .",
+		"biome:lint": "./biome lint --diagnostic-level=error .",
+		"biome:lint:write": "./biome lint --apply --diagnostic-level=error .",
+		"biome:format": "./biome format --diagnostic-level=error .",
+		"biome:format:write": "./biome format . --write"
+	},
+	"author": "Martin Eide",
+	"devDependencies": {
+		"env-cmd": "^10.1.0"
+	}
 }

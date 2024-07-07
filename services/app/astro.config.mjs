@@ -6,15 +6,15 @@ import node from "@astrojs/node";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [basicSsl(), tailwind()],
-  output: "server",
-  adapter: node({
-    mode: "standalone",
-  }),
-  vite: {
-    plugins: [basicSsl()],
-    server: {
-      https: true,
-    },
-  },
+	integrations: [basicSsl(), tailwind()],
+	output: "server",
+	adapter: node({
+		mode: "standalone",
+	}),
+	vite: {
+		plugins: [basicSsl()],
+		server: {
+			https: true,
+		},
+	},
 });

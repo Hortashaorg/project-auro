@@ -1,40 +1,40 @@
 {
-  "compilerOptions": {
-    /* Base Options */
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "target": "es2022",
-    "verbatimModuleSyntax": true,
-    "allowJs": true,
-    "resolveJsonModule": true,
-    "moduleDetection": "force",
-    "lib": ["es2022"],
+	"compilerOptions": {
+		/* Base Options */
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"target": "es2022",
+		"verbatimModuleSyntax": true,
+		"allowJs": true,
+		"resolveJsonModule": true,
+		"moduleDetection": "force",
+		"lib": ["es2022"],
 
-    /* Emit */
-    "removeComments": true,
+		/* Emit */
+		"removeComments": true,
 
-    /* Strictness */
-    "strict": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "strictPropertyInitialization": true,
-    "noImplicitThis": true,
-    "alwaysStrict": true,
-    "noUncheckedIndexedAccess": true,
-    "forceConsistentCasingInFileNames": true,
+		/* Strictness */
+		"strict": true,
+		"noImplicitAny": true,
+		"strictNullChecks": true,
+		"strictFunctionTypes": true,
+		"strictPropertyInitialization": true,
+		"noImplicitThis": true,
+		"alwaysStrict": true,
+		"noUncheckedIndexedAccess": true,
+		"forceConsistentCasingInFileNames": true,
 
-    /* Completeness */
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
+		/* Completeness */
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
 
-    /* Build with bundler */
-    "module": "ESNext",
-    "noEmit": true,
-    "moduleResolution": "Bundler",
-    "composite": true,
-    "declarationMap": true
-  }
+		/* Build with bundler */
+		"module": "ESNext",
+		"noEmit": true,
+		"moduleResolution": "Bundler",
+		"composite": true,
+		"declarationMap": true
+	}
 }

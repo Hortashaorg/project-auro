@@ -4,12 +4,12 @@ import type { HTMLAttributes } from "astro/types";
 import { cva } from "class-variance-authority";
 
 const linkVariants = cva(["hover:bg-primary-200", "py-3"], {
-  variants: {
-    variant: {
-      navLink: ["px-5"],
-      dropdownLink: ["block", "text-center"],
-    },
-  },
+	variants: {
+		variant: {
+			navLink: ["px-5"],
+			dropdownLink: ["block", "text-center"],
+		},
+	},
 });
 
 type LinkVariants = NonNullableProps<typeof linkVariants, "variant">;
