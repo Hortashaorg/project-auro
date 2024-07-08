@@ -1,0 +1,60 @@
+---
+import { cn } from "@utils/tailwind";
+import type { NonNullableProps } from "@utils/types";
+import type { HTMLAttributes } from "astro/types";
+import { cva } from "class-variance-authority";
+
+const buttonVariants = cva(
+	[
+		"rounded",
+		"font-bold",
+		"disabled:cursor-not-allowed",
+		"disabled:opacity-50",
+	],
+	{
+		variants: {
+			variant: {
+				primary: [
+					"dark:text-text-900",
+					"text-text-light",
+					"dark:bg-primary-dark",
+					"bg-primary-light",
+					"hover:shadow-md",
+					"dark:hover:shadow-accent-dark",
+					"disabled:hover:shadow-none",
+				],
+				secondary: [
+					"dark:text-text-dark",
+					"text-text-light",
+					"dark:bg-secondary-900",
+					"bg-secondary-light",
+				],
+				outline: [
+					"border-2",
+					"dark:border-primary-dark",
+					"dark:text-text-dark",
+					"border-primary-light",
+					"text-text-light",
+				],
+			},
+			size: {
+				small: ["text-sm", "px-4", "py-2"],
+				medium: ["text-base", "px-6", "py-3"],
+				large: ["text-lg", "px-8", "py-4"],
+			},
+		},
+		defaultVariants: {
+			size: "medium",
+		},
+	},
+);
+
+type ButtonVariants = NonNullableProps<typeof buttonVariants, "variant">;
+
+interface Props extends HTMLAttributes<"button">, ButtonVariants {}
+
+const { variant, size, class: className, ...restProps } = Astro.props;
+---
+<button {...restProps} class={cn(buttonVariants({ variant, size }), className)}>
+    <slot />
+</button>
