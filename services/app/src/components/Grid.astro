@@ -9,7 +9,7 @@ const { class: className, ...restProps } = Astro.props;
 
 <div
   {...restProps}
-  class={cn('grid grid-cols-[repeat(auto-fill,minmax(12rem,1fr))] gap-5 max-w-full justify-stretch justify-items-center', className)}
+  class={cn('flex flex-wrap gap-5 justify-center', className)}
 >
   <slot />
 </div>
