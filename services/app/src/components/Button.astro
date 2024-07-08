@@ -7,7 +7,6 @@ import { cva } from "class-variance-authority";
 const buttonVariants = cva(
 	[
 		"rounded",
-		"font-bold",
 		"disabled:cursor-not-allowed",
 		"disabled:opacity-50",
 		"transition-transform",
@@ -27,6 +26,7 @@ const buttonVariants = cva(
 					"disabled:hover:shadow-none",
 					"hover:transform",
 					"hover:translate-y-[-2px]",
+					"font-bold",
 				],
 				secondary: [
 					"dark:text-text-dark",
@@ -35,6 +35,7 @@ const buttonVariants = cva(
 					"bg-secondary-light",
 					"hover:transform",
 					"hover:translate-y-[-2px]",
+					"font-normal",
 				],
 				outline: [
 					"border-2",
@@ -42,6 +43,7 @@ const buttonVariants = cva(
 					"dark:text-text-dark",
 					"border-primary-light",
 					"text-text-light",
+					"font-normal",
 				],
 			},
 			size: {
