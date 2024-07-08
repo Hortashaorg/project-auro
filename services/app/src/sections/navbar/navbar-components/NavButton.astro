@@ -1,5 +1,4 @@
 ---
-import Text from "@comp/Text.astro";
 import { cn } from "@utils/tailwind";
 import type { HTMLAttributes } from "astro/types";
 
@@ -7,6 +6,6 @@ interface Props extends HTMLAttributes<"button"> {}
 
 const { class: className, ...restProps } = Astro.props;
 ---
-<button {...restProps} class={cn("px-5 group", className)}>
-    <Text variant="paragraph" class="group-hover:text-text-400">{<slot />}</Text>
+<button {...restProps} class={cn("px-5 hover:text-text-400 text-base font-normal dark:text-text-200 text-text-700 font-body leading-loose", className)}>
+    <slot />
 </button>

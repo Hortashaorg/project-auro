@@ -39,15 +39,17 @@ const userWithAvatar = Astro.locals.account?.id
     });
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
   }
-
-  const themeToggle = () => {
-    const isDark = document.documentElement.classList.contains('dark');
-    if(isDark) {
-      document.documentElement.classList.remove("dark")
-    } else {
-      document.documentElement.classList.add("dark")
-    }
-  }
+  
+  document.addEventListener('alpine:init', () => {
+      Alpine.data('themeData', () => ({
+          isDarkMode: document.documentElement.classList.contains('dark'),
+          
+          themeToggle() {
+              this.isDarkMode = !this.isDarkMode;
+              document.documentElement.classList.toggle('dark', this.isDarkMode);
+          }
+      }));
+  });
 </script>
 
 <!doctype html>

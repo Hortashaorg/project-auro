@@ -24,8 +24,8 @@ const logoutUrl = `https://dev-5g37fye485wl6b3n.eu.auth0.com/v2/logout?client_id
       <Link href="#" variant="dropdownLink">Option 3</Link>
     </Select>
   </Menu>
-  <Menu>
-  <NavButton x-on:click="themeToggle()">Change Theme</NavButton>
+  <Menu x-data="themeData">
+    <NavButton x-on:click="themeToggle" x-text="isDarkMode ? 'Light Theme' : 'Dark Theme'"></NavButton>
     {
       loggedIn ? (
         <Select
