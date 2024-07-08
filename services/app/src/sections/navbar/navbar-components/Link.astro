@@ -9,7 +9,13 @@ const linkVariants = cva(["py-3"], {
 	variants: {
 		variant: {
 			navLink: ["group", "px-5"],
-			dropdownLink: ["block", "text-center", "px-5", "hover:bg-background-950"],
+			dropdownLink: [
+				"block",
+				"text-center",
+				"px-5",
+				"dark:hover:bg-background-950",
+				"hover:bg-background-100",
+			],
 		},
 	},
 });

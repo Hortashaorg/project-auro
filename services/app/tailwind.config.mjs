@@ -1,10 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 export default {
 	content: ["./src/**/*.{astro,html}"],
+	darkMode: "selector",
 	theme: {
 		colors: {
 			text: {
-				default: "#f8f6f1",
+				dark: "#f8f6f1",
+				light: "#0e0c07",
 				50: "#f6f4ee",
 				100: "#eee9dd",
 				200: "#ddd3bb",
@@ -18,7 +20,8 @@ export default {
 				950: "#110f09",
 			},
 			background: {
-				default: "#070603",
+				dark: "#070603",
+				light: "#fcfbf8",
 				50: "#f7f5ed",
 				100: "#f0ebdb",
 				200: "#e0d6b8",
@@ -32,7 +35,8 @@ export default {
 				950: "#120f08",
 			},
 			primary: {
-				default: "#9d8948",
+				dark: "#9d8948",
+				light: "#b7a362",
 				50: "#f7f5ee",
 				100: "#efebdc",
 				200: "#dfd6b9",
@@ -46,7 +50,8 @@ export default {
 				950: "#110f08",
 			},
 			secondary: {
-				default: "#575e2c",
+				dark: "#575e2c",
+				light: "#ccd3a1",
 				50: "#f6f7ee",
 				100: "#ecefdc",
 				200: "#d9deba",
@@ -60,7 +65,8 @@ export default {
 				950: "#101108",
 			},
 			accent: {
-				default: "#687e3a",
+				dark: "#687e3a",
+				light: "#b0c581",
 				50: "#f4f7ee",
 				100: "#e9efdc",
 				200: "#d3dfb9",

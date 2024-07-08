@@ -12,7 +12,7 @@ const { title, class: className, ...restProps } = Astro.props;
 
 <div
   {...restProps}
-  class={cn('flex w-full flex-col justify-start items-center relative p-5 bg-background-950 rounded-lg', className)}
+  class={cn('flex w-full flex-col justify-start items-center relative p-5 dark:bg-background-950 bg-background-100 rounded-lg', className)}
 >
   <Text variant="paragraph" alignment="center">
     {title}

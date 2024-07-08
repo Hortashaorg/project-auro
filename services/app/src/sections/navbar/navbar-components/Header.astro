@@ -9,7 +9,7 @@ const { class: className, ...restProps } = Astro.props;
 
 <header
   {...restProps}
-  class={cn('flex w-full items-center justify-between mb-5 bg-primary-050 border-primary-900 border-b', className)}
+  class={cn('flex w-full items-center justify-between mb-5 bg-primary-050 dark:border-primary-900 border-primary-200 border-b', className)}
   x-data="{ name:'' }"
 >
   <slot />

@@ -20,7 +20,7 @@ const userWithAvatar = Astro.locals.account?.id
 	: undefined;
 ---
 <Section space="large" id="avatars">
-  <Text variant="header">Choose your <span class="text-primary-default">Avatar</span></Text>
+  <Text variant="header">Choose your <span class="dark:text-primary-dark text-primary-light">Avatar</span></Text>
   <Grid>
     {
       avatars.map((avatar) => (
@@ -28,8 +28,8 @@ const userWithAvatar = Astro.locals.account?.id
           title={avatar.name}
           class={
             avatar.id === userWithAvatar?.id
-              ? "border-4 border-primary-default"
-              : "cursor-pointer border-4 border-background-950"
+              ? "border-4 dark:border-primary-dark border-primary-light"
+              : "cursor-pointer border-4 dark:border-background-950 border-background-100"
           }
           hx-post={`/api/avatars/${avatar.id}`}
           hx-swap="outerHTML"
