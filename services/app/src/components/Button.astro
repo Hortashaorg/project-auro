@@ -10,6 +10,8 @@ const buttonVariants = cva(
 		"font-bold",
 		"disabled:cursor-not-allowed",
 		"disabled:opacity-50",
+		"transition-transform",
+		"disabled:hover:transform-none",
 	],
 	{
 		variants: {
@@ -23,12 +25,16 @@ const buttonVariants = cva(
 					"dark:hover:shadow-accent-dark",
 					"hover:shadow-accent-light",
 					"disabled:hover:shadow-none",
+					"hover:transform",
+					"hover:translate-y-[-2px]",
 				],
 				secondary: [
 					"dark:text-text-dark",
 					"text-text-light",
 					"dark:bg-secondary-900",
 					"bg-secondary-light",
+					"hover:transform",
+					"hover:translate-y-[-2px]",
 				],
 				outline: [
 					"border-2",
