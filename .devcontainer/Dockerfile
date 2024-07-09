@@ -1,4 +1,4 @@
-FROM node:20.11.0-alpine3.19 AS base
+FROM node:22.4.0-alpine3.20 AS base
 
 # Set /app as the working directory for any subsequent RUN, CMD, ENTRYPOINT, COPY, and ADD instructions
 WORKDIR /app
