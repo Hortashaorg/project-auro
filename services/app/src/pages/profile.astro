@@ -1,7 +1,11 @@
 ---
+import Section from "@comp/Section.astro";
 import Layout from "../../../app/src/layouts/Layout.astro";
 ---
 
 <Layout title="Profile">
-  <div hx-get="/api/avatars" hx-trigger="load"></div>
+  <Section space="large">
+    <div hx-get="/api/avatars" hx-trigger="load"></div>
+    <div hx-get="/api/servers" hx-trigger="load"></div>
+  </Section>
 </Layout>

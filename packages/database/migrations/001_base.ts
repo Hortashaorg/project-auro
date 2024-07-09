@@ -15,6 +15,21 @@ export async function up(db: Kysely<unknown>): Promise<void> {
 		.execute();
 
 	await db.schema
+		.createTable("server")
+		.addColumn("id", "uuid", (col) =>
+			col.primaryKey().defaultTo(sql`gen_random_uuid()`),
+		)
+		.addColumn("name", "varchar(50)", (col) => col.notNull().unique())
+		.addColumn("online", "boolean", (col) => col.notNull().defaultTo(false))
+		.addColumn("updatedAt", "timestamp", (col) =>
+			col.notNull().defaultTo("now()"),
+		)
+		.addColumn("createdAt", "timestamp", (col) =>
+			col.notNull().defaultTo("now()"),
+		)
+		.execute();
+
+	await db.schema
 		.createTable("account")
 		.addColumn("id", "uuid", (col) =>
 			col.primaryKey().defaultTo(sql`gen_random_uuid()`),
@@ -24,6 +39,7 @@ export async function up(db: Kysely<unknown>): Promise<void> {
 		.addColumn("avatarAssetId", "uuid", (col) =>
 			col.notNull().references("asset.id"),
 		)
+		.addColumn("currentServerId", "uuid", (col) => col.references("server.id"))
 		.addColumn("updatedAt", "timestamp", (col) =>
 			col.notNull().defaultTo("now()"),
 		)
@@ -38,21 +54,6 @@ export async function up(db: Kysely<unknown>): Promise<void> {
 		.addColumn("refreshTokenExpires", "timestamp")
 		.addColumn("accessTokenHash", "varchar(500)", (col) => col.unique())
 		.addColumn("accessTokenExpires", "timestamp")
-		.execute();
-
-	await db.schema
-		.createTable("server")
-		.addColumn("id", "uuid", (col) =>
-			col.primaryKey().defaultTo(sql`gen_random_uuid()`),
-		)
-		.addColumn("name", "varchar(50)", (col) => col.notNull().unique())
-		.addColumn("online", "boolean", (col) => col.notNull().defaultTo(false))
-		.addColumn("updatedAt", "timestamp", (col) =>
-			col.notNull().defaultTo("now()"),
-		)
-		.addColumn("createdAt", "timestamp", (col) =>
-			col.notNull().defaultTo("now()"),
-		)
 		.execute();
 
 	await db.schema
@@ -80,11 +81,11 @@ export async function up(db: Kysely<unknown>): Promise<void> {
 
 export async function down(db: Kysely<unknown>): Promise<void> {
 	await db.schema.dropTable("user").execute();
-	await db.schema.dropTable("server").execute();
 
 	await db.schema.dropTable("auth").execute();
 	await db.schema.dropTable("account").execute();
 
+	await db.schema.dropTable("server").execute();
 	await db.schema.dropTable("asset").execute();
 
 	await db.schema.dropType("usertype").execute();

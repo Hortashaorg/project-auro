@@ -19,7 +19,7 @@ const userWithAvatar = Astro.locals.account?.id
 			.executeTakeFirstOrThrow()
 	: undefined;
 ---
-<Section space="large" id="avatars">
+<Section space="medium" id="avatars">
   <Text variant="header">Choose your <span class="dark:text-primary-dark text-primary-light">Avatar</span></Text>
   <Grid>
     {

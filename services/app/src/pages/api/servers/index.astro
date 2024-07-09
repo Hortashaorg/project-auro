@@ -1,0 +1,35 @@
+---
+import Button from "@comp/Button.astro";
+import Grid from "@comp/Grid.astro";
+import Section from "@comp/Section.astro";
+import Text from "@comp/Text.astro";
+import { throwError } from "@package/common";
+import { getDB } from "@package/database";
+
+const db = await getDB();
+const servers = await db.selectFrom("server").selectAll().execute();
+
+const accountId = Astro.locals.account?.id ?? throwError("No account found");
+const account = await db
+	.selectFrom("account")
+	.where("id", "=", accountId)
+	.selectAll()
+	.executeTakeFirstOrThrow();
+---
+<Section space="medium" id="servers">
+    <Text variant="header">Choose <span class="dark:text-primary-dark text-primary-light">Server</span></Text>
+    <Grid>
+        {
+            servers.map((server) => (
+                <Button
+                    variant={account.currentServerId === server.id ? "primary" : "secondary"}
+                    hx-post={`/api/servers/${server.id}`}
+                    hx-swap="outerHTML"
+                    hx-target="#servers"
+                >
+                    {server.name}
+                </Button>
+            ))
+        }
+    </Grid>
+</Section>

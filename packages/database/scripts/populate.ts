@@ -1,6 +1,6 @@
 import { getDB } from "../index";
 
-const populateDBData = async () => {
+export const populateDBData = async () => {
 	try {
 		const db = await getDB();
 		await db.transaction().execute(async (trx) => {
@@ -67,6 +67,24 @@ const populateDBData = async () => {
 				])
 				.execute();
 		});
+
+		await db.transaction().execute(async (trx) => {
+			await trx.deleteFrom("server").execute();
+			// Populate Servers
+			await trx
+				.insertInto("server")
+				.values([
+					{
+						name: "Test Server",
+						online: true,
+					},
+					{
+						name: "Test Server 2",
+						online: false,
+					},
+				])
+				.execute();
+		});
 	} catch (error) {
 		console.log(error);
 		process.exit(0);
@@ -75,4 +93,3 @@ const populateDBData = async () => {
 		process.exit(0);
 	}
 };
-await populateDBData();
