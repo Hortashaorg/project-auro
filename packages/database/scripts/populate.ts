@@ -4,8 +4,6 @@ export const populateDBData = async () => {
 	try {
 		const db = await getDB();
 		await db.transaction().execute(async (trx) => {
-			await trx.deleteFrom("asset").execute();
-			// Populate Assets
 			await trx
 				.insertInto("asset")
 				.values([
@@ -65,11 +63,11 @@ export const populateDBData = async () => {
 						url: "https://stprojectaurodev.blob.core.windows.net/avatars/62.png",
 					},
 				])
+				.onConflict((occ) => occ.doNothing())
 				.execute();
 		});
 
 		await db.transaction().execute(async (trx) => {
-			await trx.deleteFrom("server").execute();
 			// Populate Servers
 			await trx
 				.insertInto("server")
@@ -83,6 +81,7 @@ export const populateDBData = async () => {
 						online: false,
 					},
 				])
+				.onConflict((occ) => occ.doNothing())
 				.execute();
 		});
 	} catch (error) {
