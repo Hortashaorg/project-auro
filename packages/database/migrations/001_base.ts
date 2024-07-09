@@ -22,10 +22,10 @@ export async function up(db: Kysely<unknown>): Promise<void> {
 		.addColumn("name", "varchar(50)", (col) => col.notNull().unique())
 		.addColumn("online", "boolean", (col) => col.notNull().defaultTo(false))
 		.addColumn("updatedAt", "timestamp", (col) =>
-			col.notNull().defaultTo("now()"),
+			col.notNull().defaultTo(sql`now()`),
 		)
 		.addColumn("createdAt", "timestamp", (col) =>
-			col.notNull().defaultTo("now()"),
+			col.notNull().defaultTo(sql`now()`),
 		)
 		.execute();
 
@@ -41,7 +41,7 @@ export async function up(db: Kysely<unknown>): Promise<void> {
 		)
 		.addColumn("currentServerId", "uuid", (col) => col.references("server.id"))
 		.addColumn("updatedAt", "timestamp", (col) =>
-			col.notNull().defaultTo("now()"),
+			col.notNull().defaultTo(sql`now()`),
 		)
 		.execute();
 
@@ -71,10 +71,10 @@ export async function up(db: Kysely<unknown>): Promise<void> {
 			col.notNull().defaultTo("player"),
 		)
 		.addColumn("updatedAt", "timestamp", (col) =>
-			col.notNull().defaultTo("now()"),
+			col.notNull().defaultTo(sql`now()`),
 		)
 		.addColumn("createdAt", "timestamp", (col) =>
-			col.notNull().defaultTo("now()"),
+			col.notNull().defaultTo(sql`now()`),
 		)
 		.execute();
 }
