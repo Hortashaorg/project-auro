@@ -7,7 +7,11 @@ import { throwError } from "@package/common";
 import { getDB } from "@package/database";
 
 const db = await getDB();
-const servers = await db.selectFrom("server").selectAll().execute();
+const servers = await db
+	.selectFrom("server")
+	.where("online", "=", true)
+	.selectAll()
+	.execute();
 
 const accountId = Astro.locals.account?.id ?? throwError("No account found");
 const account = await db

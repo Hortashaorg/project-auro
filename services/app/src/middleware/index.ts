@@ -22,6 +22,29 @@ export const getUser = defineMiddleware(async ({ cookies, locals }, next) => {
 			locals.account = {
 				...auth,
 			};
+
+			locals.server;
+
+			if (auth.currentServerId) {
+				locals.server = {
+					id: auth.currentServerId,
+				};
+
+				const user = await db
+					.selectFrom("user")
+					.where((eb) =>
+						eb.and([
+							eb("accountId", "=", auth.id),
+							eb("serverId", "=", auth.currentServerId),
+						]),
+					)
+					.selectAll()
+					.executeTakeFirstOrThrow();
+
+				locals.user = {
+					id: user.id,
+				};
+			}
 		} else {
 			locals.loggedIn = false;
 		}
