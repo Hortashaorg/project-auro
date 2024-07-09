@@ -2,7 +2,20 @@ import { type Kysely, sql } from "kysely";
 
 export async function up(db: Kysely<unknown>): Promise<void> {
 	await db.schema.createType("usertype").asEnum(["admin", "player"]).execute();
-	await db.schema.createType("assetcategory").asEnum(["avatar"]).execute();
+	await db.schema
+		.createType("assetcategory")
+		.asEnum([
+			"avatar",
+			"weapon",
+			"armor",
+			"accessory",
+			"consumable",
+			"item",
+			"companion",
+			"structure",
+			"currency",
+		])
+		.execute();
 
 	await db.schema
 		.createTable("asset")

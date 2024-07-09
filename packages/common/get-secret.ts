@@ -10,9 +10,9 @@ import { throwError } from "./utils";
 
 let credentials: TokenCredential;
 
-export const createOrGetCredentials = () => {
+export const createOrGetCredentials = (isLocal = false) => {
 	if (!credentials) {
-		if (environment.NODE_ENV === "local") {
+		if (environment.NODE_ENV === "local" || isLocal) {
 			credentials = new DefaultAzureCredential();
 		} else {
 			credentials = new ClientSecretCredential(
@@ -25,8 +25,12 @@ export const createOrGetCredentials = () => {
 	return credentials;
 };
 
-export const getSecret = async (secretName: string, keyvaultName: string) => {
-	credentials = createOrGetCredentials();
+export const getSecret = async (
+	secretName: string,
+	keyvaultName: string,
+	isLocal = false,
+) => {
+	credentials = createOrGetCredentials(isLocal);
 
 	const url = `https://${keyvaultName}.vault.azure.net`;
 	const client = new SecretClient(url, credentials);
