@@ -2,6 +2,7 @@ import type { APIContext } from "astro";
 
 const isLoggedIn = ({ locals }: APIContext) => locals.loggedIn;
 const isPublic = () => true;
+const isAdmin = ({ locals }: APIContext) => locals.user?.type === "admin";
 
 const paths = [
 	{
@@ -19,6 +20,14 @@ const paths = [
 	{
 		url: "/auth",
 		permission: isPublic,
+	},
+	{
+		url: "/admin",
+		permission: isAdmin,
+	},
+	{
+		url: "/api/admin",
+		permission: isAdmin,
 	},
 ];
 

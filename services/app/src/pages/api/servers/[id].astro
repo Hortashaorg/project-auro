@@ -1,6 +1,7 @@
 ---
 import { throwError } from "@package/common";
 import { getDB } from "@package/database";
+import Navbar from "@sections/navbar/Navbar.astro";
 import Servers from "./index.astro";
 
 const db = await getDB();
@@ -35,3 +36,5 @@ await db
 	.executeTakeFirstOrThrow();
 ---
 <Servers />
+
+<Navbar id="navbar" hx-swap-oob="true" />

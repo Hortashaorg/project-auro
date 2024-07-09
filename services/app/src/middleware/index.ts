@@ -26,9 +26,12 @@ export const getUser = defineMiddleware(async ({ cookies, locals }, next) => {
 			locals.server;
 
 			if (auth.currentServerId) {
-				locals.server = {
-					id: auth.currentServerId,
-				};
+				const server = await db
+					.selectFrom("server")
+					.where("id", "=", auth.currentServerId)
+					.selectAll()
+					.executeTakeFirstOrThrow();
+				locals.server = server;
 
 				const user = await db
 					.selectFrom("user")
@@ -41,9 +44,7 @@ export const getUser = defineMiddleware(async ({ cookies, locals }, next) => {
 					.selectAll()
 					.executeTakeFirstOrThrow();
 
-				locals.user = {
-					id: user.id,
-				};
+				locals.user = user;
 			}
 		} else {
 			locals.loggedIn = false;

@@ -1,38 +1,66 @@
 ---
+import { getDB } from "@package/database";
 import Header from "./navbar-components/Header.astro";
 import Link from "./navbar-components/Link.astro";
 import Menu from "./navbar-components/Menu.astro";
 import NavButton from "./navbar-components/NavButton.astro";
 import Select from "./navbar-components/Select.astro";
 
-interface Props {
-	loggedIn: boolean;
-	avatarUrl: string | undefined;
-}
-const { loggedIn, avatarUrl } = Astro.props;
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"header"> {}
 
 const loginUrl = `https://dev-5g37fye485wl6b3n.eu.auth0.com/authorize?response_type=code&scope=openid%20email%20offline_access&client_id=co4niwbMW14RUu0WltdhW13TVpDUnzPY&redirect_uri=${Astro.url.origin}/auth/callback/login`;
 const logoutUrl = `https://dev-5g37fye485wl6b3n.eu.auth0.com/v2/logout?client_id=co4niwbMW14RUu0WltdhW13TVpDUnzPY&returnTo=${Astro.url.origin}/auth/callback/logout`;
+
+const db = await getDB();
+
+const accountWithAvatar = Astro.locals.account?.id
+	? await db
+			.selectFrom("account")
+			.innerJoin("asset", "account.avatarAssetId", "asset.id")
+			.where("account.id", "=", Astro.locals.account.id)
+			.selectAll("account")
+			.select("asset.url")
+			.executeTakeFirstOrThrow()
+	: undefined;
+
+const user = accountWithAvatar?.currentServerId
+	? await db
+			.selectFrom("user")
+			.where((eb) =>
+				eb.and([
+					eb("accountId", "=", accountWithAvatar.id),
+					eb("serverId", "=", accountWithAvatar.currentServerId),
+				]),
+			)
+			.selectAll()
+			.executeTakeFirst()
+	: undefined;
 ---
 
-<Header>
+<Header {...Astro.props}>
   <Menu>
     <Link href="/" variant="navLink">Home</Link>
-    <Select name="Dropdown" variant="double" flow="right">
-      <Link href="#" variant="dropdownLink">Option 1</Link>
-      <Link href="#" variant="dropdownLink">Option 2</Link>
-      <Link href="#" variant="dropdownLink">Option 3</Link>
-    </Select>
+    { user?.type === 'admin' &&
+      (
+        <Select name="Admin" variant="double" flow="right">
+          <Link href="#" variant="dropdownLink">Option 1</Link>
+          <Link href="#" variant="dropdownLink">Option 2</Link>
+          <Link href="#" variant="dropdownLink">Option 3</Link>
+        </Select>
+      )
+    }
   </Menu>
   <Menu x-data="themeData">
     <NavButton x-on:click="themeToggle" x-text="isDarkMode ? 'Light Theme' : 'Dark Theme'"></NavButton>
     {
-      loggedIn ? (
+      Astro.locals.loggedIn ? (
         <Select
           name="Profile"
           variant="single"
           flow="left"
-          imgSrc={avatarUrl}
+          imgSrc={accountWithAvatar?.url}
           id="avatar"
         >
           <Link href="/profile" variant="dropdownLink">

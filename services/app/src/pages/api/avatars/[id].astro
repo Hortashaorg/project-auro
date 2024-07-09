@@ -1,8 +1,7 @@
 ---
 import { throwError } from "@package/common";
 import { getDB } from "@package/database";
-import Link from "@sections/navbar/navbar-components/Link.astro";
-import Select from "@sections/navbar/navbar-components/Select.astro";
+import Navbar from "@sections/navbar/Navbar.astro";
 import Avatars from "./index.astro";
 
 const db = await getDB();
@@ -15,24 +14,8 @@ await db
 		avatarAssetId: assetId,
 	})
 	.executeTakeFirstOrThrow();
-const avatarUrl = await db
-	.selectFrom("asset")
-	.where("id", "=", assetId)
-	.selectAll()
-	.executeTakeFirstOrThrow();
-const logoutUrl = `https://dev-5g37fye485wl6b3n.eu.auth0.com/v2/logout?client_id=co4niwbMW14RUu0WltdhW13TVpDUnzPY&returnTo=${Astro.url.origin}/auth/callback/logout`;
 ---
 
 <Avatars />
 
-<Select
-  name="Profile"
-  variant="single"
-  flow="left"
-  imgSrc={avatarUrl.url}
-  id="avatar"
-  hx-swap-oob="true"
->
-  <Link href="/profile" variant="dropdownLink">Profile</Link>
-  <Link href={logoutUrl} variant="dropdownLink">Logout</Link>
-</Select>
+<Navbar id="navbar" hx-swap-oob="true" />
