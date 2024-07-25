@@ -16,6 +16,9 @@ const buttonVariants = cva(
 		variants: {
 			variant: {
 				primary: [
+					"border-2",
+					"dark:border-primary-dark",
+					"border-primary-light",
 					"dark:text-text-900",
 					"text-text-light",
 					"dark:bg-primary-dark",
@@ -29,6 +32,9 @@ const buttonVariants = cva(
 					"font-bold",
 				],
 				secondary: [
+					"border-2",
+					"dark:border-secondary-900",
+					"border-secondary-light",
 					"dark:text-text-dark",
 					"text-text-light",
 					"dark:bg-secondary-900",
@@ -47,9 +53,9 @@ const buttonVariants = cva(
 				],
 			},
 			size: {
-				small: ["text-sm", "px-4", "py-2"],
-				medium: ["text-base", "px-6", "py-3"],
-				large: ["text-lg", "px-8", "py-4"],
+				small: ["text-sm", "px-3.5", "py-1.5"],
+				medium: ["text-base", "px-5", "py-2.5"],
+				large: ["text-lg", "px-7", "py-3"],
 			},
 		},
 		defaultVariants: {
