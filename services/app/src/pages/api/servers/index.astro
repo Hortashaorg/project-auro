@@ -21,13 +21,13 @@ const account = await db
 	.executeTakeFirstOrThrow();
 ---
 <Section space="medium" id="servers">
-    <Text variant="header">Choose <span class="dark:text-primary-dark text-primary-light">Server</span></Text>
+    <Text variant="header">Select <span class="dark:text-primary-dark text-primary-light">Server</span></Text>
     <Grid>
         {
             servers.map((server) => (
                 <Button
                     variant={account.currentServerId === server.id ? "primary" : "secondary"}
-                    hx-post={`/api/servers/${server.id}`}
+                    hx-post={account.currentServerId === server.id ? `/api/servers/exit` : `/api/servers/${server.id}`}
                     hx-swap="outerHTML"
                     hx-target="#servers"
                 >

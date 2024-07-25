@@ -4,7 +4,7 @@ import type { NonNullableProps } from "@utils/types";
 import type { HTMLAttributes } from "astro/types";
 import { cva } from "class-variance-authority";
 
-const sectionVariants = cva(["flex", "flex-col"], {
+const sectionVariants = cva(["flex"], {
 	variants: {
 		space: {
 			large: ["gap-20"],
@@ -12,14 +12,26 @@ const sectionVariants = cva(["flex", "flex-col"], {
 			small: ["gap-5"],
 			none: ["gap-0"],
 		},
+		direction: {
+			row: [
+				"md:flex-row",
+				"md:items-baseline",
+				"md:justify-between",
+				"flex-col",
+			],
+			column: ["flex-col"],
+		},
+	},
+	defaultVariants: {
+		direction: "column",
 	},
 });
 
 type SectionVariants = NonNullableProps<typeof sectionVariants, "space">;
 interface Props extends HTMLAttributes<"section">, SectionVariants {}
 
-const { space, class: className, ...restProps } = Astro.props;
+const { space, direction, class: className, ...restProps } = Astro.props;
 ---
-<section {...restProps} class={cn(sectionVariants({ space }), className)}>
+<section {...restProps} class={cn(sectionVariants({ space, direction }), className)}>
   <slot />
 </section>

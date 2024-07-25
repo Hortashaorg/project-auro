@@ -1,35 +1,30 @@
 ---
-import Button from "@comp/Button.astro";
 import Section from "@comp/Section.astro";
 import Text from "@comp/Text.astro";
 import Layout from "@layouts/Layout.astro";
+
+const locals = Astro.locals;
 ---
 
 <Layout title="Home">
-  <Section space="small">
-    <Text variant="header">Visualize Your<br>
-      <span class="dark:text-primary-dark text-primary-light">Colors</span> & <span class="italic">Fonts</span><br>
-      On a Real Site</Text>
-    <Text variant="paragraph">This is a left-aligned paragraph by default. This is going to be quite a bit longer just so that i can test paragraph settings in my application.</Text>
-  
-    <Button variant="primary">Click me</Button>
-    <Button variant="secondary">Click me</Button>
-    <Button variant="outline">Click me</Button>
-  </Section>
-  <br><br>
-  <Button variant="primary">Click me</Button>
-  <Button variant="secondary">Click me</Button>
-  <Button variant="outline">Click me</Button>
-  <br><br>
-  <Button variant="primary" size="small">Click me</Button>
-  <Button variant="secondary" size="small">Click me</Button>
-  <Button variant="outline" size="small">Click me</Button>
-  <br><br>
-  <Button variant="primary" size="large">Click me</Button>
-  <Button variant="secondary" size="large">Click me</Button>
-  <Button variant="outline" size="large">Click me</Button>
-  <br><br>
-  <Button variant="primary" disabled>Click me</Button>
-  <Button variant="secondary" disabled>Click me</Button>
-  <Button variant="outline" disabled>Click me</Button>
+{
+  locals.loggedIn ?
+    locals.server ? (
+      <Section space="small" direction="row">
+        <Text variant="header">Hello <span class="dark:text-primary-dark text-primary-light">Player</span></Text>
+        <Text variant="paragraph">You are currently playing on <span class="dark:text-primary-dark text-primary-light">{locals.server.name}</span></Text>
+      </Section>
+    ) : (
+      <Section space="small">
+        <Text variant="header">Welcome <span class="dark:text-primary-dark text-primary-light">Player</span></Text>
+        <Text variant="paragraph">You are currently not playing on any server. Go to profile to select server.</Text>
+      </Section>
+    )
+  : (
+    <Section space="small">
+      <Text variant="header">Project <span class="dark:text-primary-dark text-primary-light">Auro</span></Text>
+      <Text variant="paragraph">Free to play game made as hobby project. Login and give it a try.</Text>
+    </Section>
+  )
+}
 </Layout>

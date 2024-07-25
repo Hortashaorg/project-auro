@@ -1,0 +1,21 @@
+---
+import { throwError } from "@package/common";
+import { getDB } from "@package/database";
+import Navbar from "@sections/navbar/Navbar.astro";
+import Servers from "./index.astro";
+
+const account = Astro.locals.account ?? throwError("No account found");
+
+const db = await getDB();
+
+await db
+	.updateTable("account")
+	.set({
+		currentServerId: null,
+	})
+	.where("id", "=", account.id)
+	.executeTakeFirstOrThrow();
+---
+<Servers />
+
+<Navbar id="navbar" hx-swap-oob="true" />
