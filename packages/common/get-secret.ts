@@ -26,7 +26,6 @@ export const createOrGetCredentials = (isLocal = false) => {
 };
 
 export const getSecret = async (secretName: string, keyvaultName: string) => {
-	console.log(process.env.FROM_LOCAL === "true");
 	credentials = createOrGetCredentials(process.env.FROM_LOCAL === "true");
 
 	const url = `https://${keyvaultName}.vault.azure.net`;
