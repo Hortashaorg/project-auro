@@ -1,0 +1,54 @@
+---
+import { cn } from "@utils/tailwind";
+import type { NonNullableProps } from "@utils/types";
+import type { HTMLAttributes } from "astro/types";
+import { cva } from "class-variance-authority";
+
+const inputVariants = cva(
+	[
+		"border-2",
+		"rounded",
+		"focus:outline-none",
+		"transition-shadow",
+		"disabled:cursor-not-allowed",
+		"disabled:opacity-50",
+		"dark:focus:shadow-accent-dark",
+		"focus:shadow-accent-light",
+		"text-base",
+		"px-5",
+		"py-2.5",
+	],
+	{
+		variants: {
+			variant: {
+				default: [
+					"dark:border-primary-400",
+					"border-primary-700",
+					"dark:text-text-dark",
+					"text-text-light",
+					"dark:bg-primary-dark",
+					"bg-primary-light",
+					"dark:placeholder:text-text-300",
+					"placeholder:text-text-700",
+				],
+				error: [
+					"border-error-600",
+					"text-error-600",
+					"dark:bg-error-900",
+					"bg-error-100",
+					"dark:placeholder:text-error-300",
+					"placeholder:text-error-700",
+				],
+			},
+		},
+	},
+);
+
+type InputVariants = NonNullableProps<typeof inputVariants, "variant">;
+
+interface Props extends HTMLAttributes<"input">, InputVariants {}
+
+const { variant, class: className, ...restProps } = Astro.props;
+---
+<input {...restProps} class={cn(inputVariants({ variant }), className)} />
+

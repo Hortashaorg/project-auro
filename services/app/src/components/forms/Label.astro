@@ -1,0 +1,30 @@
+---
+import { cn } from "@utils/tailwind";
+import type { NonNullableProps } from "@utils/types";
+import type { HTMLAttributes } from "astro/types";
+import { cva } from "class-variance-authority";
+
+const labelVariants = cva(
+	["block", "font-normal", "mb-2", "transition-colors"],
+	{
+		variants: {
+			variant: {
+				default: ["dark:text-text-dark", "text-text-light"],
+				error: ["text-error-600"],
+			},
+		},
+		defaultVariants: {
+			variant: "default",
+		},
+	},
+);
+
+type LabelVariants = NonNullableProps<typeof labelVariants, "variant">;
+
+interface Props extends HTMLAttributes<"label">, LabelVariants {}
+
+const { variant, class: className, ...restProps } = Astro.props;
+---
+<label {...restProps} class={cn(labelVariants({ variant }), className)} >
+	<slot />
+</label>

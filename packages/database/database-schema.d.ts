@@ -75,6 +75,7 @@ export interface User {
   accountId: string;
   createdAt: Generated<Timestamp>;
   id: Generated<string>;
+  name: string | null;
   serverId: string;
   type: Generated<Usertype>;
   updatedAt: Generated<Timestamp>;

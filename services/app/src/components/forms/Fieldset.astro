@@ -1,0 +1,12 @@
+---
+import { cn } from "@utils/tailwind";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"fieldset"> {}
+
+const { class: className, ...restProps } = Astro.props;
+---
+
+<fieldset {...restProps} class={cn('border p-4', className)}>
+  <slot />
+</fieldset>

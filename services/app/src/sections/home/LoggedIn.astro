@@ -1,0 +1,24 @@
+---
+import Section from "@comp/Section.astro";
+import Text from "@comp/Text.astro";
+import Input from "@comp/forms/Input.astro";
+import Label from "@comp/forms/Label.astro";
+import { throwError } from "@package/common";
+
+const server = Astro.locals.server ?? throwError("No server found");
+const user = Astro.locals.user ?? throwError("No user found");
+---
+
+{
+  user.name ? (
+    <Section space="small" direction="row">
+      <Text variant="header">Hello <span class="dark:text-primary-dark text-primary-light">Player</span></Text>
+      <Text variant="paragraph">You are currently playing on <span class="dark:text-primary-dark text-primary-light">{server.name}</span></Text>
+    </Section>
+  ) : (
+    <Text variant="header">No name found</Text>
+    <Label variant="default">Name</Label>
+    <Input variant="default" placeholder="Enter your name" name="name" />
+    <Input variant="error" placeholder="Enter your name" />   
+  )
+}
