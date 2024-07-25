@@ -6,6 +6,7 @@ interface Props extends HTMLAttributes<"div"> {}
 
 const { class: className, ...restProps } = Astro.props;
 ---
-<div {...restProps} class={cn("gap-1 flex flex-grow flex-col", className)}>
+
+<div {...restProps} class={cn('flex gap-5', className)}>
   <slot />
 </div>
