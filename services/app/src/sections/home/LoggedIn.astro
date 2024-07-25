@@ -20,10 +20,10 @@ const user = Astro.locals.user ?? throwError("No user found");
     </Section>
   ) : (
     <Form alignment="center">
-      <Text variant="header">New User</Text>
+      <Text variant="header">Lets setup your user</Text>
       <FormControl>
-        <Label variant="default" for="name">Name</Label>
-        <Input variant="default" placeholder="Enter your name" name="name" />
+        <Label variant="default" for="nickname">Nickname</Label>
+        <Input variant="default" placeholder="Nickname" name="nickname" />
       </FormControl>
       <Button variant="primary" type="submit">Submit</Button>
     </Form> 

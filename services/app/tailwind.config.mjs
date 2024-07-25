@@ -82,9 +82,10 @@ export default {
 			error: {
 				100: "#fee2e2",
 				300: "#fca5a5",
+				400: "#f87171",
 				600: "#dc2626",
-				900: "#7f1d1d",
 				700: "#b91c1c",
+				900: "#7f1d1d",
 			},
 		},
 		fontSize: {

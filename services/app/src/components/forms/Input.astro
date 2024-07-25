@@ -12,8 +12,6 @@ const inputVariants = cva(
 		"transition-shadow",
 		"disabled:cursor-not-allowed",
 		"disabled:opacity-50",
-		"dark:focus:shadow-accent-dark",
-		"focus:shadow-accent-light",
 		"text-base",
 		"px-5",
 		"py-2.5",
@@ -30,6 +28,10 @@ const inputVariants = cva(
 					"bg-primary-100",
 					"dark:placeholder:text-text-300",
 					"placeholder:text-text-700",
+					"focus:border-primary-400",
+					"focus:ring-2",
+					"focus:ring-primary-400",
+					"dark:focus:ring-primary-600",
 				],
 				error: [
 					"border-error-600",
@@ -38,6 +40,10 @@ const inputVariants = cva(
 					"bg-error-100",
 					"dark:placeholder:text-error-300",
 					"placeholder:text-error-700",
+					"focus:border-error-400",
+					"focus:ring-2",
+					"focus:ring-error-400",
+					"dark:focus:ring-error-600",
 				],
 			},
 		},
@@ -48,7 +54,6 @@ type InputVariants = NonNullableProps<typeof inputVariants, "variant">;
 
 interface Props extends HTMLAttributes<"input">, InputVariants {}
 
-const { variant, class: className, ...restProps } = Astro.props;
+const { variant = "default", class: className, ...restProps } = Astro.props;
 ---
 <input {...restProps} class={cn(inputVariants({ variant }), className)} />
-
