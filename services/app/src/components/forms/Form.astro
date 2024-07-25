@@ -1,12 +1,28 @@
 ---
 import { cn } from "@utils/tailwind";
+import type { NonNullableProps } from "@utils/types";
 import type { HTMLAttributes } from "astro/types";
+import { cva } from "class-variance-authority";
 
-interface Props extends HTMLAttributes<"form"> {}
+const formVariants = cva(["flex", "max-w-md", "flex-col", "gap-5"], {
+	variants: {
+		alignment: {
+			left: [],
+			center: ["m-auto"],
+		},
+	},
+	defaultVariants: {
+		alignment: "left",
+	},
+});
 
-const { class: className, ...restProps } = Astro.props;
+type FormVariants = NonNullableProps<typeof formVariants, "alignment">;
+
+interface Props extends HTMLAttributes<"form">, FormVariants {}
+
+const { class: className, alignment, ...restProps } = Astro.props;
 ---
 
-<form {...restProps} class={cn('max-w-md', className)}>
+<form {...restProps} class={cn(formVariants({ alignment }), className)}>
   <slot />
 </form>

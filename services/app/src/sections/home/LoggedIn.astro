@@ -1,6 +1,8 @@
 ---
 import Section from "@comp/Section.astro";
 import Text from "@comp/Text.astro";
+import Form from "@comp/forms/Form.astro";
+import FormControl from "@comp/forms/FormControl.astro";
 import Input from "@comp/forms/Input.astro";
 import Label from "@comp/forms/Label.astro";
 import { throwError } from "@package/common";
@@ -16,9 +18,12 @@ const user = Astro.locals.user ?? throwError("No user found");
       <Text variant="paragraph">You are currently playing on <span class="dark:text-primary-dark text-primary-light">{server.name}</span></Text>
     </Section>
   ) : (
-    <Text variant="header">No name found</Text>
-    <Label variant="default">Name</Label>
-    <Input variant="default" placeholder="Enter your name" name="name" />
-    <Input variant="error" placeholder="Enter your name" />   
+    <Form alignment="center">
+      <Text variant="header">New User</Text>
+      <FormControl>
+        <Label variant="default" for="name">Name</Label>
+        <Input variant="default" placeholder="Enter your name" name="name" />
+      </FormControl>
+    </Form> 
   )
 }

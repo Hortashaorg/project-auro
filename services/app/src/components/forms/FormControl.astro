@@ -1,0 +1,11 @@
+---
+import { cn } from "@utils/tailwind";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {}
+
+const { class: className, ...restProps } = Astro.props;
+---
+<div {...restProps} class={cn("space-y-1", className)}>
+  <slot />
+</div>
