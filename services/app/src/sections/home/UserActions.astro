@@ -1,6 +1,7 @@
 ---
 import Card from "@comp/Card.astro";
 import Grid from "@comp/Grid.astro";
+import Section from "@comp/Section.astro";
 import Text from "@comp/Text.astro";
 import type { Selectable } from "@package/database";
 import type { User } from "@package/database/database-schema";
@@ -10,12 +11,34 @@ interface Props {
 }
 ---
 
-<div class="m-auto" id="actions">
+<div id="actions">
+  <Text variant="header">Get stuff done, but be careful, since you can only do so much per day.</Text>
+  <div>
+    <Text variant="paragraph">You get a new action every minute.</Text>
     <Text variant="paragraph">You have <span class="dark:text-primary-dark text-primary-light">{Astro.props.user.actions}</span> actions left</Text>
-    <Grid class="max-w-md">
-      <Card variant="clickable" title="Forest" disabled={Astro.props.user.actions <= 0} class="cursor-pointer" hx-disabled-elt="this" hx-post="/api/actions/1/grind" hx-swap="outerHTML" hx-target="#actions" />
-      <Card variant="clickable" title="Lake" disabled={Astro.props.user.actions <= 0} class="cursor-pointer" hx-disabled-elt="this" hx-post="/api/actions/1/grind" hx-swap="outerHTML" hx-target="#actions" />
-      <Card variant="clickable" title="Mountain" disabled={Astro.props.user.actions <= 0} class="cursor-pointer" hx-disabled-elt="this" hx-post="/api/actions/1/grind" hx-swap="outerHTML" hx-target="#actions" />
-      <Card variant="clickable" title="River" disabled={Astro.props.user.actions <= 0} class="cursor-pointer" hx-disabled-elt="this" hx-post="/api/actions/1/grind" hx-swap="outerHTML" hx-target="#actions" />
-    </Grid>
+  </div>
+
+  <Section space="small" class="m-auto max-w-3xl">
+      <Text variant="header">Locations to explore</Text>
+      <Grid class="max-w-md">
+        <Card variant="clickable" title="Forest" disabled={Astro.props.user.actions <= 0} class="cursor-pointer w-[12rem]" hx-disabled-elt="this" hx-post="/api/actions/1/grind" hx-swap="outerHTML" hx-target="#actions" />
+        <Card variant="clickable" title="Lake" disabled={Astro.props.user.actions <= 0} class="cursor-pointer w-[12rem]" hx-disabled-elt="this" hx-post="/api/actions/1/grind" hx-swap="outerHTML" hx-target="#actions" />
+        <Card variant="clickable" title="Mountain" disabled={Astro.props.user.actions <= 0} class="cursor-pointer w-[12rem]" hx-disabled-elt="this" hx-post="/api/actions/1/grind" hx-swap="outerHTML" hx-target="#actions" />
+        <Card variant="clickable" title="River" disabled={Astro.props.user.actions <= 0} class="cursor-pointer w-[12rem]" hx-disabled-elt="this" hx-post="/api/actions/1/grind" hx-swap="outerHTML" hx-target="#actions" />
+      </Grid>
+
+      <Text variant="header">Shop</Text>
+      <Grid class="max-w-md">
+        <Card variant="clickable" title="Gem" disabled={Astro.props.user.actions <= 0} class="cursor-pointer w-[12rem]" hx-disabled-elt="this" hx-post="/api/actions/1/grind" hx-swap="outerHTML" hx-target="#actions" />
+        <Card variant="clickable" title="Wooden Sword" disabled={Astro.props.user.actions <= 0} class="cursor-pointer w-[12rem]" hx-disabled-elt="this" hx-post="/api/actions/1/grind" hx-swap="outerHTML" hx-target="#actions" />
+        <Card variant="clickable" title="Boots" disabled={Astro.props.user.actions <= 0} class="cursor-pointer w-[12rem]" hx-disabled-elt="this" hx-post="/api/actions/1/grind" hx-swap="outerHTML" hx-target="#actions" />
+      </Grid>
+
+      <Text variant="header">Professions</Text>
+      <Grid class="max-w-md">
+        <Card variant="clickable" title="Woodcutting" disabled={Astro.props.user.actions <= 0} class="cursor-pointer w-[12rem]" hx-disabled-elt="this" hx-post="/api/actions/1/grind" hx-swap="outerHTML" hx-target="#actions" />
+        <Card variant="clickable" title="Fishing" disabled={Astro.props.user.actions <= 0} class="cursor-pointer w-[12rem]" hx-disabled-elt="this" hx-post="/api/actions/1/grind" hx-swap="outerHTML" hx-target="#actions" />
+        <Card variant="clickable" title="Mining" disabled={Astro.props.user.actions <= 0} class="cursor-pointer w-[12rem]" hx-disabled-elt="this" hx-post="/api/actions/1/grind" hx-swap="outerHTML" hx-target="#actions" />
+      </Grid>
+  </Section>
 </div>
