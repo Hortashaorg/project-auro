@@ -37,4 +37,5 @@ export const getDB = async () => {
 	return cachedDb;
 };
 
+export { sql } from "kysely";
 export type { Insertable, Selectable } from "kysely";

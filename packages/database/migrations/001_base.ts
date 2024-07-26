@@ -78,6 +78,7 @@ export async function up(db: Kysely<unknown>): Promise<void> {
 		.addColumn("accountId", "uuid", (col) =>
 			col.notNull().references("account.id"),
 		)
+		.addColumn("actions", "integer", (col) => col.notNull().defaultTo(15))
 		.addColumn("serverId", "uuid", (col) =>
 			col.notNull().references("server.id"),
 		)

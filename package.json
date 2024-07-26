@@ -8,6 +8,7 @@
 		"localprod": "env-cmd --file ./.env.localprod pnpm ",
 		"prod": "env-cmd --file ./.env.production pnpm ",
 		"app": "pnpm --filter @service/app",
+		"jobs": "pnpm --filter @service/jobs",
 		"database": "pnpm --filter @package/database",
 		"packages": "pnpm --filter @package/*",
 		"services": "pnpm --filter @service/*",

@@ -73,6 +73,7 @@ export interface Skill {
 
 export interface User {
   accountId: string;
+  actions: Generated<number>;
   createdAt: Generated<Timestamp>;
   id: Generated<string>;
   name: string | null;

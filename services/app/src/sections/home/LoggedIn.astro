@@ -37,7 +37,7 @@ if (!user.name) {
         <Text variant="paragraph">You are currently playing on <span class="dark:text-primary-dark text-primary-light">{server.name}</span></Text>
       </Section>
       <div class="m-auto">
-        <Text variant="paragraph">You have <span class="dark:text-primary-dark text-primary-light">100</span> actions left</Text>
+        <Text variant="paragraph">You have <span class="dark:text-primary-dark text-primary-light">{user.actions}</span> actions left</Text>
         <Section space="small" direction="row" class="max-w-md">
           <Button variant="primary" hx-disabled-elt="this" hx-post="/api/actions/grind" hx-swap="outerHTML">Grind</Button>
           <Button variant="primary">Train</Button>
