@@ -8,6 +8,7 @@ import Input from "@comp/forms/Input.astro";
 import Label from "@comp/forms/Label.astro";
 import { throwError } from "@package/common";
 import { getDB } from "@package/database";
+import UserActions from "./UserActions.astro";
 
 const server = Astro.locals.server ?? throwError("No server found");
 const user = Astro.locals.user ?? throwError("No user found");
@@ -36,14 +37,7 @@ if (!user.name) {
         <Text variant="header">Hello <span class="dark:text-primary-dark text-primary-light">{user.name}</span></Text>
         <Text variant="paragraph">You are currently playing on <span class="dark:text-primary-dark text-primary-light">{server.name}</span></Text>
       </Section>
-      <div class="m-auto">
-        <Text variant="paragraph">You have <span class="dark:text-primary-dark text-primary-light">{user.actions}</span> actions left</Text>
-        <Section space="small" direction="row" class="max-w-md">
-          <Button variant="primary" hx-disabled-elt="this" hx-post="/api/actions/grind" hx-swap="outerHTML">Grind</Button>
-          <Button variant="primary">Train</Button>
-          <Button variant="primary">Explore</Button>
-        </Section>
-      </div>
+      <UserActions user={user} />
     </Section>
   ) : (
     <Form alignment="center" hx-trigger="submit" hx-post={`/api/user/name`} hx-swap="outerHTML">

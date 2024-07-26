@@ -1,0 +1,24 @@
+---
+import { throwError } from "@package/common";
+import { getDB, sql } from "@package/database";
+import UserActions from "@sections/home/UserActions.astro";
+
+const db = await getDB();
+let user = Astro.locals.user ?? throwError("No user found");
+
+if (user.actions > 0) {
+	await db.transaction().execute(async (trx) => {
+		// Execute all the actions here.
+
+		user = await trx
+			.updateTable("user")
+			.set({
+				actions: sql`actions - 1`,
+			})
+			.where("id", "=", user.id)
+			.returningAll()
+			.executeTakeFirstOrThrow();
+	});
+}
+---
+<UserActions user={user} />

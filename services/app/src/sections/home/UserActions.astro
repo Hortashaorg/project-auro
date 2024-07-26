@@ -1,0 +1,21 @@
+---
+import Card from "@comp/Card.astro";
+import Grid from "@comp/Grid.astro";
+import Text from "@comp/Text.astro";
+import type { Selectable } from "@package/database";
+import type { User } from "@package/database/database-schema";
+
+interface Props {
+	user: Selectable<User>;
+}
+---
+
+<div class="m-auto" id="actions">
+    <Text variant="paragraph">You have <span class="dark:text-primary-dark text-primary-light">{Astro.props.user.actions}</span> actions left</Text>
+    <Grid class="max-w-md">
+      <Card variant="clickable" title="Forest" disabled={Astro.props.user.actions <= 0} class="cursor-pointer" hx-disabled-elt="this" hx-post="/api/actions/1/grind" hx-swap="outerHTML" hx-target="#actions" />
+      <Card variant="clickable" title="Lake" disabled={Astro.props.user.actions <= 0} class="cursor-pointer" hx-disabled-elt="this" hx-post="/api/actions/1/grind" hx-swap="outerHTML" hx-target="#actions" />
+      <Card variant="clickable" title="Mountain" disabled={Astro.props.user.actions <= 0} class="cursor-pointer" hx-disabled-elt="this" hx-post="/api/actions/1/grind" hx-swap="outerHTML" hx-target="#actions" />
+      <Card variant="clickable" title="River" disabled={Astro.props.user.actions <= 0} class="cursor-pointer" hx-disabled-elt="this" hx-post="/api/actions/1/grind" hx-swap="outerHTML" hx-target="#actions" />
+    </Grid>
+</div>

@@ -25,6 +25,7 @@ const userWithAvatar = Astro.locals.account?.id
     {
       avatars.map((avatar) => (
         <Card
+          variant="clickable"
           title={avatar.name}
           class={
             avatar.id === userWithAvatar?.id

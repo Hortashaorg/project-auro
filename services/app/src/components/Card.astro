@@ -1,18 +1,51 @@
 ---
 import { cn } from "@utils/tailwind";
+import type { NonNullableProps } from "@utils/types";
 import type { HTMLAttributes } from "astro/types";
+import { cva } from "class-variance-authority";
 import Text from "./Text.astro";
 
-interface Props extends HTMLAttributes<"div"> {
+const cardVariants = cva(
+	"flex w-full flex-col justify-start items-center relative p-5 rounded-lg dark:bg-background-950 bg-background-100",
+	{
+		variants: {
+			variant: {
+				clickable: [
+					"cursor-pointer",
+					"hover:shadow-md",
+					"dark:hover:shadow-accent-dark",
+					"hover:shadow-accent-light",
+					"transition-shadow",
+					"disabled:cursor-not-allowed",
+					"disabled:opacity-50",
+					"disabled:hover:shadow-none",
+					"disabled:bg-background-100",
+					"disabled:dark:bg-background-950",
+				],
+				normal: [
+					"cursor-default",
+					"bg-background-100",
+					"dark:bg-background-950",
+					"disabled:cursor-not-allowed",
+					"disabled:opacity-50",
+					"disabled:hover:shadow-none",
+				],
+			},
+		},
+	},
+);
+
+type CardVariants = NonNullableProps<typeof cardVariants, "variant">;
+interface Props extends HTMLAttributes<"button">, CardVariants {
 	title: string;
 }
 
-const { title, class: className, ...restProps } = Astro.props;
+const { title, class: className, variant, ...restProps } = Astro.props;
 ---
 
-<div
+<button
   {...restProps}
-  class={cn('flex w-full flex-col justify-start items-center relative p-5 dark:bg-background-950 bg-background-100 rounded-lg', className)}
+  class={cn(cardVariants({ variant }), className)}
 >
   <Text variant="paragraph" alignment="center">
     {title}
@@ -20,4 +53,4 @@ const { title, class: className, ...restProps } = Astro.props;
   <div class="flex justify-center">
     <slot />
   </div>
-</div>
+</button>
