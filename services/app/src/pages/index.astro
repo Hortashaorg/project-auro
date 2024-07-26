@@ -6,7 +6,7 @@ import LoggedOut from "@sections/home/LoggedOut.astro";
 
 const locals = Astro.locals;
 ---
-<Layout title="Home">
+<Layout title="Home" id="home">
   {locals.loggedIn ? (
     locals.server ? (
       <LoggedIn />

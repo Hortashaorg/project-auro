@@ -1,0 +1,64 @@
+---
+import { throwError } from "@package/common";
+import { getDB } from "@package/database";
+import LoggedIn from "@sections/home/LoggedIn.astro";
+import { z } from "astro:content";
+const params: Record<string, string> = {};
+
+const formData = await Astro.request.formData();
+
+for (const [key, value] of formData.entries()) {
+	params[key] = value as string;
+}
+
+const userForm = z.object({
+	nickname: z
+		.string()
+		.min(3, { message: "Nickname must be at least 3 characters long" })
+		.max(20, { message: "Nickname must be at most 20 characters long" })
+		.regex(/^[a-zA-Z0-9_]+$/, {
+			message: "Nickname can only contain letters, numbers, and underscores",
+		})
+		.refine((val) => /[a-zA-Z]/.test(val), {
+			message: "Nickname must contain at least one letter",
+		})
+		.refine((val) => !/^\d+$/.test(val), {
+			message: "Nickname cannot consist of only numbers",
+		}),
+});
+
+const result = userForm.safeParse(params);
+
+type Errors = Record<string, { message: string }>;
+
+const errors: Errors = {};
+
+if (result.error) {
+	for (const error of result.error.errors) {
+		errors[error.path[0] as string] = {
+			message: error.message,
+		};
+	}
+}
+
+if (result.success) {
+	const db = await getDB();
+
+	const userId = Astro.locals.user?.id ?? throwError("No user found");
+
+	try {
+		await db
+			.updateTable("user")
+			.set({
+				name: params.nickname,
+			})
+			.where("id", "=", userId)
+			.executeTakeFirstOrThrow();
+	} catch (error) {
+		errors.nickname = {
+			message: "Nickname is already taken",
+		};
+	}
+}
+---
+<LoggedIn errors={errors} nickname={params.nickname} />

@@ -7,23 +7,41 @@ import FormControl from "@comp/forms/FormControl.astro";
 import Input from "@comp/forms/Input.astro";
 import Label from "@comp/forms/Label.astro";
 import { throwError } from "@package/common";
+import { getDB } from "@package/database";
 
 const server = Astro.locals.server ?? throwError("No server found");
 const user = Astro.locals.user ?? throwError("No user found");
----
 
+type Errors = Record<string, { message: string }>;
+interface Props {
+	nickname?: string | undefined;
+	errors?: Errors;
+}
+
+if (!user.name) {
+	const db = await getDB();
+	const currentUserData = await db
+		.selectFrom("user")
+		.where("id", "=", user.id)
+		.selectAll()
+		.executeTakeFirstOrThrow();
+
+	user.name = currentUserData.name;
+}
+---
 {
   user.name ? (
     <Section space="small" direction="row">
-      <Text variant="header">Hello <span class="dark:text-primary-dark text-primary-light">Player</span></Text>
+      <Text variant="header">Hello <span class="dark:text-primary-dark text-primary-light">{user.name}</span></Text>
       <Text variant="paragraph">You are currently playing on <span class="dark:text-primary-dark text-primary-light">{server.name}</span></Text>
     </Section>
   ) : (
-    <Form alignment="center">
+    <Form alignment="center" hx-trigger="submit" hx-post={`/api/user/${user.id}/name`} hx-swap="outerHTML">
       <Text variant="header">Lets setup your user</Text>
       <FormControl>
-        <Label variant="default" for="nickname">Nickname</Label>
-        <Input variant="default" placeholder="Nickname" name="nickname" />
+        <Label variant={Astro.props.errors?.nickname ? "error" : "default"} for="nickname">Nickname</Label>
+        <Input variant={Astro.props.errors?.nickname ? "error" : "default"} value={Astro.props.nickname} placeholder="Nickname" type="text" name="nickname" />
+        {Astro.props.errors?.nickname && <Text variant="error">{Astro.props.errors.nickname.message}</Text>}
       </FormControl>
       <Button variant="primary" type="submit">Submit</Button>
     </Form> 
