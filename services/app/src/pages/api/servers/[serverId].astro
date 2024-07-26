@@ -5,7 +5,7 @@ import Navbar from "@sections/navbar/Navbar.astro";
 import Servers from "./index.astro";
 
 const db = await getDB();
-const serverId = Astro.params.id ?? throwError("No server id found");
+const serverId = Astro.params.serverId ?? throwError("No server id found");
 const account = Astro.locals.account ?? throwError("No account found");
 
 let user = await db
