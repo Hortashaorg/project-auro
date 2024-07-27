@@ -11,6 +11,7 @@ export async function up(db: Kysely<unknown>): Promise<void> {
 			"accessory",
 			"consumable",
 			"item",
+			"icon",
 			"companion",
 			"structure",
 			"currency",

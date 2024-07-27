@@ -1,6 +1,6 @@
 import type { ColumnType } from "kysely";
 
-export type Assetcategory = "accessory" | "armor" | "avatar" | "companion" | "consumable" | "currency" | "item" | "structure" | "weapon";
+export type Assetcategory = "accessory" | "armor" | "avatar" | "companion" | "consumable" | "currency" | "icon" | "item" | "structure" | "weapon";
 
 export type Generated<T> = T extends ColumnType<infer S, infer I, infer U>
   ? ColumnType<S, I | undefined, U>
