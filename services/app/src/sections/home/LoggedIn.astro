@@ -40,7 +40,7 @@ if (!user.name) {
       <UserActions user={user} />
     </Section>
   ) : (
-    <Form alignment="center" hx-trigger="submit" hx-post={`/api/user/name`} hx-swap="outerHTML">
+    <Form alignment="center" hx-trigger="submit" hx-post="/api/user/name" hx-swap="outerHTML">
       <Text variant="header">Lets setup your user</Text>
       <FormControl>
         <Label variant={Astro.props.errors?.nickname ? "error" : "default"} for="nickname">Nickname</Label>

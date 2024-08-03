@@ -1,0 +1,8 @@
+---
+import LocationForm from "@sections/admin/LocationForm.astro";
+import { parseFormData } from "@utils/parse";
+
+const params = await parseFormData(Astro.request);
+console.log(params);
+---
+<LocationForm />
