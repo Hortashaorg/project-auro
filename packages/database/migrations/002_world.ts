@@ -121,6 +121,7 @@ export async function up(db: Kysely<unknown>): Promise<void> {
 		.addColumn("updatedAt", "timestamp", (col) =>
 			col.notNull().defaultTo(sql`now()`),
 		)
+		.addUniqueConstraint("location_unique_name_server", ["name", "serverId"])
 		.execute();
 }
 

@@ -12,9 +12,9 @@ export const parseFormData = async (request: Request) => {
 	return data;
 };
 
-export const validateFormData = async (
+export const validateFormData = async <T extends z.ZodTypeAny>(
 	params: unknown,
-	schema: z.ZodTypeAny,
+	schema: T,
 ) => {
 	const errors: FormErrors = {};
 
@@ -31,5 +31,6 @@ export const validateFormData = async (
 	return {
 		success: result.success,
 		errors,
+		result: result.data as z.infer<T>,
 	};
 };

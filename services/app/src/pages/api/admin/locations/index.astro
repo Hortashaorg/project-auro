@@ -1,0 +1,28 @@
+---
+import Card from "@comp/Card.astro";
+import Grid from "@comp/Grid.astro";
+import Text from "@comp/Text.astro";
+import { getDB } from "@package/database";
+import type { HTMLAttributes } from "astro/types";
+
+const db = await getDB();
+const locations = await db
+	.selectFrom("public.location")
+	.innerJoin("public.asset", "public.location.assetId", "public.asset.id")
+	.select(["public.location.name", "public.asset.url"])
+	.execute();
+
+interface Props extends HTMLAttributes<"div"> {}
+---
+<div {...Astro.props}>
+	<Text variant="header">Locations</Text>
+	<Grid>
+		{
+			locations.map((location) => (
+				<Card variant="clickable" title={location.name}>
+					<img src={location.url} alt={location.name} class="w-[6rem]" />
+				</Card>
+			))
+		}
+	</Grid>
+</div>

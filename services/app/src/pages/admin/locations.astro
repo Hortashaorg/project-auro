@@ -1,7 +1,9 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import Location from "@pages/api/admin/locations/index.astro";
 import LocationForm from "@sections/admin/LocationForm.astro";
 ---
 <Layout title="Locations">
+    <Location id="locations" />
     <LocationForm />
 </Layout>

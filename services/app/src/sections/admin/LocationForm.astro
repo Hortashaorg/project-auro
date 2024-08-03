@@ -25,7 +25,7 @@ const assets = await db
 	.execute();
 ---
 
-<Form alignment="center" hx-trigger="submit" hx-post="/api/admin/location" hx-swap="outerHTML" x-data={`{ selectedAsset: "${Astro.props.asset ?? ""}" }`}>
+<Form alignment="center" hx-trigger="submit" hx-post="/api/admin/locations/new" hx-swap="outerHTML" x-data={`{ selectedAsset: "${Astro.props.asset ?? ""}" }`}>
     <Text variant="header">Create Location</Text>
     <FormControl>
         <Label variant={Astro.props.errors?.name ? "error" : "default"} for="name">Name</Label>

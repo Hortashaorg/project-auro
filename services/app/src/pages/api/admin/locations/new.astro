@@ -1,0 +1,45 @@
+---
+import { getDB } from "@package/database";
+import type { AssetId } from "@package/database/types/public/Asset";
+import LocationForm from "@sections/admin/LocationForm.astro";
+import { parseFormData, validateFormData } from "@utils/parse";
+import { z } from "astro:content";
+import Location from "./index.astro";
+const params = await parseFormData(Astro.request);
+
+const userForm = z.object({
+	name: z
+		.string()
+		.min(3, { message: "Name must be at least 3 characters long" })
+		.max(20, { message: "Name must be at most 20 characters long" })
+		.regex(/^[a-zA-Z\s]+$/, {
+			message: "Name can only contain letters",
+		})
+		.refine((val) => /[a-zA-Z]/.test(val), {
+			message: "Name must contain at least one letter",
+		}),
+	asset: z.string().uuid({ message: "You must select an asset" }),
+});
+
+const { errors, result, success } = await validateFormData(params, userForm);
+
+if (Astro.locals.user?.type === "admin" && success && Astro.locals.server) {
+	const db = await getDB();
+	try {
+		await db
+			.insertInto("public.location")
+			.values({
+				name: result.name,
+				assetId: result.asset as AssetId,
+				serverId: Astro.locals.server.id,
+			})
+			.execute();
+	} catch (error) {
+		errors.name = {
+			message: "Name is already taken",
+		};
+	}
+}
+---
+<LocationForm errors={errors} name={params.name} asset={params.asset} />
+<Location id="locations" hx-swap-oob="true" />
