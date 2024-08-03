@@ -2,8 +2,7 @@
 import { throwError } from "@package/common";
 import { getDB } from "@package/database";
 import LoggedIn from "@sections/home/LoggedIn.astro";
-import { parseFormData } from "@utils/parse";
-import type { FormErrors } from "@utils/types";
+import { parseFormData, validateFormData } from "@utils/parse";
 import { z } from "astro:content";
 
 const params = await parseFormData(Astro.request);
@@ -13,7 +12,7 @@ const userForm = z.object({
 		.string()
 		.min(3, { message: "Nickname must be at least 3 characters long" })
 		.max(20, { message: "Nickname must be at most 20 characters long" })
-		.regex(/^[a-zA-Z0-9_]+$/, {
+		.regex(/^[a-zA-Z0-9_\s]+$/, {
 			message: "Nickname can only contain letters, numbers, and underscores",
 		})
 		.refine((val) => /[a-zA-Z]/.test(val), {
@@ -24,19 +23,9 @@ const userForm = z.object({
 		}),
 });
 
-const result = userForm.safeParse(params);
+const { success, errors } = await validateFormData(params, userForm);
 
-const errors: FormErrors = {};
-
-if (result.error) {
-	for (const error of result.error.errors) {
-		errors[error.path[0] as string] = {
-			message: error.message,
-		};
-	}
-}
-
-if (result.success) {
+if (success) {
 	const db = await getDB();
 
 	const userId = Astro.locals.user?.id ?? throwError("No user found");

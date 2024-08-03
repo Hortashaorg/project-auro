@@ -44,8 +44,8 @@ if (!user.name) {
       <Text variant="header">Lets setup your user</Text>
       <FormControl>
         <Label variant={Astro.props.errors?.nickname ? "error" : "default"} for="nickname">Nickname</Label>
-        <Input variant={Astro.props.errors?.nickname ? "error" : "default"} value={Astro.props.nickname} placeholder="Nickname" type="text" name="nickname" />
         {Astro.props.errors?.nickname && <Text variant="error">{Astro.props.errors.nickname.message}</Text>}
+        <Input variant={Astro.props.errors?.nickname ? "error" : "default"} value={Astro.props.nickname} placeholder="Nickname" type="text" name="nickname" />
       </FormControl>
       <Button variant="primary" type="submit" hx-disabled-elt="this">Submit</Button>
     </Form> 

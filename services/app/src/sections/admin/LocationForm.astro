@@ -29,10 +29,13 @@ const assets = await db
     <Text variant="header">Create Location</Text>
     <FormControl>
         <Label variant={Astro.props.errors?.name ? "error" : "default"} for="name">Name</Label>
-        <Input variant={Astro.props.errors?.name ? "error" : "default"} value={Astro.props.name} placeholder="name" type="text" />
+        {Astro.props.errors?.name && <Text variant="error">{Astro.props.errors.name.message}</Text>}
+        <Input variant={Astro.props.errors?.name ? "error" : "default"} name="name" value={Astro.props.name} placeholder="name" type="text" />
     </FormControl>
     <FormControl>
-        <Label variant={Astro.props.errors?.name ? "error" : "default"} for="asset">Asset</Label>
+        
+        <Label variant={Astro.props.errors?.asset ? "error" : "default"} for="asset">Asset</Label>
+        {Astro.props.errors?.asset && <Text variant="error">{Astro.props.errors.asset.message}</Text>}
         <Input variant="default" x-model="selectedAsset" name="asset" type="hidden" />
         <Grid class="max-h-96">
             {assets.map((asset) => (
