@@ -34,6 +34,9 @@ if (Astro.locals.user?.type === "admin" && success && Astro.locals.server) {
 				serverId: Astro.locals.server.id,
 			})
 			.execute();
+
+		params.name = "";
+		params.asset = "";
 	} catch (error) {
 		errors.name = {
 			message: "Name is already taken",
