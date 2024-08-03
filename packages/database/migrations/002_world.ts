@@ -102,6 +102,26 @@ export async function up(db: Kysely<unknown>): Promise<void> {
 			col.notNull().defaultTo(sql`now()`),
 		)
 		.execute();
+
+	await db.schema
+		.createTable("location")
+		.addColumn("id", "uuid", (col) =>
+			col.primaryKey().defaultTo(sql`gen_random_uuid()`),
+		)
+		.addColumn("name", "varchar(50)", (col) => col.notNull())
+		.addColumn("description", "text")
+		.addColumn("available", "boolean", (col) => col.notNull().defaultTo(false))
+		.addColumn("assetId", "uuid", (col) => col.notNull().references("asset.id"))
+		.addColumn("serverId", "uuid", (col) =>
+			col.notNull().references("server.id"),
+		)
+		.addColumn("createdAt", "timestamp", (col) =>
+			col.notNull().defaultTo(sql`now()`),
+		)
+		.addColumn("updatedAt", "timestamp", (col) =>
+			col.notNull().defaultTo(sql`now()`),
+		)
+		.execute();
 }
 
 export async function down(db: Kysely<unknown>): Promise<void> {
@@ -114,4 +134,5 @@ export async function down(db: Kysely<unknown>): Promise<void> {
 	await db.schema.dropTable("currency").execute();
 
 	await db.schema.dropType("itemtype").execute();
+	await db.schema.dropTable("location").execute();
 }
