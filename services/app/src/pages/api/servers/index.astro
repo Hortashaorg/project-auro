@@ -8,14 +8,14 @@ import { getDB } from "@package/database";
 
 const db = await getDB();
 const servers = await db
-	.selectFrom("server")
+	.selectFrom("public.server")
 	.where("online", "=", true)
 	.selectAll()
 	.execute();
 
 const accountId = Astro.locals.account?.id ?? throwError("No account found");
 const account = await db
-	.selectFrom("account")
+	.selectFrom("public.account")
 	.where("id", "=", accountId)
 	.selectAll()
 	.executeTakeFirstOrThrow();

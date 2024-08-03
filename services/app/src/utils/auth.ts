@@ -20,13 +20,13 @@ export const getLoginTokens = async (
 	const db = await getDB();
 
 	const defaultAvatar = await db
-		.selectFrom("asset")
-		.select("asset.id")
+		.selectFrom("public.asset")
+		.select("id")
 		.where("type", "=", "avatar")
 		.executeTakeFirstOrThrow();
 
 	let account = await db
-		.insertInto("account")
+		.insertInto("public.account")
 		.values({
 			email: idTokenClaims.email,
 			registrationTime: new Date(),
@@ -38,7 +38,7 @@ export const getLoginTokens = async (
 
 	if (!account) {
 		account = await db
-			.selectFrom("account")
+			.selectFrom("public.account")
 			.where("email", "=", idTokenClaims.email)
 			.selectAll()
 			.executeTakeFirst();
@@ -48,7 +48,7 @@ export const getLoginTokens = async (
 
 	// Update or insert auth tokens
 	await db
-		.insertInto("auth")
+		.insertInto("public.auth")
 		.values({
 			accountId: account.id,
 			accessTokenHash: hashToken(tokenInfo.access_token),
@@ -89,7 +89,7 @@ export const nullifyTokensByRefreshToken = async (
 	const hashedRefreshToken = hashToken(refreshToken);
 
 	await db
-		.updateTable("auth")
+		.updateTable("public.auth")
 		.set({
 			accessTokenHash: null,
 			accessTokenExpires: null,

@@ -6,16 +6,20 @@ import Text from "@comp/Text.astro";
 import { getDB } from "@package/database";
 const db = await getDB();
 const avatars = await db
-	.selectFrom("asset")
+	.selectFrom("public.asset")
 	.selectAll()
 	.where("type", "=", "avatar")
 	.execute();
 const userWithAvatar = Astro.locals.account?.id
 	? await db
-			.selectFrom("account")
-			.innerJoin("asset", "account.avatarAssetId", "asset.id")
-			.where("account.id", "=", Astro.locals.account.id)
-			.selectAll("asset")
+			.selectFrom("public.account")
+			.innerJoin(
+				"public.asset",
+				"public.account.avatarAssetId",
+				"public.asset.id",
+			)
+			.where("public.account.id", "=", Astro.locals.account.id)
+			.selectAll("public.asset")
 			.executeTakeFirstOrThrow()
 	: undefined;
 ---

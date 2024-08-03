@@ -19,8 +19,8 @@ interface Props {
 const db = await getDB();
 
 const assets = await db
-	.selectFrom("asset")
-	.where("asset.type", "=", "structure")
+	.selectFrom("public.asset")
+	.where("type", "=", "structure")
 	.selectAll()
 	.execute();
 ---

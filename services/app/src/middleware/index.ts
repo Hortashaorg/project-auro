@@ -12,8 +12,8 @@ export const getUser = defineMiddleware(async ({ cookies, locals }, next) => {
 	} else {
 		const db = await getDB();
 		const auth = await db
-			.selectFrom("auth")
-			.innerJoin("account", "auth.accountId", "account.id")
+			.selectFrom("public.auth")
+			.innerJoin("public.account", "public.auth.accountId", "public.account.id")
 			.where("accessTokenHash", "=", hashToken(accessToken.value))
 			.selectAll()
 			.executeTakeFirst();
@@ -27,14 +27,14 @@ export const getUser = defineMiddleware(async ({ cookies, locals }, next) => {
 
 			if (auth.currentServerId) {
 				const server = await db
-					.selectFrom("server")
+					.selectFrom("public.server")
 					.where("id", "=", auth.currentServerId)
 					.selectAll()
 					.executeTakeFirstOrThrow();
 				locals.server = server;
 
 				const user = await db
-					.selectFrom("user")
+					.selectFrom("public.user")
 					.where((eb) =>
 						eb.and([
 							eb("accountId", "=", auth.id),
@@ -71,7 +71,7 @@ export const validation = defineMiddleware(async (context, next) => {
 	const db = await getDB();
 
 	await db
-		.updateTable("auth")
+		.updateTable("public.auth")
 		.set({
 			accessTokenExpires: null,
 			accessTokenHash: null,

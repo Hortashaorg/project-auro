@@ -32,7 +32,7 @@ if (success) {
 
 	try {
 		await db
-			.updateTable("user")
+			.updateTable("public.user")
 			.set({
 				name: params.nickname,
 			})

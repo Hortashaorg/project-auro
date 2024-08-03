@@ -5,7 +5,7 @@ const job = async () => {
 	const db = await getDB();
 	console.log("Adding turn for all users");
 	await db
-		.updateTable("user")
+		.updateTable("public.user")
 		.set({
 			actions: sql`actions + 1`,
 		})

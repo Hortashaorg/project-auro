@@ -1,6 +1,7 @@
 ---
 import { throwError } from "@package/common";
 import { getDB, sql } from "@package/database";
+import type { UserId } from "@package/database/types/public/User";
 import UserActions from "@sections/home/UserActions.astro";
 
 const db = await getDB();
@@ -11,11 +12,11 @@ if (user.actions > 0) {
 		// Execute all the actions here.
 
 		user = await trx
-			.updateTable("user")
+			.updateTable("public.user")
 			.set({
 				actions: sql`actions - 1`,
 			})
-			.where("id", "=", user.id)
+			.where("id", "=", user.id as UserId)
 			.returningAll()
 			.executeTakeFirstOrThrow();
 	});

@@ -1,6 +1,7 @@
 ---
 import { throwError } from "@package/common";
 import { getDB } from "@package/database";
+import type { AssetId } from "@package/database/types/public/Asset";
 import Navbar from "@sections/navbar/Navbar.astro";
 import Avatars from "./index.astro";
 
@@ -8,10 +9,10 @@ const db = await getDB();
 const assetId = Astro.params.avatarId ?? throwError("No asset id found");
 const account = Astro.locals.account ?? throwError("No account found");
 await db
-	.updateTable("account")
+	.updateTable("public.account")
 	.where("id", "=", account.id)
 	.set({
-		avatarAssetId: assetId,
+		avatarAssetId: assetId as AssetId,
 	})
 	.executeTakeFirstOrThrow();
 ---

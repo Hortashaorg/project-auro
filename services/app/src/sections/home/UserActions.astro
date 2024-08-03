@@ -3,11 +3,10 @@ import Card from "@comp/Card.astro";
 import Grid from "@comp/Grid.astro";
 import Section from "@comp/Section.astro";
 import Text from "@comp/Text.astro";
-import type { Selectable } from "@package/database";
-import type { User } from "@package/database/database-schema";
+import type { User } from "@package/database/types/public/User";
 
 interface Props {
-	user: Selectable<User>;
+	user: User;
 }
 ---
 

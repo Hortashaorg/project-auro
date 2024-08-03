@@ -22,7 +22,7 @@ interface Props {
 if (!user.name) {
 	const db = await getDB();
 	const currentUserData = await db
-		.selectFrom("user")
+		.selectFrom("public.user")
 		.where("id", "=", user.id)
 		.selectAll()
 		.executeTakeFirstOrThrow();

@@ -17,17 +17,21 @@ const db = await getDB();
 
 const accountWithAvatar = Astro.locals.account?.id
 	? await db
-			.selectFrom("account")
-			.innerJoin("asset", "account.avatarAssetId", "asset.id")
-			.where("account.id", "=", Astro.locals.account.id)
-			.selectAll("account")
-			.select("asset.url")
+			.selectFrom("public.account")
+			.innerJoin(
+				"public.asset",
+				"public.account.avatarAssetId",
+				"public.asset.id",
+			)
+			.where("public.account.id", "=", Astro.locals.account.id)
+			.selectAll("public.account")
+			.select("public.asset.url")
 			.executeTakeFirstOrThrow()
 	: undefined;
 
 const user = accountWithAvatar?.currentServerId
 	? await db
-			.selectFrom("user")
+			.selectFrom("public.user")
 			.where((eb) =>
 				eb.and([
 					eb("accountId", "=", accountWithAvatar.id),

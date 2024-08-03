@@ -1,6 +1,8 @@
 ---
 import { throwError } from "@package/common";
 import { getDB } from "@package/database";
+import type { AccountId } from "@package/database/types/public/Account";
+import type { ServerId } from "@package/database/types/public/Server";
 import Navbar from "@sections/navbar/Navbar.astro";
 import Servers from "./index.astro";
 
@@ -9,30 +11,33 @@ const serverId = Astro.params.serverId ?? throwError("No server id found");
 const account = Astro.locals.account ?? throwError("No account found");
 
 let user = await db
-	.selectFrom("user")
+	.selectFrom("public.user")
 	.where((eb) =>
-		eb.and([eb("accountId", "=", account.id), eb("serverId", "=", serverId)]),
+		eb.and([
+			eb("accountId", "=", account.id),
+			eb("serverId", "=", serverId as ServerId),
+		]),
 	)
 	.selectAll()
 	.executeTakeFirst();
 
 if (!user) {
 	user = await db
-		.insertInto("user")
+		.insertInto("public.user")
 		.values({
 			accountId: account.id,
-			serverId: serverId,
+			serverId: serverId as ServerId,
 		})
 		.returningAll()
 		.executeTakeFirstOrThrow();
 }
 
 await db
-	.updateTable("account")
+	.updateTable("public.account")
 	.set({
-		currentServerId: serverId,
+		currentServerId: serverId as ServerId,
 	})
-	.where("id", "=", account.id)
+	.where("id", "=", account.id as AccountId)
 	.executeTakeFirstOrThrow();
 ---
 <Servers />

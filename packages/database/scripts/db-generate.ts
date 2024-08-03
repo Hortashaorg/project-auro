@@ -1,24 +1,30 @@
-import { DialectManager, Generator } from "kysely-codegen";
+import kanel from "kanel";
+import kanelKysely from "kanel-kysely";
+import { environment } from "../environment";
 
-import { getDB } from "../index";
+const outFile = "./types";
 
-const outFile = "./database-schema.d.ts";
+async function run() {
+	await kanel.processDatabase({
+		connection: {
+			host: environment.DB_HOST,
+			database: "root",
+			password: "root",
+			user: environment.DB_USER,
+			ssl: false,
+		},
+		outputPath: outFile,
+		enumStyle: "type",
+		preRenderHooks: [
+			kanelKysely.makeKyselyHook({
+				databaseFilename: "index",
+				includeSchemaNameInTableName: true,
+			}),
+			kanelKysely.kyselyCamelCaseHook,
+		],
+	});
+}
 
-const initGenerator = async () => {
-	const db = await getDB();
-
-	try {
-		const generator = new Generator();
-		await generator.generate({
-			db,
-			dialect: new DialectManager().getDialect("postgres"),
-			camelCase: true,
-			outFile,
-		});
-		console.log(`Schema written to ${outFile}`);
-		process.exit(0);
-	} catch (error) {
-		console.error(error);
-	}
-};
-initGenerator();
+await run();
+console.log(`Schema written to ${outFile}`);
+process.exit(0);

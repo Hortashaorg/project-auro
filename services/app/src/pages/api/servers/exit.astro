@@ -9,7 +9,7 @@ const account = Astro.locals.account ?? throwError("No account found");
 const db = await getDB();
 
 await db
-	.updateTable("account")
+	.updateTable("public.account")
 	.set({
 		currentServerId: null,
 	})

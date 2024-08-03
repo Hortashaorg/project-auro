@@ -3,12 +3,12 @@ import pkg from "pg";
 import Cursor from "pg-cursor";
 
 import { getSecret } from "@package/common";
-import type { DB } from "./database-schema";
 import { environment } from "./environment";
+import type Database from "./types";
 
 const { Pool } = pkg;
 
-let cachedDb: Kysely<DB> | null = null;
+let cachedDb: Kysely<Database> | null = null;
 
 export const getDB = async () => {
 	if (cachedDb) {
@@ -20,7 +20,7 @@ export const getDB = async () => {
 			? "root"
 			: await getSecret("DB-PASSWORD", environment.KEYVAULT_NAME);
 
-	cachedDb = new Kysely<DB>({
+	cachedDb = new Kysely<Database>({
 		dialect: new PostgresDialect({
 			cursor: Cursor,
 			pool: new Pool({
