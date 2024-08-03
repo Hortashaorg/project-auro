@@ -14,3 +14,5 @@ export type NonNullableProps<
 	},
 	T
 >;
+
+export type FormErrors = Record<string, { message: string }>;

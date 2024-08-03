@@ -1,0 +1,50 @@
+---
+import Button from "@comp/Button.astro";
+import Card from "@comp/Card.astro";
+import Grid from "@comp/Grid.astro";
+import Text from "@comp/Text.astro";
+import Form from "@comp/forms/Form.astro";
+import FormControl from "@comp/forms/FormControl.astro";
+import Input from "@comp/forms/Input.astro";
+import Label from "@comp/forms/Label.astro";
+import { getDB } from "@package/database";
+import type { FormErrors } from "@utils/types";
+
+interface Props {
+	name?: string | undefined;
+	asset?: string | undefined;
+	errors?: FormErrors;
+}
+
+const db = await getDB();
+
+const assets = await db
+	.selectFrom("asset")
+	.where("asset.type", "=", "structure")
+	.selectAll()
+	.execute();
+---
+
+<Form alignment="center" x-data={`{ selectedAsset: "${Astro.props.asset ?? ''}" }`}>
+    <Text variant="header">Create Location</Text>
+    <FormControl>
+        <Label variant={Astro.props.errors?.name ? "error" : "default"} for="name">Name</Label>
+        <Input variant={Astro.props.errors?.name ? "error" : "default"} value={Astro.props.name} placeholder="name" type="text" />
+    </FormControl>
+    <FormControl>
+        <Label variant={Astro.props.errors?.name ? "error" : "default"} for="asset">Asset</Label>
+        <Input variant="default" x-model="selectedAsset" name="asset" id="selected-asset" type="hidden" />
+        <Grid class="max-h-96">
+            {assets.map((asset) => (
+                <Card x-show={`selectedAsset == "${asset.id}"`} x-cloak variant="normal" state="selected" title={asset.name}>
+                    <img src={asset.url} alt={asset.name} class="w-[6rem]" />
+                </Card>
+                <Card x-on:click={`selectedAsset = "${asset.id}"`} x-show={`selectedAsset != "${asset.id}"`} x-cloak variant="clickable" title={asset.name}>
+                    <img src={asset.url} alt={asset.name} class="w-[6rem]" />
+                </Card>
+                )
+            )}
+        </Grid>
+    </FormControl>
+    <Button variant="primary" type="submit" hx-disabled-elt="this">Create Location</Button>
+</Form>

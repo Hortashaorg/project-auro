@@ -8,15 +8,15 @@ import Input from "@comp/forms/Input.astro";
 import Label from "@comp/forms/Label.astro";
 import { throwError } from "@package/common";
 import { getDB } from "@package/database";
+import type { FormErrors } from "@utils/types";
 import UserActions from "./UserActions.astro";
 
 const server = Astro.locals.server ?? throwError("No server found");
 const user = Astro.locals.user ?? throwError("No user found");
 
-type Errors = Record<string, { message: string }>;
 interface Props {
 	nickname?: string | undefined;
-	errors?: Errors;
+	errors?: FormErrors;
 }
 
 if (!user.name) {
@@ -47,7 +47,7 @@ if (!user.name) {
         <Input variant={Astro.props.errors?.nickname ? "error" : "default"} value={Astro.props.nickname} placeholder="Nickname" type="text" name="nickname" />
         {Astro.props.errors?.nickname && <Text variant="error">{Astro.props.errors.nickname.message}</Text>}
       </FormControl>
-      <Button variant="primary" type="submit">Submit</Button>
+      <Button variant="primary" type="submit" hx-disabled-elt="this">Submit</Button>
     </Form> 
   )
 }

@@ -9,7 +9,7 @@ const { class: className, ...restProps } = Astro.props;
 
 <div
   {...restProps}
-  class={cn('flex flex-wrap gap-5 justify-center', className)}
+  class={cn('flex flex-wrap gap-5 justify-center overflow-y-auto', className)}
 >
   <slot />
 </div>

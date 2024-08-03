@@ -25,14 +25,10 @@ const userWithAvatar = Astro.locals.account?.id
     {
       avatars.map((avatar) => (
         <Card
-          variant="clickable"
-          hx-disabled-elt="this"
+          variant={avatar.id === userWithAvatar?.id ? "normal" : "clickable"}
           title={avatar.name}
-          class={
-            avatar.id === userWithAvatar?.id
-              ? "border-4 dark:border-primary-dark border-primary-light w-[12rem]"
-              : "cursor-pointer border-4 dark:border-background-950 border-background-100 w-[12rem]"
-          }
+          class="w-[12rem]"
+          state={avatar.id === userWithAvatar?.id ? "selected" : "normal"}
           hx-post={`/api/avatars/${avatar.id}`}
           hx-swap="outerHTML"
           hx-target="#avatars"

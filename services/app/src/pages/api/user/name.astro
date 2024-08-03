@@ -2,6 +2,7 @@
 import { throwError } from "@package/common";
 import { getDB } from "@package/database";
 import LoggedIn from "@sections/home/LoggedIn.astro";
+import type { FormErrors } from "@utils/types";
 import { z } from "astro:content";
 const params: Record<string, string> = {};
 
@@ -29,9 +30,7 @@ const userForm = z.object({
 
 const result = userForm.safeParse(params);
 
-type Errors = Record<string, { message: string }>;
-
-const errors: Errors = {};
+const errors: FormErrors = {};
 
 if (result.error) {
 	for (const error of result.error.errors) {
