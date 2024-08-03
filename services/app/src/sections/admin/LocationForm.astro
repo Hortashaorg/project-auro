@@ -33,7 +33,7 @@ const assets = await db
     </FormControl>
     <FormControl>
         <Label variant={Astro.props.errors?.name ? "error" : "default"} for="asset">Asset</Label>
-        <Input variant="default" x-model="selectedAsset" name="asset" id="selected-asset" type="hidden" />
+        <Input variant="default" x-model="selectedAsset" name="asset" type="hidden" />
         <Grid class="max-h-96">
             {assets.map((asset) => (
                 <Card x-show={`selectedAsset == "${asset.id}"`} x-cloak variant="normal" state="selected" title={asset.name}>
