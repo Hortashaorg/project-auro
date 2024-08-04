@@ -10,7 +10,7 @@ const db = await getDB();
 const locations = await db
 	.selectFrom("public.location")
 	.innerJoin("public.asset", "public.location.assetId", "public.asset.id")
-	.select(["public.location.name", "public.asset.url"])
+	.select(["public.location.name", "public.asset.url", "public.location.id"])
 	.execute();
 
 interface Props extends HTMLAttributes<"div"> {}
@@ -23,7 +23,7 @@ interface Props extends HTMLAttributes<"div"> {}
 		</Card>
 		{
 			locations.map((location) => (
-				<Card variant="clickable" title={location.name}>
+				<Card variant="clickable" title={location.name} href={`/admin/locations/${location.id}`}>
 					<Image src={location.url} alt={location.name} class="w-[6rem]" />
 				</Card>
 			))

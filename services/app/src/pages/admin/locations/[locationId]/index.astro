@@ -1,0 +1,20 @@
+---
+import Text from "@comp/Text.astro";
+import Layout from "@layouts/Layout.astro";
+import { throwError } from "@package/common";
+import { getDB } from "@package/database";
+import type { LocationId } from "@package/database/types/public/Location";
+
+const locationId =
+	Astro.params.locationId ?? throwError("No location id found");
+
+const db = await getDB();
+const location = await db
+	.selectFrom("public.location")
+	.where("id", "=", locationId as LocationId)
+	.selectAll()
+	.executeTakeFirstOrThrow();
+---
+<Layout title={`Location: ${location.name}`}>
+	<Text variant="header">{location.name}</Text>
+</Layout>

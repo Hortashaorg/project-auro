@@ -58,15 +58,26 @@ const cardVariants = cva(
 type CardVariants = NonNullableProps<typeof cardVariants, "variant">;
 interface Props extends HTMLAttributes<"button">, CardVariants {
 	title: string;
+	href?: string;
 }
 
-const { title, class: className, variant, state, ...restProps } = Astro.props;
+const {
+	title,
+	class: className,
+	variant,
+	state,
+	href,
+	...restProps
+} = Astro.props;
+
+const Tag = href ? "a" : "button";
 ---
 
-<button
+<Tag
   {...restProps}
+  href={href ? href : undefined}
+  type={href ? undefined : "button"}
   class={cn(cardVariants({ variant, state}), className)}
-  type="button"
 >
   <Text variant="paragraph" alignment="center">
     {title}
@@ -74,4 +85,4 @@ const { title, class: className, variant, state, ...restProps } = Astro.props;
   <div class="flex justify-center">
     <slot />
   </div>
-</button>
+</Tag>
