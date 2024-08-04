@@ -1,9 +1,11 @@
 ---
 import Card from "@comp/Card.astro";
 import Grid from "@comp/Grid.astro";
+import Image from "@comp/Image.astro";
 import Section from "@comp/Section.astro";
 import Text from "@comp/Text.astro";
 import { getDB } from "@package/database";
+
 const db = await getDB();
 const avatars = await db
 	.selectFrom("public.asset")
@@ -37,7 +39,7 @@ const userWithAvatar = Astro.locals.account?.id
           hx-swap="outerHTML"
           hx-target="#avatars"
         >
-          <img src={avatar.url} alt={avatar.name} class="w-[9rem]" />
+          <Image src={avatar.url} alt={avatar.name} class="w-[9rem]" />
         </Card>
       ))
     }

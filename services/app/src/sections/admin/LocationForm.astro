@@ -2,6 +2,7 @@
 import Button from "@comp/Button.astro";
 import Card from "@comp/Card.astro";
 import Grid from "@comp/Grid.astro";
+import Image from "@comp/Image.astro";
 import Text from "@comp/Text.astro";
 import Form from "@comp/forms/Form.astro";
 import FormControl from "@comp/forms/FormControl.astro";
@@ -39,10 +40,10 @@ const assets = await db
         <Grid class="max-h-96">
             {assets.map((asset) => (
                 <Card x-show={`selectedAsset == "${asset.id}"`} x-cloak variant="normal" state="selected" title={asset.name}>
-                    <img src={asset.url} alt={asset.name} class="w-[6rem]" />
+                    <Image src={asset.url} alt={asset.name} class="w-[6rem]" />
                 </Card>
                 <Card x-on:click={`selectedAsset = "${asset.id}"`} x-show={`selectedAsset != "${asset.id}"`} x-cloak variant="clickable" title={asset.name}>
-                    <img src={asset.url} alt={asset.name} class="w-[6rem]" />
+                    <Image src={asset.url} alt={asset.name} class="w-[6rem]" />
                 </Card>
                 )
             )}

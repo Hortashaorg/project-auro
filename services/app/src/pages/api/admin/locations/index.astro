@@ -1,6 +1,7 @@
 ---
 import Card from "@comp/Card.astro";
 import Grid from "@comp/Grid.astro";
+import Image from "@comp/Image.astro";
 import Text from "@comp/Text.astro";
 import { getDB } from "@package/database";
 import type { HTMLAttributes } from "astro/types";
@@ -18,12 +19,12 @@ interface Props extends HTMLAttributes<"div"> {}
 	<Text variant="header">Locations</Text>
 	<Grid>
 		<Card variant="clickable" title="Create Location" class="dark:bg-accent-900 bg-accent-300" x-on:click="$refs.dialogRef.showModal()">
-			<img src="https://stprojectaurodev.blob.core.windows.net/pixelart/d2950.png" alt="Create Location" class="w-[6rem]" />
+			<Image src="https://stprojectaurodev.blob.core.windows.net/pixelart/d2950.png" alt="Create Location" class="w-[6rem]" />
 		</Card>
 		{
 			locations.map((location) => (
 				<Card variant="clickable" title={location.name}>
-					<img src={location.url} alt={location.name} class="w-[6rem]" />
+					<Image src={location.url} alt={location.name} class="w-[6rem]" />
 				</Card>
 			))
 		}
