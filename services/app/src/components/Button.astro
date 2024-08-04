@@ -68,8 +68,14 @@ type ButtonVariants = NonNullableProps<typeof buttonVariants, "variant">;
 
 interface Props extends HTMLAttributes<"button">, ButtonVariants {}
 
-const { variant, size, class: className, ...restProps } = Astro.props;
+const {
+	variant,
+	size,
+	class: className,
+	type = "button",
+	...restProps
+} = Astro.props;
 ---
-<button {...restProps} class={cn(buttonVariants({ variant, size }), className)}>
+<button {...restProps} type={type} class={cn(buttonVariants({ variant, size }), className)}>
     <slot />
 </button>

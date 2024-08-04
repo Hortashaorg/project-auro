@@ -6,7 +6,7 @@ import LocationForm from "@sections/admin/LocationForm.astro";
 ---
 <Layout title="Locations" x-data="{}">
     <Location id="locations" />
-    <Dialog x-ref="dialogRef">
+    <Dialog x-ref="dialogRef" x-on:close-dialog.window="$refs.dialogRef.close()">
         <LocationForm />
     </Dialog>
 </Layout>
