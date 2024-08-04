@@ -1,1 +1,4 @@
-- We need to introduce concept of "locations" that you can explore as an action.
+- pages should have the same structures as the api endpoints that they call.
+- lets create some items / skills / currencies
+- Add some minimum nessesary stuff to a location
+- Make location available for a user to interact with
