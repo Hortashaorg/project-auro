@@ -1,4 +1,7 @@
 ---
+import Button from "@comp/Button.astro";
+import Section from "@comp/Section.astro";
+import Text from "@comp/Text.astro";
 import { getDB } from "@package/database";
 import type { AssetId } from "@package/database/types/public/Asset";
 import LocationForm from "@sections/admin/LocationForm.astro";
@@ -44,5 +47,15 @@ if (Astro.locals.user?.type === "admin" && success && Astro.locals.server) {
 	}
 }
 ---
-<LocationForm errors={errors} name={params.name} asset={params.asset} />
+{
+	success ?
+	(
+		<Section space="medium">
+			<Text variant="paragraph">Sucessfully created {params.name}</Text>
+			<Button variant="primary" x-on:click="$refs.dialogRef.close()">Close</Button>
+		</Section>
+	) :
+	<LocationForm errors={errors} name={params.name} asset={params.asset} />
+}
+
 <Location id="locations" hx-swap-oob="true" />

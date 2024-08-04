@@ -17,6 +17,9 @@ interface Props extends HTMLAttributes<"div"> {}
 <div {...Astro.props}>
 	<Text variant="header">Locations</Text>
 	<Grid>
+		<Card variant="clickable" title="Create Location" class="dark:bg-accent-900 bg-accent-300" x-on:click="$refs.dialogRef.showModal()">
+			<img src="https://stprojectaurodev.blob.core.windows.net/pixelart/d2950.png" alt="Create Location" class="w-[6rem]" />
+		</Card>
 		{
 			locations.map((location) => (
 				<Card variant="clickable" title={location.name}>

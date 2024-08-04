@@ -1,9 +1,12 @@
 ---
+import Dialog from "@comp/Dialog.astro";
 import Layout from "@layouts/Layout.astro";
 import Location from "@pages/api/admin/locations/index.astro";
 import LocationForm from "@sections/admin/LocationForm.astro";
 ---
-<Layout title="Locations">
+<Layout title="Locations" x-data="{}">
     <Location id="locations" />
-    <LocationForm />
+    <Dialog x-ref="dialogRef">
+        <LocationForm />
+    </Dialog>
 </Layout>

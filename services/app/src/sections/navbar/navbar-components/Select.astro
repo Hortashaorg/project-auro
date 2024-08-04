@@ -51,7 +51,7 @@ const {
 ---
 
 <div {...restProps} class={cn('relative', className)}>
-  <div @click={`name = name == "${name}" ? "" : "${name}"`}>
+  <div x-on:click={`name = name == "${name}" ? "" : "${name}"`}>
     {
       imgSrc ? (
         <img

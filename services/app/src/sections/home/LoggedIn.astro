@@ -43,9 +43,9 @@ if (!user.name) {
     <Form alignment="center" hx-trigger="submit" hx-post="/api/user/name" hx-swap="outerHTML">
       <Text variant="header">Lets setup your user</Text>
       <FormControl>
-        <Label variant={Astro.props.errors?.nickname ? "error" : "default"} for="nickname">Nickname</Label>
+        <Label variant={Astro.props.errors?.nickname ? "error" : "default"} for="form-nickname">Nickname</Label>
         {Astro.props.errors?.nickname && <Text variant="error">{Astro.props.errors.nickname.message}</Text>}
-        <Input variant={Astro.props.errors?.nickname ? "error" : "default"} value={Astro.props.nickname} placeholder="Nickname" type="text" name="nickname" />
+        <Input variant={Astro.props.errors?.nickname ? "error" : "default"} value={Astro.props.nickname} placeholder="Nickname" type="text" id="form-nickname" name="nickname" />
       </FormControl>
       <Button variant="primary" type="submit" hx-disabled-elt="this">Submit</Button>
     </Form> 

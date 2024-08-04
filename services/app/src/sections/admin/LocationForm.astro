@@ -24,17 +24,16 @@ const assets = await db
 	.selectAll()
 	.execute();
 ---
-
 <Form alignment="center" hx-trigger="submit" hx-post="/api/admin/locations/new" hx-swap="outerHTML" x-data={`{ selectedAsset: "${Astro.props.asset ?? ""}" }`}>
     <Text variant="header">Create Location</Text>
     <FormControl>
-        <Label variant={Astro.props.errors?.name ? "error" : "default"} for="name">Name</Label>
+        <Label variant={Astro.props.errors?.name ? "error" : "default"} for="form-name">Name</Label>
         {Astro.props.errors?.name && <Text variant="error">{Astro.props.errors.name.message}</Text>}
-        <Input variant={Astro.props.errors?.name ? "error" : "default"} name="name" value={Astro.props.name} placeholder="name" type="text" />
+        <Input variant={Astro.props.errors?.name ? "error" : "default"} id="form-name" name="name" value={Astro.props.name} placeholder="name" type="text" />
     </FormControl>
     <FormControl>
         
-        <Label variant={Astro.props.errors?.asset ? "error" : "default"} for="asset">Asset</Label>
+        <Label variant={Astro.props.errors?.asset ? "error" : "default"}>Asset</Label>
         {Astro.props.errors?.asset && <Text variant="error">{Astro.props.errors.asset.message}</Text>}
         <Input variant="default" x-model="selectedAsset" name="asset" type="hidden" />
         <Grid class="max-h-96">

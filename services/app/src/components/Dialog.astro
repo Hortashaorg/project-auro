@@ -1,0 +1,11 @@
+---
+import { cn } from "@utils/tailwind";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"dialog"> {}
+
+const { class: className, ...restProps } = Astro.props;
+---
+<dialog {...restProps} class={cn("bg-background-light dark:bg-background-dark p-4 backdrop:bg-accent-950/95", className)}>
+    <slot />
+</dialog>
